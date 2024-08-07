@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
     return (
@@ -7,6 +8,10 @@ export default function Navbar() {
                 <div className='text-2xl font-bold uppercase'>Joana</div>
 
                 <div className='flex gap-4'>
+                <Link to='/home' className='hover:underline'>Home </Link>
+                <Link to='/login' className='hover:underline'>Login </Link>
+                <Link to='/about' className='hover:underline'>About </Link>
+                <Link to='/contact' className='hover:underline'>Contact </Link>
                     <div className='hover:underline'>Home</div>
                     <div className='hover:underline'>Produtos</div>
                     <div className='hover:underline'>Sobre nós</div>
@@ -18,3 +23,4 @@ export default function Navbar() {
         </div>
     )
 }
+
