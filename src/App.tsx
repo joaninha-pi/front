@@ -1,7 +1,8 @@
 import Footer from './components/footer/Footer'
 import Navbar from './components/navbar/Navbar'
-import Home from './pages/Home/Home'
+import Contact from './pages/Contact/Contact'
 import About from './pages/About/About'
+import Home from './pages/Home/Home'
 import './App.css'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Navbar />
       <Home />
       <About />
+      <Contact/>
       <Footer />
     </>
   )
