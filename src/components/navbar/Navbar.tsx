@@ -10,17 +10,18 @@ export default function Navbar() {
 
                     <div className='text-2xl font-bold uppercase'>
 
-                        Joana
+                    <Link to='/home' className='hover:text-[#FEFCDD] transition-colors duration-300'>Joana</Link>
 
                     </div>
-                    <img src={Logo} width={60} height={60} style={{alignContent: 'center'}}/>
 
+                    <div style={{paddingLeft: '115px'}}>
+                    <img src={Logo} width={60} height={60}/>
+                    </div>
+                    
                     <div className='flex gap-4'>
-                        <Link to='/home' className='hover:underline'>Home</Link>
-                        <Link to='/login' className='hover:underline'>Login</Link>
-                        <div className='hover:underline'>Produtos</div>
-                        {/* <div className='hover:underline'>Minha conta</div>
-                        <div className='hover:underline'>Sair</div>  adicionar no futuro*/}
+                        <Link to='/home' className='hover:text-[#FEFCDD] transition-colors duration-300'>Home</Link>
+                        <Link to='/login' className='hover:text-[#FEFCDD] transition-colors duration-300'>Login</Link>
+                        <div className='hover:text-[#FEFCDD] transition-colors duration-300'>Produtos</div>
                     </div>
                 </div>
             </div>
