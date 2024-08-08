@@ -7,19 +7,42 @@ export default function Login() {
         <>
             <div className="h-96 mb-96">
 
-                <p className='pularLinha'></p>
-               
-                <div className='containerLogin'>
+                {/* <p className='pularLinha'></p> */}
 
-                <h1 className='text-xl' style={{ textAlign: 'center' }}>Login</h1>
+                <h1 style={{ textAlign: 'center', paddingTop: '30px', paddingBottom: '50px', fontSize: '30px', fontWeight: 'bold' }}>Login</h1>
 
-                <label>Email:</label>
-                <input type="text" name="email"/>
-                
-                <label>Senha:</label>
-                <input  type="Password" />
+                <div style={{ border: '1px solid black', padding: '20px', borderRadius: '10px', width: '500px', margin: "0% 32.5%", backgroundColor: 'darkgrey' }}>
 
-                <button type='submit'>Entrar</button>
+                    <form>
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                            <label>Email:</label>
+                            <input type="text" name="email" style={{ width: '300px'}}/>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                            <label style={{paddingTop: '20px'}}>Senha:</label>
+                            <input type="Password" style={{ width: '300px'}} />
+                        </div>
+                        
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <button
+                            type="submit"
+                            style={{
+                                backgroundColor: '#4CAF50',
+                                color: 'white',
+                                padding: '10px 20px',
+                                border: 'none',
+                                borderRadius: '5px',
+                                cursor: 'pointer',
+                                fontSize: '16px',
+                                fontWeight: 'bold',
+                                textAlign: 'center',
+                                marginTop: '10px',
+                            }}>Login</button>
+                        </div>
+
+                    </form>
+
 
                 </div>
             </div>
