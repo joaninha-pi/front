@@ -1,7 +1,8 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Categoria from '../../../models/Categoria';
 import { atualizar, buscar, cadastrar } from '../../../services/Service';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 function FormularioCategoria() {
     const [categoria, setCategoria] = useState<Categoria>({
@@ -10,12 +11,18 @@ function FormularioCategoria() {
         descricao: ''
     });
 
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
     const { id } = useParams<{ id: string }>();
+    const { usuario, handleLogout } = useContext(AuthContext);
+    const token = usuario.token;
 
     async function buscarPorId(id: string) {
         try {
-            await buscar(`/categorias/${id}`, setCategoria);
+            await buscar(`/categorias/${id}`, setCategoria, {
+                headers: {
+                    'Authorization': token
+                }
+            });
         } catch (error: any) {
             console.error('Erro ao buscar a categoria:', error);
             alert('Erro ao buscar a categoria');
@@ -40,13 +47,19 @@ function FormularioCategoria() {
     
         try {
             if (id) {
-                // Atualizar categoria existente
-                const categoriaComId = { ...categoria, id: Number(id) }; // Certifique-se de que o ID está incluído
-                await atualizar(`/categorias`, categoriaComId, setCategoria);
+                const categoriaComId = { ...categoria, id: Number(id) };
+                await atualizar(`/categorias`, categoriaComId, setCategoria, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
                 alert('Categoria atualizada com sucesso');
             } else {
-                // Cadastrar nova categoria
-                await cadastrar(`/categorias`, categoria, setCategoria);
+                await cadastrar(`/categorias`, categoria, setCategoria, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
                 alert('Categoria cadastrada com sucesso');
             }
             retornar();

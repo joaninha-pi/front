@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from "../../assets/images/Logo.png"
+import { AuthContext } from '../../contexts/AuthContext'
 
 export default function Navbar() {
+
+    let navigate = useNavigate()
+
+
+    const { usuario, handleLogout } = useContext(AuthContext)
+
+  function logout() {
+      handleLogout()
+      alert('Usuário deslogado com sucesso')
+      navigate('/login')
+  }
+
+  let navbarComponent
+  
+
     return (
         <>
             <div className='w-full bg-[#FF8C82] text-neutral-800 flex justify-center py-4'>
@@ -21,7 +37,10 @@ export default function Navbar() {
                     <div className='flex gap-4'>
                         <Link to='/home' className='hover:text-[#FEFCDD] transition-colors duration-300'>Home</Link>
                         <Link to='/login' className='hover:text-[#FEFCDD] transition-colors duration-300'>Login</Link>
+                        <Link to='/categorias' className='hover:text-[#FEFCDD] transition-colors duration-300'>Categorias</Link>
                         <div className='hover:text-[#FEFCDD] transition-colors duration-300'>Produtos</div>
+                        <Link to='' onClick={logout} className='hover:text-[#FEFCDD] transition-colors duration-300'>Sair</Link>
+
                     </div>
                 </div>
             </div>
