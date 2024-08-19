@@ -17,7 +17,7 @@ export default function App() {
           <Navbar />
           <div className="min-h-[80vh] bg-[#FEFCDD] text-gray-800">
             <Routes>
-              <Route path="/" element={<Login />} />
+              <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/cadastro" element={<Cadastro />} />
