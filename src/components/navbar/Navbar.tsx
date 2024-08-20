@@ -38,7 +38,9 @@ export default function Navbar() {
                         <Link to='/home' className='hover:text-[#FEFCDD] transition-colors duration-300'>Home</Link>
                         <Link to='/login' className='hover:text-[#FEFCDD] transition-colors duration-300'>Login</Link>
                         <Link to='/categorias' className='hover:text-[#FEFCDD] transition-colors duration-300'>Categorias</Link>
-                        <div className='hover:text-[#FEFCDD] transition-colors duration-300'>Produtos</div>
+                        <Link to='/cadastroCategoria' className='hover:underline'>Cadastrar categoria</Link>
+                        <Link to= '/produtos' className='hover:text-[#FEFCDD] transition-colors duration-300'>Produtos</Link>
+                        <Link to='/cadastroProduto' className='hover:underline'>Cadastrar um produto</Link>
                         <Link to='' onClick={logout} className='hover:text-[#FEFCDD] transition-colors duration-300'>Sair</Link>
 
                     </div>

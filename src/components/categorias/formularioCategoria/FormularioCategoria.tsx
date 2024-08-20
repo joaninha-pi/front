@@ -11,10 +11,26 @@ function FormularioCategoria() {
         descricao: ''
     });
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const { usuario, handleLogout } = useContext(AuthContext);
     const token = usuario.token;
+    
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        // Verifica se o usuário está logado
+        if (!token) {
+            alert('Você precisa estar logado');
+            navigate('/login');
+        } else {
+            // Se estiver logado e houver um ID, busca a categoria para edição
+            if (id) {
+                buscarPorId(id);
+            }
+            setLoading(false);
+        }
+    }, [token, id, navigate]);
 
     async function buscarPorId(id: string) {
         try {
@@ -29,12 +45,6 @@ function FormularioCategoria() {
         }
     }
 
-    useEffect(() => {
-        if (id) {
-            buscarPorId(id);
-        }
-    }, [id]);
-
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
         setCategoria({
             ...categoria,
@@ -44,11 +54,11 @@ function FormularioCategoria() {
 
     async function gerarNovaCategoria(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-    
+
         try {
             if (id) {
                 const categoriaComId = { ...categoria, id: Number(id) };
-                await atualizar(`/categorias`, categoriaComId, setCategoria, {
+                await atualizar(`/categorias/${id}`, categoriaComId, setCategoria, {
                     headers: {
                         'Authorization': token
                     }
@@ -64,11 +74,14 @@ function FormularioCategoria() {
             }
             retornar();
         } catch (error: any) {
-            console.error('Erro ao salvar a categoria:', error);
-            alert('Erro ao salvar a categoria');
+            if (error.toString().includes('403')) {
+                alert('O token expirou, favor logar novamente');
+                handleLogout();
+            } else {
+                alert('Erro ao salvar a categoria');
+            }
         }
     }
-    
 
     function retornar() {
         navigate("/categorias");
@@ -105,10 +118,11 @@ function FormularioCategoria() {
                     />
                 </div>
                 <button
-                    className="rounded text-slate-100 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto block"
+                    disabled={loading}
+                    className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto block text-white font-bold"
                     type="submit"
                 >
-                    {id ? 'Editar' : 'Cadastrar'}
+                    {loading ? <span>Carregando...</span> : (id ? 'Editar' : 'Cadastrar')}
                 </button>
             </form>
         </div>
