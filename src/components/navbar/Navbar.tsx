@@ -51,13 +51,16 @@ export default function Navbar() {
                     </button>
                         <div className={`${isOpen ? 'block' : 'hidden'} absolute top-full right-0 mt-2 w-full md:w-1/4 bg-[#fefcdd] rounded-lg shadow-lg z-20`}>
                             <div className="flex flex-col font-medium rounded-lg font-body">
-                                <Link to='/home' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-300">Home</Link>
-                                <Link to='/login' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-300">Login</Link>
-                                <Link to='/categorias' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-300">Produtos por Categorias</Link>
-                                <Link to='/produtos' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-300">Todos os Produtos</Link>
-                                <Link to='' onClick={logout} className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-300">Sair</Link>
+                                 <Link to='/home' className='hover:text-[#FEFCDD] transition-colors duration-300'>Home</Link>
+                                 <Link to='/login' className='hover:text-[#FEFCDD] transition-colors duration-300'>Login</Link>
+                                 <Link to='/categorias' className='hover:text-[#FEFCDD] transition-colors duration-300'>Categorias</Link>
+                                 <Link to='/cadastroCategoria' className='hover:underline'>Cadastrar categoria</Link>
+                                 <Link to= '/produtos' className='hover:text-[#FEFCDD] transition-colors duration-300'>Produtos</Link>
+                                 <Link to='/cadastroProduto' className='hover:underline'>Cadastrar um produto</Link>
+                                 <Link to='' onClick={logout} className='hover:text-[#FEFCDD] transition-colors duration-300'>Sair</Link>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </nav>
