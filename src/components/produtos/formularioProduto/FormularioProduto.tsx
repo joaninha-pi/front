@@ -3,16 +3,18 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import Produto from '../../../models/Produto';
 import Categoria from '../../../models/Categoria';
-import Usuario from '../../../models/Usuario';
-import { buscar, atualizar, cadastrar, buscarU } from '../../../services/Service';
+import { buscar, atualizar, cadastrar } from '../../../services/Service';
 
 function FormularioProduto() {
   let navigate = useNavigate();
+
   const { id } = useParams<{ id: string }>();
+
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+
   const [categoria, setCategoria] = useState<Categoria>({
     id: 0,
     nome: '',
@@ -30,10 +32,12 @@ function FormularioProduto() {
     usuario: null,
   });
 
-  const [loading, setLoading] = useState<boolean>(true);
-
   async function buscarProdutoPorId(id: string) {
-    await buscarU(`/produtos/${id}`, setProduto);
+    await buscar(`/produtos/${id}`, setProduto, {
+      headers: {
+        Authorization: token,
+      },
+    });
   }
 
   async function buscarCategoriaPorId(id: string) {
@@ -55,42 +59,31 @@ function FormularioProduto() {
   useEffect(() => {
     if (token === '') {
       alert('Você precisa estar logado');
-      navigate('/login');
+      navigate('/');
     }
   }, [token]);
 
   useEffect(() => {
-    (async () => {
-      await buscarCategorias();
-      if (id !== undefined) {
-        await buscarProdutoPorId(id);
-      }
-      setLoading(false);
-    })();
+    buscarCategorias();
+    if (id !== undefined) {
+      buscarProdutoPorId(id);
+      console.log(categoria);
+    }
   }, [id]);
 
   useEffect(() => {
-    setProduto((prevProduto) => ({
-      ...prevProduto,
+    setProduto({
+      ...produto,
       categoria: categoria,
-    }));
+    });
   }, [categoria]);
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-    const usuarioConvertido: Usuario = {
-      id: usuario.id,
-      nome: usuario.nome,
-      usuario: usuario.nome,
-      senha: usuario.senha,
-      foto: '',
-      produto: null,
-    };
-
     setProduto({
       ...produto,
       [e.target.name]: e.target.value,
       categoria: categoria,
-      usuario: usuarioConvertido,
+      usuario: usuario,
     });
   }
 
@@ -101,9 +94,11 @@ function FormularioProduto() {
   async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (id !== undefined) {
+    console.log({ produto });
+
+    if (id != undefined) {
       try {
-        await atualizar(`/produtos/${id}`, produto, setProduto, {
+        await atualizar(`/produtos`, produto, setProduto, {
           headers: {
             Authorization: token,
           },
@@ -125,6 +120,7 @@ function FormularioProduto() {
             Authorization: token,
           },
         });
+
         alert('Produto cadastrado com sucesso');
         retornar();
       } catch (error: any) {
@@ -138,8 +134,7 @@ function FormularioProduto() {
     }
   }
 
-  const carregandoCategoria = categorias.length === 0;
-
+  const carregandoCategoria = categoria.descricao === '';
   return (
     <div className="container flex flex-col mx-auto items-center">
       <h1 className="text-4xl text-center my-8">{id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}</h1>
@@ -158,18 +153,6 @@ function FormularioProduto() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="quantidade">Quantidade do produto</label>
-          <input
-            value={produto.quantidade}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            type="number"
-            placeholder="Quantidade"
-            name="quantidade"
-            required
-            className="border-2 border-slate-700 rounded p-2"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
           <label htmlFor="descricao">Descrição do produto</label>
           <input
             value={produto.descricao}
@@ -182,58 +165,33 @@ function FormularioProduto() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="preco">Preço do produto</label>
-          <input
-            value={produto.preco}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            type="number"
-            placeholder="Preço"
-            name="preco"
-            required
-            className="border-2 border-slate-700 rounded p-2"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
           <label htmlFor="image">URL da imagem do produto</label>
           <input
             value={produto.image}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             type="text"
-            placeholder="URL da Imagem"
+            placeholder="URL da imagem"
             name="image"
             required
             className="border-2 border-slate-700 rounded p-2"
           />
+          {produto.image && (
+            <img src={produto.image} alt="Imagem do Produto" className="mt-4 w-32 h-32 object-cover rounded" />
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <p>Categoria do produto</p>
-          <select 
-            name="categoria" 
-            id="categoria" 
-            className='border p-2 border-slate-800 rounded' 
-            onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
-          >
-            <option value="" disabled>Selecione uma categoria</option>
+          <select name="categoria" id="categoria" className='border p-2 border-slate-800 rounded' onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}>
+            <option value="" selected disabled>Selecione uma categoria</option>
             {categorias.map((categoria) => (
               <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
             ))}
           </select>
         </div>
-        <button 
-          disabled={carregandoCategoria || loading} 
-          type='submit' 
-          className='rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto block py-2'
-        >
-          {carregandoCategoria || loading ? <span>Carregando</span> : id !== undefined ? 'Editar' : 'Cadastrar'}
+        <button disabled={carregandoCategoria} type='submit' className='rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto block py-2'>
+          {carregandoCategoria ? <span>Carregando</span> : id !== undefined ? 'Editar' : 'Cadastrar'}
         </button>
       </form>
-
-      {produto.image && (
-        <div className="mt-4">
-          <h2 className="text-2xl">Imagem do Produto</h2>
-          <img src={produto.image} alt={produto.nome} className="w-full max-w-md" />
-        </div>
-      )}
     </div>
   );
 }
