@@ -1,11 +1,9 @@
-import React from 'react';
-
 export default function Contact() {
     return (
         <>
 
-            <h1 style={{ textAlign: 'center', paddingTop: '30px', paddingBottom: '50px', fontSize: '30px', fontWeight: 'bold' }}>Entre em contato!</h1>
-            <div style={{ border: '1px solid black', padding: '20px', borderRadius: '10px', width: '500px', margin: "0% 32.5%", backgroundColor: 'darkgrey' }}>
+            <h1 style={{ textAlign: 'center', paddingTop: '30px', paddingBottom: '50px', fontSize: '30px', fontWeight: 'bold', fontFamily: 'Josefin Sans'}}>Entre em contato!</h1>
+            <div style={{ border: '1px solid black', padding: '20px', borderRadius: '10px', width: '500px', margin: "0% 32.5%", backgroundColor: 'darkgrey', fontFamily: 'Josefin Sans'}}>
 
                 <form>
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>

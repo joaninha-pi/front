@@ -2,11 +2,10 @@ import './Home.css';
 import { Link, useNavigate } from 'react-router-dom'
 import ModalProdutos from '../../components/produtos/modalProdutos/ModalProdutos';
 
-
 function Home() {
   return (
     <>
-      <div className="bg-gray-900 flex justify-center">
+      <div className="bg-gray-900 flex justify-center font-body">
         <div className='container grid grid-cols-2 text-white'>
           <div className="flex flex-col gap-4 items-center justify-center py-4">
             <div className="flex justify-around gap-4">
