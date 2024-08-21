@@ -19,10 +19,11 @@ export default function Navbar() {
     let navbarCadCat = null
     let navbarCadProd = null
     let navbarSair = null
+    
 
     if (usuario.token !== "" && usuario.usuario === "root@root.com") {
-        navbarCadCat = (<Link to='/cadastrarCategoria' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Cadastrar Categoria</Link>)
-        navbarCadProd = (<Link to='/cadastrarProdutos' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Cadastrar Produtos</Link>)
+        navbarCadCat = (<Link to='/cadastroCategoria' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Cadastrar Categoria</Link>)
+        navbarCadProd = (<Link to='/cadastroProduto' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Cadastrar Produtos</Link>)
         navbarSair = (<Link to='/login' onClick={logout} className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Sair</Link>)    
     }
     else if (usuario.token !== "") {
@@ -37,7 +38,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="border-gray-200 bg-[#FF8C82] relative">
+            <nav className="bg-[#FF8C82] relative">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src={logo} className="h-12 mr-3" alt="Joana Logo" />

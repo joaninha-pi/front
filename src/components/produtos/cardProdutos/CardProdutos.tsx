@@ -8,7 +8,7 @@ interface CardProdutoProps {
 
 function CardProduto({ produto }: CardProdutoProps) {
   return (
-    <div className='border-slate-900 border flex flex-col rounded overflow-hidden justify-between'>
+    <div className=' border flex flex-col rounded overflow-hidden justify-between'>
       <div>
         <div className="flex w-full bg-gray-400 py-2 px-4 items-center gap-4">
           <img src={produto.image} className='h-12 rounded-full' alt="imagem do produto" />
@@ -18,7 +18,7 @@ function CardProduto({ produto }: CardProdutoProps) {
           <h4 className='text-lg font-semibold uppercase'>{produto.nome}</h4>
           <p>{produto.descricao}</p>
           <p>Categoria: {produto.categoria?.descricao}</p>
-          <p>Preço: R$ {produto.preco.toFixed(2)}</p> {/* Formatação do preço com duas casas decimais */}
+          <p>Preço: R$ {produto.preco.toFixed(2)}</p> 
         </div>
       </div>
       <div className="flex">
