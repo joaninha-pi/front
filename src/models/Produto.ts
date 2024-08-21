@@ -1,7 +1,7 @@
 import Categoria from "./Categoria";
 import Usuario from "./Usuario.ts";
 
-export default interface Produto {
+export interface Produto {
     id: number;
     nome: string;
     quantidade: number;

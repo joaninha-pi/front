@@ -8,7 +8,7 @@ export default function Navbar() {
 
     const { usuario, handleLogout } = useContext(AuthContext)
 
-    
+    const { quantidadeItems } = useContext(AuthContext)
 
     function logout() {
         handleLogout()
@@ -47,6 +47,7 @@ export default function Navbar() {
                     <Link to='/produtos' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Produtos</Link>
                     <Link to='/about' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Sobre nós</Link>
                     <Link to='/contact' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Contato</Link>
+                    <Link to='/carrinho' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Carrinho [{ quantidadeItems }]</Link>
                     <Link to='/produtos' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"></Link>
                     <div className="flex md:order-2">
                         <button onClick={toggleMenu} data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-center p-1 w-10 h-10 text-sm text-[#262626] rounded-lg hover:bg-[#fefcdd] focus:outline-none focus:ring-2 focus:ring-[#82ffba] " aria-controls="navbar-hamburger" aria-expanded={isOpen}>
@@ -61,6 +62,7 @@ export default function Navbar() {
                                 <Link to='/login' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Login</Link>
                                 <Link to='/categorias' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Categorias</Link>
                                 <Link to='/produtos' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Produtos</Link>
+                                <Link to='/carrinho' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Carrinho [{ quantidadeItems }]</Link>
                                 {navbarCadCat}
                                 {navbarCadProd}
                                 {navbarSair}

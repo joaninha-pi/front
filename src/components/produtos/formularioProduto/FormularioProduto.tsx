@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
-import Produto from '../../../models/Produto';
+import { Produto } from '../../../models/Produto';
 import Categoria from '../../../models/Categoria';
 import { buscar, atualizar, cadastrar } from '../../../services/Service';
 
