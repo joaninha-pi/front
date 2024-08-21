@@ -7,3 +7,4 @@ export default interface Usuario {
     senha: string;
     foto: string;
     produto?: Produto | null;
+}

@@ -1,7 +1,8 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Categoria from '../../../models/Categoria';
 import { atualizar, buscar, cadastrar } from '../../../services/Service';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 function FormularioCategoria() {
     const [categoria, setCategoria] = useState<Categoria>({
@@ -12,21 +13,37 @@ function FormularioCategoria() {
 
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
+    const { usuario, handleLogout } = useContext(AuthContext);
+    const token = usuario.token;
+    
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        // Verifica se o usuário está logado
+        if (!token) {
+            alert('Você precisa estar logado');
+            navigate('/login');
+        } else {
+            // Se estiver logado e houver um ID, busca a categoria para edição
+            if (id) {
+                buscarPorId(id);
+            }
+            setLoading(false);
+        }
+    }, [token, id, navigate]);
 
     async function buscarPorId(id: string) {
         try {
-            await buscar(`/categorias/${id}`, setCategoria);
+            await buscar(`/categorias/${id}`, setCategoria, {
+                headers: {
+                    'Authorization': token
+                }
+            });
         } catch (error: any) {
             console.error('Erro ao buscar a categoria:', error);
             alert('Erro ao buscar a categoria');
         }
     }
-
-    useEffect(() => {
-        if (id) {
-            buscarPorId(id);
-        }
-    }, [id]);
 
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
         setCategoria({
@@ -37,25 +54,34 @@ function FormularioCategoria() {
 
     async function gerarNovaCategoria(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-    
+
         try {
             if (id) {
-                // Atualizar categoria existente
-                const categoriaComId = { ...categoria, id: Number(id) }; // Certifique-se de que o ID está incluído
-                await atualizar(`/categorias`, categoriaComId, setCategoria);
+                const categoriaComId = { ...categoria, id: Number(id) };
+                await atualizar(`/categorias`, categoriaComId, setCategoria, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
                 alert('Categoria atualizada com sucesso');
             } else {
-                // Cadastrar nova categoria
-                await cadastrar(`/categorias`, categoria, setCategoria);
+                await cadastrar(`/categorias`, categoria, setCategoria, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
                 alert('Categoria cadastrada com sucesso');
             }
             retornar();
         } catch (error: any) {
-            console.error('Erro ao salvar a categoria:', error);
-            alert('Erro ao salvar a categoria');
+            if (error.toString().includes('403')) {
+                alert('O token expirou, favor logar novamente');
+                handleLogout();
+            } else {
+                alert('Erro ao salvar a categoria');
+            }
         }
     }
-    
 
     function retornar() {
         navigate("/categorias");
@@ -92,10 +118,11 @@ function FormularioCategoria() {
                     />
                 </div>
                 <button
-                    className="rounded text-slate-100 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto block"
+                    disabled={loading}
+                    className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto block text-white font-bold"
                     type="submit"
                 >
-                    {id ? 'Editar' : 'Cadastrar'}
+                    {loading ? <span>Carregando...</span> : (id ? 'Editar' : 'Cadastrar')}
                 </button>
             </form>
         </div>
