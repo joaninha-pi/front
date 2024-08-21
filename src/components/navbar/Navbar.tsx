@@ -1,27 +1,43 @@
 import { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from '../../assets/images/logo.svg'
 import { AuthContext } from '../../contexts/AuthContext'
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
-    let navigate = useNavigate()
 
-    const { handleLogout } = useContext(AuthContext)
+    const { usuario, handleLogout } = useContext(AuthContext)
+
+    
 
     function logout() {
         handleLogout()
         alert('Usuário deslogado com sucesso')
-        navigate('/login')
+        
+    }
+    
+    let navbarCadCat = null
+    let navbarCadProd = null
+    let navbarSair = null
+
+    if (usuario.token !== "" && usuario.usuario === "root@root.com") {
+        navbarCadCat = (<Link to='/cadastrarCategoria' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Cadastrar Categoria</Link>)
+        navbarCadProd = (<Link to='/cadastrarProdutos' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Cadastrar Produtos</Link>)
+        navbarSair = (<Link to='/login' onClick={logout} className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Sair</Link>)    
+    }
+    else if (usuario.token !== "") {
+    
+        navbarSair = (<Link to = '/login' onClick={logout} className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Sair</Link>)
     }
 
     function toggleMenu() {
+
         setIsOpen(!isOpen)
     }
 
     return (
         <>
-            <nav className="border-gray-200 bg-[#FF8C82] dark:bg-gray-800 dark:border-gray-700 relative">
+            <nav className="border-gray-200 bg-[#FF8C82] relative">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src={logo} className="h-12 mr-3" alt="Joana Logo" />
@@ -43,10 +59,10 @@ export default function Navbar() {
                                 <Link to='/home' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Home</Link>
                                 <Link to='/login' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Login</Link>
                                 <Link to='/categorias' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Categorias</Link>
-                                <Link to='/cadastrarCategoria' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Cadastrar Categoria</Link>
                                 <Link to='/produtos' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Produtos</Link>
-                                <Link to='/cadastrarProdutos' className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Cadastrar produtos</Link>
-                                <Link to='' onClick={logout} className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600">Sair</Link>
+                                {navbarCadCat}
+                                {navbarCadProd}
+                                {navbarSair}
                             </div>
                         </div>
 
