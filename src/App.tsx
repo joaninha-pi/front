@@ -1,12 +1,12 @@
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
-import Contact from "./pages/contact/Contact";
-import About from "./pages/about/About";
-import Home from "./pages/home/Home";
+import Contact from "./pages/Contact/Contact";
+import About from "./pages/About/About";
+import Home from "./pages/Home/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/login/Login";
 import { AuthProvider } from './contexts/AuthContext';
-import Cadastro from './pages/cadastro/Cadastro';
+import Cadastro from './pages/Cadastro/Cadastro';
 import "./App.css";
 import ListaCategorias from "./components/categorias/listaCategorias/ListaCategorias";
 import ListaProdutos from "./components/produtos/listaProdutos/ListaProdutos";
