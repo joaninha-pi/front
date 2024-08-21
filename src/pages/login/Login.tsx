@@ -38,34 +38,37 @@ function Login() {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold ">
-        <form className="flex justify-center items-center flex-col w-1/2 gap-4" onSubmit={login}>
-          <h2 className="text-slate-900 text-5xl font-title">Entrar</h2>
-          <div className="flex flex-col w-full font-sans">
+      <div className="flex justify-center items-center min-h-screen font-bold">
+        <form className="flex justify-center items-center flex-col gap-4 mx-auto" onSubmit={login}>
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-3xl font-bold text-green-600 my-auto font-title">JOANA</h1>
+            <div className="text-sm font-light text-green-600 font-body">Faça seu Login</div>
+          </div>
+          <div className="flex flex-col font-body text-green-600">
             <label htmlFor="usuario">Usuário</label>
             <input
               type="text"
               id="usuario"
               name="usuario"
-              placeholder="Usuario"
-              className="border-2 border-slate-700 rounded p-2"
+              placeholder="Usuário"
+              className="p-2 text-lg rounded border focus:outline focus:outline-2 focus:outline-offset-2 bg-[#ffffff] text-[#444444] focus:outline-[#aaaaaa] border-[#cccccc] w-80"
               value={usuarioLogin.nome}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
           </div>
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col font-body text-green-600">
             <label htmlFor="senha">Senha</label>
             <input
               type="password"
               id="senha"
               name="senha"
               placeholder="Senha"
-              className="border-2 border-slate-700 rounded p-2"
+              className="p-2 text-lg rounded border focus:outline focus:outline-2 focus:outline-offset-2 bg-[#ffffff] text-[#444444] focus:outline-[#aaaaaa] border-[#cccccc] w-80"
               value={usuarioLogin.senha}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
           </div>
-          <button type='submit' className="rounded bg-[#009674] hover:bg-[#91ccab] hover:text-[#262626] text-[#fefcdd] w-1/2 py-2 flex justify-center">
+          <button type='submit' className="rounded text-stone-100 bg-green-600 hover:bg-opacity-25 hover:text-zinc-950 w-1/2 py-2 flex justify-center font-body">
             {isLoading ? <RotatingLines
               strokeColor="white"
               strokeWidth="5"
@@ -75,18 +78,16 @@ function Login() {
             /> :
               <span>Enviar</span>}
           </button>
-
-          <hr className="border-slate-800 w-full" />
-
-          <p>
+          <p className="text-sm font-body">
             Ainda não tem uma conta?{' '}
-            <Link to="/cadastro" className="text-[#3d7eb3] hover:underline">
+            <Link to="/cadastro" className="text-red-800 hover:underline">
               Cadastre-se
             </Link>
           </p>
         </form>
-        <div className="fundoLogin hidden lg:block"></div>
       </div>
+
+
     </>
   );
 }
