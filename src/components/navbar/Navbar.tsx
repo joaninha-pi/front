@@ -38,6 +38,7 @@ export default function Navbar() {
   let navbarCadProd = null;
   let navbarSair = null;
   let navbarCat = null;
+  let navbarPerfil = null;
 
 
   if (usuario.token !== '' && usuario.usuario === 'root@root.com') {
@@ -57,6 +58,16 @@ export default function Navbar() {
         Cadastrar Produtos
       </Link>
     );
+
+    navbarPerfil = (
+      <Link
+        to="/perfil"
+        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+      >
+        Perfil
+      </Link>
+    )
+
     navbarSair = (
       <Link
         to="/login"
@@ -85,6 +96,16 @@ export default function Navbar() {
         Sair
       </Link>
     );
+
+    navbarPerfil = (
+      <Link
+        to="/perfil"
+        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+      >
+        Perfil
+      </Link>
+    )
+
   }
 
   return (
@@ -182,6 +203,7 @@ export default function Navbar() {
               {navbarCat}
               {navbarCadCat}
               {navbarCadProd}
+              {navbarPerfil}
               {navbarSair}
             </div>
           </div>
