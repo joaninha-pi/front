@@ -4,6 +4,7 @@ export default function Contact() {
     return (
         <>
             <div className="fundoLogao">
+            <div className='pt-24'></div>
             <h1 style={{ textAlign: 'center', paddingTop: '30px', paddingBottom: '50px', fontSize: '30px', fontWeight: 'bold' }}>Entre em contato!</h1>
             <div style={{ border: '1px solid black', padding: '20px', borderRadius: '10px', width: '500px', margin: "0% 32.5%", backgroundColor: 'darkgrey' }}>
 

@@ -4,7 +4,8 @@ export default function Footer() {
 
     return (
         <>
-            <div className="flex justify-center bg-[#FF8C82] text-neutral-800">
+        
+            <div className="flex justify-center bg-red-600 text-neutral-800">
                 <div className="container flex flex-col items-center py-4">
                     <p className='text-xl font-bold'>Joana | Copyright: Generation Brasil </p>
                     <p className='text-lg'>Nos acompanhe nas redes!</p>

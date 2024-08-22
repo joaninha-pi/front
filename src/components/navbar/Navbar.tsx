@@ -66,7 +66,7 @@ export default function Navbar() {
     navbarPerfil = (
       <Link
         to="/perfil"
-        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+         className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
       >
         Perfil
       </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
     navbarCat = (
       <Link
         to="/categorias"
-        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+        className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
       >
         Categorias
       </Link>
@@ -104,7 +104,7 @@ export default function Navbar() {
     navbarPerfil = (
       <Link
         to="/perfil"
-        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+        className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
       >
         Perfil
       </Link>
@@ -214,16 +214,8 @@ export default function Navbar() {
               >
                 Login
               </Link>
+             
               <Link
-<<<<<<< HEAD
-                to="/categorias"
-                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
-              >
-                Categorias
-              </Link>
-              <Link
-=======
->>>>>>> 7208d2271355a86ed79f8ba26c3022cdceb1d2f1
                 to="/produtos"
                 className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
               >
