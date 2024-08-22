@@ -1,0 +1,30 @@
+@keyframes logoAnimation {
+    0%, 100% { opacity: 1; }
+    33%, 66% { opacity: 0; }
+}
+
+.logoContainer {
+    position: relative;
+    width: 6rem;
+    height: 6rem;
+}
+
+.logoImage {
+    position: absolute;
+    height: 6rem;
+    width: 6rem;
+    opacity: 0;
+    animation: logoAnimation 6s infinite;
+}
+
+.logoImage:nth-of-type(1) {
+    animation-delay: 0s;
+}
+
+.logoImage:nth-of-type(2) {
+    animation-delay: 2s;
+}
+
+.logoImage:nth-of-type(3) {
+    animation-delay: 4s;
+}
