@@ -37,6 +37,7 @@ export default function Navbar() {
   let navbarCadCat = null;
   let navbarCadProd = null;
   let navbarSair = null;
+  let navbarCat = null;
 
   if (usuario.token !== '' && usuario.usuario === 'root@root.com') {
     navbarCadCat = (
@@ -64,6 +65,15 @@ export default function Navbar() {
         Sair
       </Link>
     );
+    navbarCat = (
+      <Link
+        to="/categorias"
+        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+      >
+        Categorias
+      </Link>
+    );
+
   } else if (usuario.token !== '') {
     navbarSair = (
       <Link
@@ -157,12 +167,6 @@ export default function Navbar() {
                 Login
               </Link>
               <Link
-                to="/categorias"
-                className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
-              >
-                Categorias
-              </Link>
-              <Link
                 to="/produtos"
                 className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
               >
@@ -174,6 +178,7 @@ export default function Navbar() {
               >
                 Carrinho [{quantidadeItems}]
               </Link>
+              {navbarCat}
               {navbarCadCat}
               {navbarCadProd}
               {navbarSair}

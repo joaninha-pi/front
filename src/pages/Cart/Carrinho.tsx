@@ -10,7 +10,7 @@ function Carrinho() {
     const finalizarCompra = () => {
         if (usuario.token !== "") {
             limparCart()
-            alert("Compra finalizada com sucesso!")
+
         } else {
             alert("Faça o login para finalizar a compra")
             navigate('/login')
@@ -19,6 +19,11 @@ function Carrinho() {
 
     return (
         <>
+            <div className="fundoLogao">
+            <div className='flex justify-items-start p-2 pt-24 '>
+                <h1 className='text-3xl font-bold'>Carrinho:</h1>
+            </div>
+            <div className='pb'> </div> 
             <div className='flex justify-end p-2'>
                 <button 
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
@@ -40,6 +45,7 @@ function Carrinho() {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </>
     )

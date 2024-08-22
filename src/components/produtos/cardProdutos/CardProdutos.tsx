@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-// import { Link } from 'react-router-dom';
 import { Produto } from '../../../models/Produto';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
@@ -11,10 +10,10 @@ interface CardProdutoProps {
 function CardProduto({ produto }: CardProdutoProps) {
   const { adicionarProduto, removerProduto } = useContext(AuthContext)
   const { usuario } = useContext(AuthContext)
-  let admPerm = null
+  let admPermProd = null
 
   if (usuario.token != "" && usuario.usuario == "root@root.com") {
-    admPerm = (<div className="flex">
+    admPermProd = (<div className="flex">
       <Link to={`/editarProduto/${produto.id}`} className='w-full text-white bg-indigo-400 hover:bg-indigo-800 flex items-center justify-center py-2'>
         <button>Editar</button>
       </Link>
@@ -47,7 +46,7 @@ function CardProduto({ produto }: CardProdutoProps) {
           onClick={() => removerProduto(produto.id)}>Remover</button>
       </div>
 
-      {admPerm}
+      {admPermProd}
 
     </div>
   );

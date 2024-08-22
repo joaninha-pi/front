@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dna } from 'react-loader-spinner';
-import { useNavigate } from 'react-router-dom';
-import Produto from '../../../models/Produto';
+import {Produto} from '../../../models/Produto';
 import {buscarU } from '../../../services/Service';
 import CardProduto from '../cardProdutos/CardProdutos';
 function ListaProdutos() {
