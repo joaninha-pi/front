@@ -41,6 +41,9 @@ export default function Navbar() {
   let navbarCadCat = null;
   let navbarCadProd = null;
   let navbarSair = null;
+  let navbarCat = null;
+  let navbarPerfil = null;
+
 
   if (usuario.token !== '' && usuario.usuario === 'root@root.com') {
     navbarCadCat = (
@@ -59,6 +62,16 @@ export default function Navbar() {
         Cadastrar Produtos
       </Link>
     );
+
+    navbarPerfil = (
+      <Link
+        to="/perfil"
+        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+      >
+        Perfil
+      </Link>
+    )
+
     navbarSair = (
       <Link
         to="/login"
@@ -68,6 +81,15 @@ export default function Navbar() {
         Sair
       </Link>
     );
+    navbarCat = (
+      <Link
+        to="/categorias"
+        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+      >
+        Categorias
+      </Link>
+    );
+
   } else if (usuario.token !== '') {
     navbarSair = (
       <Link
@@ -78,6 +100,16 @@ export default function Navbar() {
         Sair
       </Link>
     );
+
+    navbarPerfil = (
+      <Link
+        to="/perfil"
+        className="block py-2 px-4 text-[#262626] hover:bg-[#82ffba] rounded transition-colors duration-600"
+      >
+        Perfil
+      </Link>
+    )
+
   }
 
   return (
@@ -183,12 +215,15 @@ export default function Navbar() {
                 Login
               </Link>
               <Link
+<<<<<<< HEAD
                 to="/categorias"
                 className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
               >
                 Categorias
               </Link>
               <Link
+=======
+>>>>>>> 7208d2271355a86ed79f8ba26c3022cdceb1d2f1
                 to="/produtos"
                 className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
               >
@@ -200,8 +235,10 @@ export default function Navbar() {
               >
                 Carrinho [{quantidadeItems}]
               </Link>
+              {navbarCat}
               {navbarCadCat}
               {navbarCadProd}
+              {navbarPerfil}
               {navbarSair}
             </div>
           </div>

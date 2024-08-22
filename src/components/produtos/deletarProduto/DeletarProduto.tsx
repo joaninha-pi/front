@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext } from '../../../contexts/AuthContext'
-import Produto from '../../../models/Produto'
+import {Produto} from '../../../models/Produto'
 import { buscar, deletar } from '../../../services/Service'
 
 function DeletarProduto() {
@@ -54,7 +54,7 @@ function DeletarProduto() {
         }
       })
 
-      alert('Produto apagada com sucesso')
+      alert('Produto apagado com sucesso')
 
     } catch (error) {
       alert('Erro ao apagar o Produto')
