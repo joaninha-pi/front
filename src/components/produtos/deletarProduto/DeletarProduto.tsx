@@ -4,6 +4,7 @@ import { AuthContext } from '../../../contexts/AuthContext'
 import { Produto } from '../../../models/Produto'
 import { buscar, deletar } from '../../../services/Service'
 import { RotatingLines } from 'react-loader-spinner'  // Importando o spinner
+import { toastAlerta } from '../../../utils/toastAlerta'
 
 function DeletarProduto() {
   const [produto, setProduto] = useState<Produto>({} as Produto)
@@ -23,7 +24,7 @@ function DeletarProduto() {
       })
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        alert('O token expirou, favor logar novamente')
+        toastAlerta('O token expirou, favor logar novamente', 'info')
         handleLogout()
       }
     }
@@ -31,7 +32,7 @@ function DeletarProduto() {
 
   useEffect(() => {
     if (token === '') {
-      alert('Você precisa estar logado')
+      toastAlerta('Você precisa estar logado', 'info')
       navigate('/login')
     }
   }, [token])
@@ -54,9 +55,9 @@ function DeletarProduto() {
           'Authorization': token
         }
       })
-      alert('Produto apagado com sucesso')
+      toastAlerta('Produto apagado com sucesso', 'sucesso')
     } catch (error) {
-      alert('Erro ao apagar o Produto')
+      toastAlerta('Erro ao apagar o Produto', 'erro')
     } finally {
       setLoading(false)  // Finaliza o carregamento
       retornar()

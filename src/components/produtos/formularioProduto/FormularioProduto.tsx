@@ -5,6 +5,7 @@ import { Produto } from '../../../models/Produto';
 import Categoria from '../../../models/Categoria';
 import { buscar, atualizar, cadastrar } from '../../../services/Service';
 import { RotatingLines } from 'react-loader-spinner';
+import { toastAlerta } from '../../../utils/toastAlerta';
 
 function FormularioProduto() {
   let navigate = useNavigate();
@@ -58,7 +59,7 @@ function FormularioProduto() {
 
   useEffect(() => {
     if (token === '') {
-      alert('Você precisa estar logado');
+      toastAlerta('Você precisa estar logado', 'info');
       navigate('/login');
     }
   }, [token]);
@@ -101,22 +102,22 @@ function FormularioProduto() {
             Authorization: token,
           },
         });
-        alert('Produto atualizado com sucesso');
+        toastAlerta('Produto atualizado com sucesso', 'sucesso');
       } else {
         await cadastrar(`/produtos`, produto, setProduto, {
           headers: {
             Authorization: token,
           },
         });
-        alert('Produto cadastrado com sucesso');
+        toastAlerta('Produto cadastrado com sucesso', 'sucesso');
       }
       retornar();
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        alert('O token expirou, favor logar novamente');
+        toastAlerta('O token expirou, favor logar novamente', 'info');
         handleLogout();
       } else {
-        alert('Erro ao processar o Produto');
+        toastAlerta('Erro ao processar o Produto', 'erro');
       }
     } finally {
       setLoading(false);

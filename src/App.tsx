@@ -15,12 +15,15 @@ import FormularioProduto from "./components/produtos/formularioProduto/Formulari
 import DeletarCategoria from "./components/categorias/deletarCategoria/DeletarCategoria";
 import DeletarProduto from "./components/produtos/deletarProduto/DeletarProduto";
 import Carrinho from "./pages/Cart/Carrinho";
-import Perfil from "./pages/perfil/perfil";
+import Perfil from "./pages/perfil/Perfil";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
     <>
       <AuthProvider>
+        <ToastContainer />
         <BrowserRouter>
           <Navbar />
           <div className="min-h-[80vh] bg-[#FEFCDD] text-gray-800">

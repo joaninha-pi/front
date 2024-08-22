@@ -3,15 +3,22 @@ import { Circles } from 'react-loader-spinner';
 import { Produto } from '../../../models/Produto';
 import { buscarU } from '../../../services/Service';
 import CardProduto from '../cardProdutos/CardProdutos';
+import { toastAlerta } from '../../../utils/toastAlerta';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function ListaProdutos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
+
+  let navigate = useNavigate();
 
   async function buscarProdutos() {
     try {
       await buscarU('/produtos', setProdutos);
     } catch (error: any) {
-      alert('Erro ao buscar produtos');
+      if (error.toString().includes('403')) {
+        toastAlerta('O token expirou, favor logar novamente', 'info');
+        navigate('/login');
+      }
     }
   }
 
