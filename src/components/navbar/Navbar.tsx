@@ -39,6 +39,7 @@ export default function Navbar() {
   let navbarSair = null;
   let navbarCat = null;
 
+
   if (usuario.token !== '' && usuario.usuario === 'root@root.com') {
     navbarCadCat = (
       <Link
