@@ -7,8 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        title: ['Black Han Sans', 'sans-serif'],
-        body: ['ABeeZee', 'sans-serif'],
+        title: ['Nunito', 'sans-serif'],
+        subtitle: ['Exo', 'sans-serif'],
+        body: ['Rubik', 'sans-serif'],
       },
     },
   },
