@@ -4,17 +4,15 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import { Produto } from '../../../models/Produto';
 import Categoria from '../../../models/Categoria';
 import { buscar, atualizar, cadastrar } from '../../../services/Service';
+import { RotatingLines } from 'react-loader-spinner';
 
 function FormularioProduto() {
   let navigate = useNavigate();
-
   const { id } = useParams<{ id: string }>();
-
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-
   const [categoria, setCategoria] = useState<Categoria>({
     id: 0,
     nome: '',
@@ -31,6 +29,8 @@ function FormularioProduto() {
     image: '',
     usuario: null,
   });
+
+  const [loading, setLoading] = useState(false);
 
   async function buscarProdutoPorId(id: string) {
     await buscar(`/produtos/${id}`, setProduto, {
@@ -67,7 +67,6 @@ function FormularioProduto() {
     buscarCategorias();
     if (id !== undefined) {
       buscarProdutoPorId(id);
-      console.log(categoria);
     }
   }, [id]);
 
@@ -93,105 +92,128 @@ function FormularioProduto() {
 
   async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
 
-    console.log({ produto });
-
-    if (id != undefined) {
-      try {
+    try {
+      if (id !== undefined) {
         await atualizar(`/produtos`, produto, setProduto, {
           headers: {
             Authorization: token,
           },
         });
         alert('Produto atualizado com sucesso');
-        retornar();
-      } catch (error: any) {
-        if (error.toString().includes('403')) {
-          alert('O token expirou, favor logar novamente');
-          handleLogout();
-        } else {
-          alert('Erro ao atualizar o Produto');
-        }
-      }
-    } else {
-      try {
+      } else {
         await cadastrar(`/produtos`, produto, setProduto, {
           headers: {
             Authorization: token,
           },
         });
-
         alert('Produto cadastrado com sucesso');
-        retornar();
-      } catch (error: any) {
-        if (error.toString().includes('403')) {
-          alert('O token expirou, favor logar novamente');
-          handleLogout();
-        } else {
-          alert('Erro ao cadastrar o Produto');
-        }
       }
+      retornar();
+    } catch (error: any) {
+      if (error.toString().includes('403')) {
+        alert('O token expirou, favor logar novamente');
+        handleLogout();
+      } else {
+        alert('Erro ao processar o Produto');
+      }
+    } finally {
+      setLoading(false);
     }
   }
 
   const carregandoCategoria = categoria.descricao === '';
-  return (
-    <div className="container flex flex-col mx-auto items-center">
-      <h1 className="text-4xl text-center my-8">{id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}</h1>
 
-      <form onSubmit={gerarNovoProduto} className="flex flex-col w-1/2 gap-4">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="nome">Nome do produto</label>
-          <input
-            value={produto.nome}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            type="text"
-            placeholder="Nome"
-            name="nome"
-            required
-            className="border-2 border-slate-700 rounded p-2"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="descricao">Descrição do produto</label>
-          <input
-            value={produto.descricao}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            type="text"
-            placeholder="Descrição"
-            name="descricao"
-            required
-            className="border-2 border-slate-700 rounded p-2"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="image">URL da imagem do produto</label>
-          <input
-            value={produto.image}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            type="text"
-            placeholder="URL da imagem"
-            name="image"
-            required
-            className="border-2 border-slate-700 rounded p-2"
-          />
-          {produto.image && (
-            <img src={produto.image} alt="Imagem do Produto" className="mt-4 w-32 h-32 object-cover rounded" />
-          )}
-        </div>
-        <div className="flex flex-col gap-2">
-          <p>Categoria do produto</p>
-          <select name="categoria" id="categoria" className='border p-2 border-slate-800 rounded' onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}>
-            <option value="" selected disabled>Selecione uma categoria</option>
-            {categorias.map((categoria) => (
-              <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
-            ))}
-          </select>
-        </div>
-        <button disabled={carregandoCategoria} type='submit' className='rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto block py-2'>
-          {carregandoCategoria ? <span>Carregando</span> : id !== undefined ? 'Editar' : 'Cadastrar'}
-        </button>
-      </form>
+  return (
+    <div className='fundoLogao'>
+      <div className='pt-24'></div>
+      <div className="container flex flex-col mx-auto items-center">
+        <h1 className="text-4xl text-center my-8">
+          {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
+        </h1>
+
+        <form onSubmit={gerarNovoProduto} className="w-full max-w-lg flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="nome">Nome do produto</label>
+            <input
+              value={produto.nome}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              type="text"
+              placeholder="Nome"
+              name="nome"
+              required
+              className="border-2 border-slate-700 rounded p-2"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="descricao">Descrição do produto</label>
+            <input
+              value={produto.descricao}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              type="text"
+              placeholder="Descrição"
+              name="descricao"
+              required
+              className="border-2 border-slate-700 rounded p-2"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="image">URL da imagem do produto</label>
+            <input
+              value={produto.image}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              type="text"
+              placeholder="URL da imagem"
+              name="image"
+              required
+              className="border-2 border-slate-700 rounded p-2"
+            />
+            {produto.image && (
+              <img
+                src={produto.image}
+                alt="Imagem do Produto"
+                className="mt-4 w-32 h-32 object-cover rounded"
+              />
+            )}
+          </div>
+          <div className="flex flex-col gap-2">
+            <p>Categoria do produto</p>
+            <select
+              name="categoria"
+              id="categoria"
+              className="border p-2 border-slate-800 rounded"
+              onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
+            >
+              <option value="" selected disabled>
+                Selecione uma categoria
+              </option>
+              {categorias.map((categoria) => (
+                <option key={categoria.id} value={categoria.id}>
+                  {categoria.nome}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            disabled={carregandoCategoria || loading}
+            type="submit"
+            className="flex items-center justify-center rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2"
+          >
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <RotatingLines
+                  strokeColor="#18181b"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="24"
+                  visible={true}
+                />
+              </div>
+            ) : id !== undefined ? 'Editar' : 'Cadastrar'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

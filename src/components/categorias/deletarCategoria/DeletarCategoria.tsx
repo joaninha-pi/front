@@ -3,14 +3,14 @@ import { useNavigate, useParams } from 'react-router'
 import { AuthContext } from '../../../contexts/AuthContext'
 import Categoria from '../../../models/Categoria'
 import { buscar, deletar } from '../../../services/Service'
+import { RotatingLines } from 'react-loader-spinner'  // Importando o spinner
 
 function DeletarCategoria() {
-    const [Categoria, setCategoria] = useState<Categoria>({} as Categoria)
+    const [categoria, setCategoria] = useState<Categoria>({} as Categoria)
+    const [loading, setLoading] = useState<boolean>(false)  // Estado de carregamento
 
     let navigate = useNavigate()
-
     const { id } = useParams<{ id: string }>()
-
     const { usuario, handleLogout } = useContext(AuthContext)
     const token = usuario.token
 
@@ -43,39 +43,57 @@ function DeletarCategoria() {
     }, [id])
 
     function retornar() {
-        navigate("/Categorias")
+        navigate("/categorias")
     }
 
     async function deletarCategoria() {
+        setLoading(true)  // Inicia o carregamento
         try {
             await deletar(`/categorias/${id}`, {
                 headers: {
                     'Authorization': token
                 }
             })
-
             alert('Categoria apagada com sucesso')
-
         } catch (error) {
-            alert('Erro ao apagar o Categoria')
+            alert('Erro ao apagar a Categoria')
+        } finally {
+            setLoading(false)  // Finaliza o carregamento
+            retornar()
         }
-
-        retornar()
     }
+
     return (
-        <div className='container w-1/3 mx-auto'>
-            <h1 className='text-4xl text-center py-4'>Deletar Categoria</h1>
+        <div className='fundoLogao'>
+            <div className='pt-24'></div>
+            <div className='container w-1/3 mx-auto'>
+                <h1 className='text-4xl text-center py-4'>Deletar Categoria</h1>
 
-            <p className='text-center font-semibold mb-4'>Você tem certeza de que deseja apagar a Categoria a seguir?</p>
+                <p className='text-center font-semibold mb-4'>Você tem certeza de que deseja apagar a Categoria a seguir?</p>
 
-            <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
-                <header className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>{Categoria.nome}</header>
-                <p className='p-8 text-3xl bg-slate-200 h-full'>{Categoria.descricao}</p>
-                <div className="flex">
-                    <button className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2' onClick={retornar}>Não</button>
-                    <button className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-600 flex items-center justify-center' onClick={deletarCategoria}>
-                        Sim
-                    </button>
+                <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
+                    <header className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>{categoria.nome}</header>
+                    <p className='p-8 text-3xl bg-slate-200 h-full'>{categoria.descricao}</p>
+                    <div className="flex">
+                        <button className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2' onClick={retornar}>Não</button>
+                        <button
+                            className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-600 flex items-center justify-center'
+                            onClick={deletarCategoria}
+                            disabled={loading}  // Desativa o botão durante o carregamento
+                        >
+                            {loading ? (
+                                <RotatingLines
+                                    strokeColor="#fff"
+                                    strokeWidth="5"
+                                    animationDuration="0.75"
+                                    width="24"
+                                    visible={true}
+                                />
+                            ) : (
+                                'Sim'
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
