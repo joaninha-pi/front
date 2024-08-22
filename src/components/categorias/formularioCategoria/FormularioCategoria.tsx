@@ -89,6 +89,8 @@ function FormularioCategoria() {
         navigate("/categorias");
     }
 
+    const carregandoCategoria = categoria.descricao === '';
+
     return (
         <div className='fundoLogao'>
             <div className='pt-24'></div>
@@ -122,7 +124,7 @@ function FormularioCategoria() {
                         />
                     </div>
                     <button
-                        disabled={loading}
+                        disabled={carregandoCategoria || loading}
                         className="flex items-center justify-center rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto text-white font-bold"
                         type="submit"
                     >

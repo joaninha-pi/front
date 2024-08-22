@@ -9,21 +9,21 @@ interface CardCategoriaProps {
 
 function CardCategorias({ categoria }: CardCategoriaProps) {
 
-    const {usuario} = useContext(AuthContext)
+    const { usuario } = useContext(AuthContext)
     let admPermCat = null
 
-    if(usuario.token != "" && usuario.usuario == "root@root.com"){
+    if (usuario.token != "" && usuario.usuario == "root@root.com") {
         admPermCat = (
 
             <div className="flex">
-            <Link to={`/editarCategoria/${categoria.id}`} className='w-full text-[#262626] font-medium bg-[#82ffba] hover:bg-[#91ccab] flex items-center justify-center py-2'>
-                <button>Editar</button>
-            </Link>
-            <Link to={`/deletarCategoria/${categoria.id}`} className='text-[#262626] font-medium bg-red-400 hover:bg-red-700 w-full flex items-center justify-center'>
-                <button>Deletar</button>
-            </Link>
-        </div>
-            
+                <Link to={`/editarCategoria/${categoria.id}`} className='w-full text-[#262626] font-medium bg-[#82ffba] hover:bg-[#91ccab] flex items-center justify-center py-2'>
+                    <button>Editar</button>
+                </Link>
+                <Link to={`/deletarCategoria/${categoria.id}`} className='text-[#262626] font-medium bg-red-400 hover:bg-red-700 w-full flex items-center justify-center'>
+                    <button>Deletar</button>
+                </Link>
+            </div>
+
         )
     }
 

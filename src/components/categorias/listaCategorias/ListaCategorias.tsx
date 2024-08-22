@@ -21,8 +21,8 @@ function ListaCategorias() {
       });
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        alert('O token expirou, favor logar novamente')
-        handleLogout()
+        alert('O token expirou, favor logar novamente');
+        handleLogout();
       }
     }
   }
@@ -37,28 +37,27 @@ function ListaCategorias() {
   useEffect(() => {
     buscarCategorias();
   }, [categorias.length]);
+
   return (
     <>
       <div className="fundoLogao">
         <div className='pt-24'></div>
         {categorias.length === 0 && (
-          <Circles
-            visible={true}
-            height="200"
-            width="200"
-            ariaLabel="circles-loading"
-            wrapperStyle={{}}
-            wrapperClass="circles-wrapper mx-auto"
-            color='black'
-          />
+          <div className="flex justify-center items-center min-h-screen">
+            <Circles
+              visible={true}
+              height="200"
+              width="200"
+              ariaLabel="circles-loading"
+              color='black'
+            />
+          </div>
         )}
         <div className="flex justify-center w-full py-4">
           <div className="container flex flex-col">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {categorias.map((categoria) => (
-                <>
-                  <CardCategorias key={categoria.id} categoria={categoria} />
-                </>
+                <CardCategorias key={categoria.id} categoria={categoria} />
               ))}
             </div>
           </div>
