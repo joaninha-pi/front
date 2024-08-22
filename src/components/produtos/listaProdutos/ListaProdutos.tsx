@@ -6,24 +6,32 @@ import CardProduto from '../cardProdutos/CardProdutos';
 
 function ListaProdutos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   async function buscarProdutos() {
+    setLoading(true);
     try {
       await buscarU('/produtos', setProdutos);
     } catch (error: any) {
       alert('Erro ao buscar produtos');
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
-    buscarProdutos();
+    const timer = setTimeout(() => {
+      buscarProdutos();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
       <div className='fundoLogao'>
         <div className='pt-24'></div>
-        {produtos.length === 0 && (
+        {loading && (
           <div className="flex justify-center items-center min-h-screen">
             <Circles
               visible={true}
