@@ -9,6 +9,7 @@ import { toastAlerta } from '../../../utils/toastAlerta';
 
 function ListaCategorias() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); 
 
   let navigate = useNavigate();
 
@@ -16,6 +17,7 @@ function ListaCategorias() {
   const token = usuario.token;
 
   async function buscarCategorias() {
+    setLoading(true); 
     try {
       await buscar('/categorias', setCategorias, {
         headers: { Authorization: token },
@@ -25,6 +27,8 @@ function ListaCategorias() {
         toastAlerta('O token expirou, favor logar novamente', 'info');
         handleLogout();
       }
+    } finally {
+      setLoading(false); 
     }
   }
 
@@ -36,14 +40,19 @@ function ListaCategorias() {
   }, [token]);
 
   useEffect(() => {
-    buscarCategorias();
-  }, [categorias.length]);
 
+    const timer = setTimeout(() => {
+      buscarCategorias();
+    }, 100);
+
+ 
+    return () => clearTimeout(timer);
+  }, [token]); 
   return (
     <>
       <div className="fundoLogao">
         <div className='pt-24'></div>
-        {categorias.length === 0 && (
+        {loading && (
           <div className="flex justify-center items-center min-h-screen">
             <Circles
               visible={true}

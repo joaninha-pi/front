@@ -9,28 +9,28 @@ import { Navigate, useNavigate } from 'react-router-dom';
 function ListaProdutos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
 
-  let navigate = useNavigate();
-
   async function buscarProdutos() {
+    setLoading(true);
     try {
       await buscarU('/produtos', setProdutos);
     } catch (error: any) {
-      if (error.toString().includes('403')) {
-        toastAlerta('O token expirou, favor logar novamente', 'info');
-        navigate('/login');
-      }
+      alert('Erro ao buscar produtos');
     }
   }
 
   useEffect(() => {
-    buscarProdutos();
+    const timer = setTimeout(() => {
+      buscarProdutos();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
       <div className='fundoLogao'>
         <div className='pt-24'></div>
-        {produtos.length === 0 && (
+        {loading && (
           <div className="flex justify-center items-center min-h-screen">
             <Circles
               visible={true}
