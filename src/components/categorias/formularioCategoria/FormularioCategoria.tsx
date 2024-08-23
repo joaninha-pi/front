@@ -93,7 +93,7 @@ function FormularioCategoria() {
 
     return (
         <div className='fundoLogao'>
-            <div className='pt-24'></div>
+            <div className=''></div>
             <div className="container flex flex-col items-center justify-center mx-auto">
                 <h1 className="text-4xl text-center my-8">
                     {id ? 'Editar categoria' : 'Cadastre uma nova categoria'}

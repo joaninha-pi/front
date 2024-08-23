@@ -128,7 +128,7 @@ function FormularioProduto() {
 
   return (
     <div className='fundoLogao'>
-      <div className='pt-24'></div>
+      <div className=''></div>
       <div className="container flex flex-col mx-auto items-center">
         <h1 className="text-4xl text-center my-8">
           {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}

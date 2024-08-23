@@ -26,9 +26,9 @@ export default function Contact() {
                 />
             </div>
         ) : (
-            <div className="w-full flex flex-col items-center py-[100px] bg-stone-100">
+            <div className="w-full flex flex-col items-center bg-stone-100">
                 <div className="mb-6">
-                    <h1 className="text-2xl font-bold">Entre em contato!</h1>
+                    <h1 className="text-2xl font-bold font-body">Entre em contato!</h1>
                 </div>
                 
                 <div className="relative p-6 bg-[#b91c1c] rounded-lg shadow-2xl shadow-red-800">

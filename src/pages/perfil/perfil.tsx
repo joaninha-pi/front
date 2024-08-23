@@ -23,7 +23,7 @@ function Perfil() {
 
   return (
     <div className="fundoLogao">
-      <div className='pt-24'></div>
+      <div className=''></div>
     <div className='container mx-auto mt-4 rounded-2xl overflow-hidden'>
       <img className='w-full h-72 object-cover border-b-8 border-white' src='https://joaobidu.com.br/wp-content/uploads/2023/02/joaninhas.jpg' alt="Capa do Perfil" />
       <img src={usuario.foto} alt={`"Foto de perfil de ${usuario.nome}`} className='rounded-full w-56 mx-auto mt-[-8rem] border-8 border-white relative z-10' />

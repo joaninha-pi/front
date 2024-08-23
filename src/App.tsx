@@ -26,7 +26,7 @@ export default function App() {
         <ToastContainer />
         <BrowserRouter>
           <Navbar />
-          <div className="min-h-[80vh] bg-[#FEFCDD] text-gray-800">
+          <div className="min-h-[80vh] pt-[120px] pb-[180px] bg-stone-100 text-gray-800">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />

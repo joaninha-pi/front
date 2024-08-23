@@ -51,7 +51,7 @@ function ListaCategorias() {
   return (
     <>
       <div className="fundoLogao">
-        <div className='pt-24'></div>
+        <div className=''></div>
         {loading && (
           <div className="flex justify-center items-center min-h-screen">
             <Circles
