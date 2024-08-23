@@ -3,11 +3,14 @@ import { Circles } from 'react-loader-spinner';
 import { Produto } from '../../../models/Produto';
 import { buscarU } from '../../../services/Service';
 import CardProduto from '../cardProdutos/CardProdutos';
+import { toastAlerta } from '../../../utils/toastAlerta';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function ListaProdutos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
 
   async function buscarProdutos() {
+    setLoading(true);
     try {
       await buscarU('/produtos', setProdutos);
     } catch (error: any) {
@@ -16,14 +19,18 @@ function ListaProdutos() {
   }
 
   useEffect(() => {
-    buscarProdutos();
+    const timer = setTimeout(() => {
+      buscarProdutos();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
       <div className='fundoLogao'>
         <div className='pt-24'></div>
-        {produtos.length === 0 && (
+        {loading && (
           <div className="flex justify-center items-center min-h-screen">
             <Circles
               visible={true}
