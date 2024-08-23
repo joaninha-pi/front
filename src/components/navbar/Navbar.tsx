@@ -152,7 +152,7 @@ export default function Navbar() {
                 Produtos
               </Link>
             </div>
-            <div className="flex items-center justify-center w-auto" style={{ paddingLeft: '78px' }}>
+            <div className="flex items-center justify-center w-auto pl-20">
               <a href="/home" className="flex items-center">
                 <div className="logoContainer">
                   <img src={logo_b} className="logoImage" alt="Logo Blue" />
