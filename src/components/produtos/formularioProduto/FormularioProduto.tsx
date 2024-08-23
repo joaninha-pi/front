@@ -5,6 +5,7 @@ import { Produto } from '../../../models/Produto';
 import Categoria from '../../../models/Categoria';
 import { buscar, atualizar, cadastrar } from '../../../services/Service';
 import { RotatingLines } from 'react-loader-spinner';
+import { toastAlerta } from '../../../utils/toastAlerta';
 
 function FormularioProduto() {
   let navigate = useNavigate();
@@ -58,7 +59,7 @@ function FormularioProduto() {
 
   useEffect(() => {
     if (token === '') {
-      alert('Você precisa estar logado');
+      toastAlerta('Você precisa estar logado', 'info');
       navigate('/login');
     }
   }, [token]);
@@ -101,22 +102,22 @@ function FormularioProduto() {
             Authorization: token,
           },
         });
-        alert('Produto atualizado com sucesso');
+        toastAlerta('Produto atualizado com sucesso', 'sucesso');
       } else {
         await cadastrar(`/produtos`, produto, setProduto, {
           headers: {
             Authorization: token,
           },
         });
-        alert('Produto cadastrado com sucesso');
+        toastAlerta('Produto cadastrado com sucesso', 'sucesso');
       }
       retornar();
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        alert('O token expirou, favor logar novamente');
+        toastAlerta('O token expirou, favor logar novamente', 'info');
         handleLogout();
       } else {
-        alert('Erro ao processar o Produto');
+        toastAlerta('Erro ao processar o Produto', 'erro');
       }
     } finally {
       setLoading(false);
@@ -198,7 +199,7 @@ function FormularioProduto() {
           <button
             disabled={carregandoCategoria || loading}
             type="submit"
-            className="flex items-center justify-center rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2"
+            className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
           >
             {loading ? (
               <div className="flex items-center justify-center">

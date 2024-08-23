@@ -4,6 +4,7 @@ import Categoria from '../../../models/Categoria';
 import { atualizar, buscar, cadastrar } from '../../../services/Service';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { RotatingLines } from 'react-loader-spinner';
+import { toastAlerta } from '../../../utils/toastAlerta';
 
 function FormularioCategoria() {
     const [categoria, setCategoria] = useState<Categoria>({
@@ -21,7 +22,7 @@ function FormularioCategoria() {
 
     useEffect(() => {
         if (!token) {
-            alert('Você precisa estar logado');
+            toastAlerta('Você precisa estar logado', 'info');
             navigate('/login');
         } else if (id) {
             buscarPorId(id);
@@ -37,8 +38,7 @@ function FormularioCategoria() {
                 }
             });
         } catch (error: any) {
-            console.error('Erro ao buscar a categoria:', error);
-            alert('Erro ao buscar a categoria');
+            toastAlerta('Erro ao buscar a categoria', 'erro');
         } finally {
             setLoading(false);
         }
@@ -63,22 +63,22 @@ function FormularioCategoria() {
                         'Authorization': token
                     }
                 });
-                alert('Categoria atualizada com sucesso');
+                toastAlerta('Categoria atualizada com sucesso', 'sucesso');
             } else {
                 await cadastrar(`/categorias`, categoria, setCategoria, {
                     headers: {
                         'Authorization': token
                     }
                 });
-                alert('Categoria cadastrada com sucesso');
+                toastAlerta('Categoria cadastrada com sucesso', 'sucesso');
             }
             retornar();
         } catch (error: any) {
             if (error.toString().includes('403')) {
-                alert('O token expirou, favor logar novamente');
+                toastAlerta('O token expirou, favor logar novamente', 'info');
                 handleLogout();
             } else {
-                alert('Erro ao salvar a categoria');
+                toastAlerta('Erro ao salvar a categoria', 'erro');
             }
         } finally {
             setLoading(false);
@@ -125,7 +125,7 @@ function FormularioCategoria() {
                     </div>
                     <button
                         disabled={carregandoCategoria || loading}
-                        className="flex items-center justify-center rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto text-white font-bold"
+                        className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
                         type="submit"
                     >
                         {loading ? (

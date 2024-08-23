@@ -14,11 +14,11 @@ function CardProduto({ produto }: CardProdutoProps) {
 
   if (usuario.token != "" && usuario.usuario == "root@root.com") {
     admPermProd = (<div className="flex">
-      <Link to={`/editarProduto/${produto.id}`} className='w-full text-white bg-indigo-400 hover:bg-indigo-800 flex items-center justify-center py-2'>
-        <button>Editar</button>
+      <Link to={`/editarProduto/${produto.id}`} className='w-full bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 flex items-center justify-center py-2'>
+        <button>Editar produto</button>
       </Link>
-      <Link to={`/deletarProduto/${produto.id}`} className='text-white bg-red-400 hover:bg-red-700 w-full flex items-center justify-center'>
-        <button>Deletar</button>
+      <Link to={`/deletarProduto/${produto.id}`} className='bg-red-700 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 w-full flex items-center justify-center'>
+        <button>Deletar produto</button>
       </Link>
     </div>)
   }
@@ -39,11 +39,11 @@ function CardProduto({ produto }: CardProdutoProps) {
       </div>
       <div className="flex justify-center gap-1 px-6 pt-4 pb-2">
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          onClick={() => adicionarProduto(produto)}>Adicionar</button>
+        <button className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
+          onClick={() => adicionarProduto(produto)}>Adicionar ao carrinho</button>
 
-        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-          onClick={() => removerProduto(produto.id)}>Remover</button>
+        <button className='bg-red-700 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 hover:opacity-75 active:scale-95 transition-transform transform'
+          onClick={() => removerProduto(produto.id)}>Remover do carrinho</button>
       </div>
 
       {admPermProd}

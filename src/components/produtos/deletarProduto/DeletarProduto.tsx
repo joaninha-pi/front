@@ -4,6 +4,7 @@ import { AuthContext } from '../../../contexts/AuthContext'
 import { Produto } from '../../../models/Produto'
 import { buscar, deletar } from '../../../services/Service'
 import { RotatingLines } from 'react-loader-spinner'  // Importando o spinner
+import { toastAlerta } from '../../../utils/toastAlerta'
 
 function DeletarProduto() {
   const [produto, setProduto] = useState<Produto>({} as Produto)
@@ -23,7 +24,7 @@ function DeletarProduto() {
       })
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        alert('O token expirou, favor logar novamente')
+        toastAlerta('O token expirou, favor logar novamente', 'info')
         handleLogout()
       }
     }
@@ -31,7 +32,7 @@ function DeletarProduto() {
 
   useEffect(() => {
     if (token === '') {
-      alert('Você precisa estar logado')
+      toastAlerta('Você precisa estar logado', 'info')
       navigate('/login')
     }
   }, [token])
@@ -54,9 +55,9 @@ function DeletarProduto() {
           'Authorization': token
         }
       })
-      alert('Produto apagado com sucesso')
+      toastAlerta('Produto apagado com sucesso', 'sucesso')
     } catch (error) {
-      alert('Erro ao apagar o Produto')
+      toastAlerta('Erro ao apagar o Produto', 'erro')
     } finally {
       setLoading(false)  // Finaliza o carregamento
       retornar()
@@ -77,15 +78,16 @@ function DeletarProduto() {
             <p className='text-xl h-full'>{produto.nome}</p>
             <p>{produto.descricao}</p>
           </div>
-          <div className="flex">
+          <div className="flex items-center justify-center">
             <button
-              className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2'
+              className='bg-red-700 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 w-full py-2'
               onClick={retornar}
             >
               Não
             </button>
+            
             <button
-              className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-600 flex items-center justify-center'
+              className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 w-full py-2'
               onClick={deletarProduto}
               disabled={loading}  // Desativa o botão durante o carregamento
             >
