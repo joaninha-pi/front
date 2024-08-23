@@ -3,12 +3,12 @@ import { useNavigate, useParams } from 'react-router'
 import { AuthContext } from '../../../contexts/AuthContext'
 import Categoria from '../../../models/Categoria'
 import { buscar, deletar } from '../../../services/Service'
-import { RotatingLines } from 'react-loader-spinner'  // Importando o spinner
+import { RotatingLines } from 'react-loader-spinner'
 import { toastAlerta } from '../../../utils/toastAlerta'
 
 function DeletarCategoria() {
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria)
-    const [loading, setLoading] = useState<boolean>(false)  // Estado de carregamento
+    const [loading, setLoading] = useState<boolean>(false)
 
     let navigate = useNavigate()
     const { id } = useParams<{ id: string }>()

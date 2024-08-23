@@ -67,7 +67,7 @@ export default function Navbar() {
     navbarPerfil = (
       <Link
         to="/perfil"
-         className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
+        className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
       >
         Perfil
       </Link>
@@ -116,9 +116,8 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed w-full transition-opacity duration-500 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        } bg-[linear-gradient(to_bottom,_rgba(0,_0,_0,_0.8)_0%,_rgba(0,_0,_0,_0)_100%)]`}
+        className={`fixed w-full transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'
+          } bg-[linear-gradient(to_bottom,_rgba(0,_0,_0,_0.8)_0%,_rgba(0,_0,_0,_0)_100%)]`}
       >
         <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-2">
           <div className="flex flex-grow items-center justify-start space-x-4 rtl:space-x-reverse">
@@ -191,16 +190,15 @@ export default function Navbar() {
             aria-expanded={isOpen}
           >
             <span className="sr-only">Open main menu</span>
-            <img 
-              src={menuIcon} 
-              alt="Ícone Menu" 
+            <img
+              src={menuIcon}
+              alt="Ícone Menu"
               className="w-12 h-12 shadow- rounded-full border-2 border-zinc-900 border-opacity-100 hover:w-14 hover:h-14"
             />
           </button>
           <div
-            className={`${
-              isOpen ? 'block' : 'hidden'
-            } absolute top-full right-0 mt-2 w-64 bg-zinc-900 rounded-lg shadow-lg z-20`}
+            className={`${isOpen ? 'block' : 'hidden'
+              } absolute top-full right-0 mt-2 w-64 bg-zinc-900 rounded-lg shadow-lg z-20`}
           >
             <div className="flex flex-col font-medium rounded-lg font-body">
               <Link
@@ -215,7 +213,7 @@ export default function Navbar() {
               >
                 Login
               </Link>
-             
+
               <Link
                 to="/produtos"
                 className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
