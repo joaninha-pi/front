@@ -28,3 +28,7 @@
 .logoImage:nth-of-type(3) {
     animation-delay: 4s;
 }
+
+.cart-popup {
+    z-index: 9999; /* Valor alto para garantir que fique sobre outros elementos */
+  }

@@ -16,10 +16,10 @@ function CardCategorias({ categoria }: CardCategoriaProps) {
         admPermCat = (
 
             <div className="flex justify-end pt-6">
-                <Link to={`/editarCategoria/${categoria.id}`} className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'>
+                <Link to={`/editarCategoria/${categoria.id}`} className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 '>
                     <button>Editar Categoria</button>
                 </Link>
-                <Link to={`/deletarCategoria/${categoria.id}`} className='bg-red-700 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 hover:opacity-75 active:scale-95 transition-transform transform'>
+                <Link to={`/deletarCategoria/${categoria.id}`} className='bg-red-700 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 hover:opacity-75 active:scale-95 '>
                     <button>Deletar Categoria</button>
                 </Link>
             </div>

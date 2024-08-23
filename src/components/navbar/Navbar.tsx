@@ -14,8 +14,7 @@ export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false); // Estado para controlar a janela do carrinho
-  const { usuario, handleLogout, quantidadeItems, items } = useContext(AuthContext);
+  const { usuario, handleLogout, quantidadeItems } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleScroll = () => {
@@ -49,9 +48,6 @@ export default function Navbar() {
       navigate('/login');
     }, 300);
   }
-
- 
-  const totalCarrinho = items.reduce((total, item) => total + item.preco, 0);
 
   let navbarCadCat = null;
   let navbarCadProd = null;
@@ -178,53 +174,25 @@ export default function Navbar() {
               >
                 Contato
               </Link>
-              <div
-                className="relative"
-                onMouseEnter={() => setIsCartOpen(true)}
-                onMouseLeave={() => setIsCartOpen(false)}
+              <Link
+                to="/carrinho"
+                className="relative block text-stone-100 transition-colors duration-600"
               >
-                <Link
-                  to="/carrinho"
-                  className="relative block text-stone-100 transition-colors duration-600"
-                >
-                  <div className="relative inline-block group">
-                    <div className="bg-stone-100 rounded-full p-2 transition-opacity duration-600 group-hover:opacity-60">
-                      <img
-                        src={cartIcon}
-                        alt="Carrinho"
-                        className="w-6 h-6 transition-opacity duration-600 group-hover:opacity-60"
-                      />
-                    </div>
-                    {quantidadeItems > 0 && (
-                      <span className="absolute -top-2 -right-2 bg-red-600 font-body text-stone-100 text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                        {quantidadeItems}
-                      </span>
-                    )}
+                <div className="relative inline-block group">
+                  <div className="bg-stone-100 rounded-full p-2 transition-opacity duration-600 group-hover:opacity-60">
+                    <img
+                      src={cartIcon}
+                      alt="Carrinho"
+                      className="w-6 h-6 transition-opacity duration-600 group-hover:opacity-60"
+                    />
                   </div>
-                </Link>
-                {isCartOpen && items.length > 0 && (
-                  <div className="absolute right-0 mt-2 w-64 bg-zinc-900 text-stone-100 rounded-lg shadow-lg p-4 z-20">
-                    <h3 className="font-title text-lg mb-2">Carrinho</h3>
-                    <ul className="space-y-2">
-                      {items.map((item) => (
-                        <li key={item.id} className="flex justify-between items-center">
-                          <span className="font-body">{item.nome}</span>
-                          <span className="font-body">R${item.preco.toFixed(2)}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="font-title mt-4 text-right">
-                      Total: R${totalCarrinho.toFixed(2)}
-                    </div>
-                    <Link
-                      to="/carrinho"
-                      className="block mt-4 text-center font-title bg-red-600 hover:bg-red-500 text-stone-100 py-2 px-4 rounded transition-colors duration-600"
-                    >
-                      Ver Carrinho
-                    </Link>
-                  </div>
-                )}
-              </div>
+                  {quantidadeItems > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-600 font-body text-stone-100 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {quantidadeItems}
+                    </span>
+                  )}
+                </div>
+              </Link>
             </div>
           </div>
         </nav>
