@@ -78,15 +78,16 @@ function DeletarProduto() {
             <p className='text-xl h-full'>{produto.nome}</p>
             <p>{produto.descricao}</p>
           </div>
-          <div className="flex">
+          <div className="flex items-center justify-center">
             <button
-              className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2'
+              className='bg-red-700 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 w-full py-2'
               onClick={retornar}
             >
               Não
             </button>
+            
             <button
-              className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-600 flex items-center justify-center'
+              className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 w-full py-2'
               onClick={deletarProduto}
               disabled={loading}  // Desativa o botão durante o carregamento
             >

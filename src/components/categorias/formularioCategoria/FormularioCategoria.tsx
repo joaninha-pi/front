@@ -125,7 +125,7 @@ function FormularioCategoria() {
                     </div>
                     <button
                         disabled={carregandoCategoria || loading}
-                        className="flex items-center justify-center rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto text-white font-bold"
+                        className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
                         type="submit"
                     >
                         {loading ? (

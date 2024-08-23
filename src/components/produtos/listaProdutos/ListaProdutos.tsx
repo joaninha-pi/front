@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Circles } from 'react-loader-spinner';
+import { Circles, RotatingLines } from 'react-loader-spinner';
 import { Produto } from '../../../models/Produto';
 import { buscarU } from '../../../services/Service';
 import CardProduto from '../cardProdutos/CardProdutos';
@@ -8,13 +8,15 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 function ListaProdutos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   async function buscarProdutos() {
-    setLoading(true);
+    setLoading(false);
     try {
       await buscarU('/produtos', setProdutos);
     } catch (error: any) {
-      alert('Erro ao buscar produtos');
+      toastAlerta('Erro ao buscar produtos', 'erro');
     }
   }
 
