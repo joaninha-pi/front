@@ -78,7 +78,7 @@ function FormularioProduto() {
     });
   }, [categoria]);
 
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+  function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setProduto({
       ...produto,
       [e.target.name]: e.target.value,
@@ -158,6 +158,19 @@ function FormularioProduto() {
                 name="descricao"
                 required
                 className="border-2 border-slate-700 rounded p-2"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="preco">Preço do produto</label>
+              <input
+                value={produto.preco}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                type="number"
+                placeholder="Preço"
+                name="preco"
+                required
+                className="border-2 border-slate-700 rounded p-2"
+                step="0.01"
               />
             </div>
             <div className="flex flex-col gap-2">
