@@ -78,7 +78,7 @@ function FormularioProduto() {
     });
   }, [categoria]);
 
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+  function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setProduto({
       ...produto,
       [e.target.name]: e.target.value,
@@ -128,92 +128,115 @@ function FormularioProduto() {
 
   return (
     <div className='fundoLogao'>
-      <div className=''></div>
+      <div className='pt-24'></div>
       <div className="container flex flex-col mx-auto items-center">
         <h1 className="text-4xl text-center my-8">
           {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
         </h1>
 
-        <form onSubmit={gerarNovoProduto} className="w-full max-w-lg flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="nome">Nome do produto</label>
-            <input
-              value={produto.nome}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              type="text"
-              placeholder="Nome"
-              name="nome"
-              required
-              className="border-2 border-slate-700 rounded p-2"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="descricao">Descrição do produto</label>
-            <input
-              value={produto.descricao}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              type="text"
-              placeholder="Descrição"
-              name="descricao"
-              required
-              className="border-2 border-slate-700 rounded p-2"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="image">URL da imagem do produto</label>
-            <input
-              value={produto.image}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              type="text"
-              placeholder="URL da imagem"
-              name="image"
-              required
-              className="border-2 border-slate-700 rounded p-2"
-            />
-            {produto.image && (
-              <img
-                src={produto.image}
-                alt="Imagem do Produto"
-                className="mt-4 w-32 h-32 object-cover rounded"
+        <div className="flex flex-col gap-4 w-full max-w-lg">
+          <form onSubmit={gerarNovoProduto} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="nome">Nome do produto</label>
+              <input
+                value={produto.nome}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                type="text"
+                placeholder="Nome"
+                name="nome"
+                required
+                className="border-2 border-slate-700 rounded p-2"
               />
-            )}
-          </div>
-          <div className="flex flex-col gap-2">
-            <p>Categoria do produto</p>
-            <select
-              name="categoria"
-              id="categoria"
-              className="border p-2 border-slate-800 rounded"
-              onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
-            >
-              <option value="" selected disabled>
-                Selecione uma categoria
-              </option>
-              {categorias.map((categoria) => (
-                <option key={categoria.id} value={categoria.id}>
-                  {categoria.nome}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button
-            disabled={carregandoCategoria || loading}
-            type="submit"
-            className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
-          >
-            {loading ? (
-              <div className="flex items-center justify-center">
-                <RotatingLines
-                  strokeColor="#18181b"
-                  strokeWidth="5"
-                  animationDuration="0.75"
-                  width="24"
-                  visible={true}
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="descricao">Descrição do produto</label>
+              <input
+                value={produto.descricao}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                type="text"
+                placeholder="Descrição"
+                name="descricao"
+                required
+                className="border-2 border-slate-700 rounded p-2"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="preco">Preço do produto</label>
+              <input
+                value={produto.preco}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                type="number"
+                placeholder="Preço"
+                name="preco"
+                required
+                className="border-2 border-slate-700 rounded p-2"
+                step="0.01"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="image">URL da imagem do produto</label>
+              <input
+                value={produto.image}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                type="text"
+                placeholder="URL da imagem"
+                name="image"
+                required
+                className="border-2 border-slate-700 rounded p-2"
+              />
+              {produto.image && (
+                <img
+                  src={produto.image}
+                  alt="Imagem do Produto"
+                  className="mt-4 w-32 h-32 object-cover rounded"
                 />
-              </div>
-            ) : id !== undefined ? 'Editar' : 'Cadastrar'}
-          </button>
-        </form>
+              )}
+            </div>
+            <div className="flex flex-col gap-2">
+              <p>Categoria do produto</p>
+              <select
+                name="categoria"
+                id="categoria"
+                className="border p-2 border-slate-800 rounded"
+                onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
+              >
+                <option value="" selected disabled>
+                  Selecione uma categoria
+                </option>
+                {categorias.map((categoria) => (
+                  <option key={categoria.id} value={categoria.id}>
+                    {categoria.nome}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex gap-4">
+              <button
+                disabled={carregandoCategoria || loading}
+                type="submit"
+                className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+              >
+                {loading ? (
+                  <div className="flex items-center justify-center">
+                    <RotatingLines
+                      strokeColor="#18181b"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      width="24"
+                      visible={true}
+                    />
+                  </div>
+                ) : id !== undefined ? 'Editar' : 'Cadastrar'}
+              </button>
+              <button
+                onClick={retornar}
+                className='bg-red-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-400 hover:text-stone-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+              >
+                Voltar
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

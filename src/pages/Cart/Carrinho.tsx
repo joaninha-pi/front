@@ -9,6 +9,9 @@ function Carrinho() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState<boolean>(true);
 
+    // Função para calcular o total da compra
+    const totalCarrinho = items.reduce((total, item) => total + item.preco, 0);
+
     const finalizarCompra = () => {
         if (usuario.token !== "") {
             limparCart();
@@ -21,7 +24,7 @@ function Carrinho() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoading(false);
-        }, 300); 
+        }, 300);
 
         return () => clearTimeout(timer);
     }, []);
@@ -45,12 +48,6 @@ function Carrinho() {
                     </div>
                     <div className='pb'></div>
                     <div className='flex justify-end p-2'>
-                        <button 
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                            onClick={finalizarCompra}
-                        >
-                            Finalizar Compra
-                        </button>
                     </div>
                     <div className='flex flex-col'>
                         <div className="flex justify-center w-full my-4">
@@ -64,6 +61,17 @@ function Carrinho() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className='flex justify-end p-20 items-center'>
+                        <div className="text-xl font-bold mr-4">
+                            Total: R${totalCarrinho.toFixed(2)}
+                        </div>
+                        <button
+                            className="bg-emerald-900 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
+                            onClick={finalizarCompra}
+                        >
+                            Finalizar Compra
+                        </button>
                     </div>
                 </div>
             )}

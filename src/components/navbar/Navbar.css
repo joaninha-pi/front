@@ -5,14 +5,14 @@
 
 .logoContainer {
     position: relative;
-    width: 6rem;
-    height: 6rem;
+    width: 13rem; /* Dobrado de 6rem */
+    height: 7rem; /* Dobrado de 6rem */
 }
 
 .logoImage {
     position: absolute;
-    height: 6rem;
-    width: 6rem;
+    height: 7rem; /* Dobrado de 6rem */
+    width: 13rem; /* Dobrado de 6rem */
     opacity: 0;
     animation: logoAnimation 6s infinite;
 }
@@ -27,4 +27,8 @@
 
 .logoImage:nth-of-type(3) {
     animation-delay: 4s;
+}
+
+.cart-popup {
+    z-index: 9999; /* Valor alto para garantir que fique sobre outros elementos */
 }
