@@ -5,14 +5,14 @@
 
 .logoContainer {
     position: relative;
-    width: 15rem; /* Dobrado de 6rem */
-    height: 8rem; /* Dobrado de 6rem */
+    width: 13rem; /* Dobrado de 6rem */
+    height: 7rem; /* Dobrado de 6rem */
 }
 
 .logoImage {
     position: absolute;
-    height: 10rem; /* Dobrado de 6rem */
-    width: 15rem; /* Dobrado de 6rem */
+    height: 7rem; /* Dobrado de 6rem */
+    width: 13rem; /* Dobrado de 6rem */
     opacity: 0;
     animation: logoAnimation 6s infinite;
 }
