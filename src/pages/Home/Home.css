@@ -23,9 +23,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-.imagem-texto img {
+.imagem-texto h1 {
+  margin-bottom: 10px;
+}
+
+.imagem-texto p {
+  font-style: italic;
+  padding: 10px;
+  margin: 10px;
+}
+
+.imagem-texto-img {
   margin-right: 20px;
   border-radius: 8px;
   max-width: 800px;
@@ -33,7 +44,7 @@
 }
 
 .testimonials-section {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
