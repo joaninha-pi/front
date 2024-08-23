@@ -50,7 +50,7 @@ export default function Navbar() {
     }, 300);
   }
 
-  // Função para calcular o total do carrinho
+ 
   const totalCarrinho = items.reduce((total, item) => total + item.preco, 0);
 
   let navbarCadCat = null;
@@ -178,49 +178,53 @@ export default function Navbar() {
               >
                 Contato
               </Link>
-              <Link
-                to="/carrinho"
-                className="relative block text-stone-100 transition-colors duration-600"
-                onMouseEnter={() => setIsCartOpen(true)} // Mostrar janela ao passar o mouse
-                onMouseLeave={() => setIsCartOpen(false)} // Esconder janela ao retirar o mouse
+              <div
+                className="relative"
+                onMouseEnter={() => setIsCartOpen(true)}
+                onMouseLeave={() => setIsCartOpen(false)}
               >
-                <div className="relative inline-block group">
-                  <div className="bg-stone-100 rounded-full p-2 transition-opacity duration-600 group-hover:opacity-60">
-                    <img
-                      src={cartIcon}
-                      alt="Carrinho"
-                      className="w-6 h-6 transition-opacity duration-600 group-hover:opacity-60"
-                    />
-                  </div>
-                  {quantidadeItems > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-600 font-body text-stone-100 text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                      {quantidadeItems}
-                    </span>
-                  )}
-                  {isCartOpen && items.length > 0 && (
-                    <div className="absolute right-0 mt-2 w-64 bg-zinc-900 text-stone-100 rounded-lg shadow-lg p-4 z-20">
-                      <h3 className="font-title text-lg mb-2">Carrinho</h3>
-                      <ul className="space-y-2">
-                        {items.map((item) => (
-                          <li key={item.id} className="flex justify-between items-center">
-                            <span className="font-body">{item.nome}</span>
-                            <span className="font-body">R${item.preco.toFixed(2)}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="font-title mt-4 text-right">
-                        Total: R${totalCarrinho.toFixed(2)}
-                      </div>
-                      <Link
-                        to="/carrinho"
-                        className="block mt-4 text-center font-title bg-red-600 hover:bg-red-500 text-stone-100 py-2 px-4 rounded transition-colors duration-600"
-                      >
-                        Ver Carrinho
-                      </Link>
+                <Link
+                  to="/carrinho"
+                  className="relative block text-stone-100 transition-colors duration-600"
+                >
+                  <div className="relative inline-block group">
+                    <div className="bg-stone-100 rounded-full p-2 transition-opacity duration-600 group-hover:opacity-60">
+                      <img
+                        src={cartIcon}
+                        alt="Carrinho"
+                        className="w-6 h-6 transition-opacity duration-600 group-hover:opacity-60"
+                      />
                     </div>
-                  )}
-                </div>
-              </Link>
+                    {quantidadeItems > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-red-600 font-body text-stone-100 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {quantidadeItems}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+                {isCartOpen && items.length > 0 && (
+                  <div className="absolute right-0 mt-2 w-64 bg-zinc-900 text-stone-100 rounded-lg shadow-lg p-4 z-20">
+                    <h3 className="font-title text-lg mb-2">Carrinho</h3>
+                    <ul className="space-y-2">
+                      {items.map((item) => (
+                        <li key={item.id} className="flex justify-between items-center">
+                          <span className="font-body">{item.nome}</span>
+                          <span className="font-body">R${item.preco.toFixed(2)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="font-title mt-4 text-right">
+                      Total: R${totalCarrinho.toFixed(2)}
+                    </div>
+                    <Link
+                      to="/carrinho"
+                      className="block mt-4 text-center font-title bg-red-600 hover:bg-red-500 text-stone-100 py-2 px-4 rounded transition-colors duration-600"
+                    >
+                      Ver Carrinho
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </nav>
@@ -230,12 +234,67 @@ export default function Navbar() {
         <div className="fixed top-4 right-4 z-40">
           <button
             onClick={toggleMenu}
-            className="flex items-center p-2 w-10 h-10 text-sm text-stone-100 rounded-lg md:hidden hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-600"
+            data-collapse-toggle="navbar-hamburger"
+            type="button"
+            className="inline-flex items-center justify-center"
             aria-controls="navbar-hamburger"
             aria-expanded={isOpen}
           >
-            <img src={menuIcon} alt="Menu" className="w-6 h-6" />
+            <span className="sr-only">Open main menu</span>
+            <img
+              src={menuIcon}
+              alt="Ícone Menu"
+              className="w-12 h-12 shadow- rounded-full border-2 border-zinc-900 border-opacity-100 hover:w-14 hover:h-14"
+            />
           </button>
+          <div
+            className={`${isOpen ? 'block' : 'hidden'
+              } absolute top-full right-0 mt-2 w-64 bg-zinc-900 rounded-lg shadow-lg z-20`}
+          >
+            <div className="flex flex-col font-medium rounded-lg font-body">
+              <Link
+                to="/home"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
+              >
+                Home
+              </Link>
+              <Link
+                to="/login"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
+              >
+                Login
+              </Link>
+              <Link
+                to="/produtos"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
+              >
+                Produtos
+              </Link>
+              <Link
+                to="/carrinho"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
+              >
+                Carrinho
+              </Link>
+              <Link
+                to="/about"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
+              >
+                Sobre nós
+              </Link>
+              <Link
+                to="/contact"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-600"
+              >
+                Contato
+              </Link>
+              {navbarCat}
+              {navbarCadCat}
+              {navbarCadProd}
+              {navbarPerfil}
+              {navbarSair}
+            </div>
+          </div>
         </div>
       )}
     </>
