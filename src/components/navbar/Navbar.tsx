@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
-import './Navbar.css'; // Importa o CSS atualizado
+import './Navbar.css';
 import logo_b from '../../assets/icons/logo_b.png';
 import logo_s from '../../assets/icons/logo_s.png';
 import logo_r from '../../assets/icons/logo_r.png';
