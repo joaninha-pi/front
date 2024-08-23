@@ -15,7 +15,7 @@ import FormularioProduto from "./components/produtos/formularioProduto/Formulari
 import DeletarCategoria from "./components/categorias/deletarCategoria/DeletarCategoria";
 import DeletarProduto from "./components/produtos/deletarProduto/DeletarProduto";
 import Carrinho from "./pages/Cart/Carrinho";
-import Perfil from "./pages/perfil/Perfil";
+import Perfil from "./pages/perfil/perfil"; 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
