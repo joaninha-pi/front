@@ -232,7 +232,7 @@ function FormularioProduto() {
                 onClick={retornar}
                 className='bg-red-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-400 hover:text-stone-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
               >
-                Voltar para Produtos
+                Voltar
               </button>
             </div>
           </form>
