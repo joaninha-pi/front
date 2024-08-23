@@ -93,7 +93,7 @@ function FormularioCategoria() {
 
     return (
         <div className='fundoLogao'>
-            <div className=''></div>
+            <div className='pt-24'></div>
             <div className="container flex flex-col items-center justify-center mx-auto">
                 <h1 className="text-4xl text-center my-8">
                     {id ? 'Editar categoria' : 'Cadastre uma nova categoria'}
@@ -123,21 +123,30 @@ function FormularioCategoria() {
                             onChange={atualizarEstado}
                         />
                     </div>
-                    <button
-                        disabled={carregandoCategoria || loading}
-                        className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
-                        type="submit"
-                    >
-                        {loading ? (
-                            <RotatingLines
-                                strokeColor="#18181b"
-                                strokeWidth="5"
-                                animationDuration="0.75"
-                                width="24"
-                                visible={true}
-                            />
-                        ) : id ? 'Editar' : 'Cadastrar'}
-                    </button>
+                    <div className="flex justify-between items-center">
+                        <button
+                            disabled={carregandoCategoria || loading}
+                            className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
+                            type="submit"
+                        >
+                            {loading ? (
+                                <RotatingLines
+                                    strokeColor="#18181b"
+                                    strokeWidth="5"
+                                    animationDuration="0.75"
+                                    width="24"
+                                    visible={true}
+                                />
+                            ) : id ? 'Editar' : 'Cadastrar'}
+                        </button>
+                        <button
+                            type="button"
+                            className="bg-gray-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-gray-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
+                            onClick={retornar}
+                        >
+                            Voltar
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
