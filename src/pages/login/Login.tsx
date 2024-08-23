@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import UsuarioLogin from '../../models/UsuarioLogin';
 import { RotatingLines } from 'react-loader-spinner';
+import logo from '../../assets/icons/logo_b.png'; // Importando o logo
 
 function Login() {
   let navigate = useNavigate();
@@ -36,38 +37,41 @@ function Login() {
 
   return (
     <>
-      <div className='fundoLogin'>
-        <div className="flex justify-center items-center min-h-screen font-bold">
-          <form className="flex justify-center items-center flex-col gap-4 mx-auto" onSubmit={login}>
+      <div className="fundoLogin min-h-screen flex items-center justify-center">
+        <div 
+          id="card" 
+          className="w-[400px] h-[500px] rounded-[10px] pb-10 pl-10 pr-10 bg-red-300 flex flex-col justify-center items-center font-bold shadow-2xl shadow-black"
+        >
+          <form className="flex justify-center items-center flex-col gap-4 w-full" onSubmit={login}>
             <div className="flex flex-col justify-center items-center">
-              <h1 className="text-3xl font-bold text-lime-500 my-auto font-title">JOANA</h1>
-              <div className="text-sm font-light text-stone-100 font-body">Faça seu Login</div>
+              <img src={logo} alt="Logo" className="h-32" /> {/* Substituindo o h1 pelo logo */}
+              <div className="text-sm text-black font-title">Faça seu login</div>
             </div>
-            <div className="flex flex-col font-body text-lime-500">
+            <div className="flex flex-col font-body text-black w-full">
               <label htmlFor="usuario">Usuário</label>
               <input
                 type="text"
                 id="usuario"
                 name="usuario"
                 placeholder="Usuário"
-                className="p-2 text-lg rounded border focus:outline focus:outline-2 focus:outline-offset-2 bg-stone-100 text-zinc-800  w-80"
+                className="p-1 text-lg border-b-2 border-black rounded-tl rounded-tr focus:outline focus:outline-2 focus:outline-offset-2 bg-stone-100 text-zinc-800 w-full"
                 value={usuarioLogin.nome}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
               />
             </div>
-            <div className="flex flex-col font-body text-lime-500">
+            <div className="flex flex-col font-body text-black w-full">
               <label htmlFor="senha">Senha</label>
               <input
                 type="password"
                 id="senha"
                 name="senha"
                 placeholder="Senha"
-                className="p-2 text-lg rounded border focus:outline focus:outline-2 focus:outline-offset-2 bg-stone-100 text-zinc-800 w-80"
+                className="p-1 text-lg border-b-2 border-black rounded-tl rounded-tr focus:outline focus:outline-2 focus:outline-offset-2 bg-stone-100 text-zinc-800 w-full"
                 value={usuarioLogin.senha}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
               />
             </div>
-            <button type='submit' className="rounded text-stone-100 bg-lime-500 hover:bg-red-700 w-1/2 py-2 flex justify-center font-body">
+            <button type='submit' className="rounded text-stone-100 bg-black hover:bg-lime-600 w-1/2 py-2 flex justify-center font-body">
               {isLoading ? <RotatingLines
                 strokeColor="white"
                 strokeWidth="5"
@@ -77,7 +81,7 @@ function Login() {
               /> :
                 <span>Enviar</span>}
             </button>
-            <p className="text-sm font-body text-stone-100">
+            <p className="text-sm font-body text-black">
               Ainda não tem uma conta?{' '}
               <Link to="/cadastro" className="text-red-700 hover:underline">
                 Cadastre-se
