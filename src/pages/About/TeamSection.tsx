@@ -7,7 +7,7 @@ const TeamSection = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-4">
           <div className="bg-red-300 bg-opacity-30 p-10 rounded shadow flex items-center">
-            <img src="./src/pages/About/labout.png" alt="arado" className="w-1/3 mr-6" />
+            <img src="https://cdn.discordapp.com/attachments/1262942566370775061/1276569973749186707/10.png?ex=66ca01ef&is=66c8b06f&hm=d2791b587a524cc3e7ce5b8d5bb62d926567312eb45fe19bb6192a06dae97195&" alt="arado" className="w-1/3 mr-6" />
             <div>
               <h2 className="text-3xl font-body font-semibold mt-8 mb-6">
                 Nossa história

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
-import logo from '../../assets/icons/Logo.png'; // Caminho atualizado para o logo
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import logo from '../../assets/icons/Logo.png'; 
 
 export default function Contact() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -36,10 +38,10 @@ export default function Contact() {
                         id='principal' 
                         className="p-6 rounded-lg w-[500px] bg-cover bg-no-repeat bg-center relative"
                         style={{ 
-                            backgroundImage: `url(${logo})`, // Define o logo como background
+                            backgroundImage: `url(${logo})`, 
                             backgroundColor: '#b91c1c',
-                            backgroundSize: 'contain', // Ajusta o tamanho do logo
-                            backgroundPosition: 'center' // Centraliza o logo
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'center'
                         }}
                     >
                         <form>
@@ -69,6 +71,10 @@ export default function Contact() {
                             <div className="text-center">
                                 <button
                                     type="submit"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        toast.success("Mensagem enviada com sucesso!");
+                                    }}
                                     className="bg-[#18181b] text-stone-100 font-bold py-2 px-4 rounded-full hover:bg-[#fca5a5cc] transition duration-300"
                                 >
                                     Enviar
@@ -79,6 +85,7 @@ export default function Contact() {
                 </div>
             </div>
         )}
+        <ToastContainer /> 
         </>
     );
 }
