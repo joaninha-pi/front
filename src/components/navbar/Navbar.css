@@ -1,34 +1,95 @@
-@keyframes logoAnimation {
-    0%, 100% { opacity: 1; }
-    33%, 66% { opacity: 0; }
-}
+    @keyframes logoAnimation {
+        0%, 100% { opacity: 1; }
+        33%, 66% { opacity: 0; }
+    }
 
-.logoContainer {
-    position: relative;
-    width: 13rem; /* Dobrado de 6rem */
-    height: 7rem; /* Dobrado de 6rem */
-}
+    .logoContainer {
+        position: relative;
+        width: 13rem; /* Dobrado de 6rem */
+        height: 7rem; /* Dobrado de 6rem */
+    }
 
-.logoImage {
-    position: absolute;
-    height: 7rem; /* Dobrado de 6rem */
-    width: 13rem; /* Dobrado de 6rem */
-    opacity: 0;
-    animation: logoAnimation 6s infinite;
-}
+    .logoImage {
+        position: absolute;
+        height: 7rem; /* Dobrado de 6rem */
+        width: 13rem; /* Dobrado de 6rem */
+        opacity: 0;
+        animation: logoAnimation 6s infinite;
+    }
 
-.logoImage:nth-of-type(1) {
-    animation-delay: 0s;
-}
+    .logoImage:nth-of-type(1) {
+        animation-delay: 0s;
+    }
 
-.logoImage:nth-of-type(2) {
-    animation-delay: 2s;
-}
+    .logoImage:nth-of-type(2) {
+        animation-delay: 2s;
+    }
 
-.logoImage:nth-of-type(3) {
-    animation-delay: 4s;
-}
+    .logoImage:nth-of-type(3) {
+        animation-delay: 4s;
+    }
 
-.cart-popup {
-    z-index: 9999; /* Valor alto para garantir que fique sobre outros elementos */
-}
+    .cart-popup {
+        z-index: 9999; /* Valor alto para garantir que fique sobre outros elementos */
+    }
+    @media (max-width: 768px) {
+        /* Oculta as rotas "Login", "Produtos", "Sobre nós" e "Contato" na barra de navegação principal */
+        #navbarprincipal .flex-grow.items-center.justify-start button, /* Login */
+        #navbarprincipal .flex-grow.items-center.justify-start a[href="/produtos"], /* Produtos */
+        #navbarprincipal .flex-grow.items-center.justify-end a[href="/about"], /* Sobre nós */
+        #navbarprincipal .flex-grow.items-center.justify-end a[href="/contact"] { /* Contato */
+        display: none;
+        }
+    
+        /* Centraliza o logo */
+        #navbarprincipal .flex.items-center.justify-center.w-auto {
+        flex-grow: 1;
+        justify-content: center;
+        }
+    
+        /* Ajusta a posição do menu hambúrguer */
+        .fixed.top-4.right-4.z-40 {
+        top: 0;
+        right: 0;
+        }
+        
+        /* Redimensiona o ícone do menu hambúrguer para melhor aparência em telas menores */
+        .fixed.top-4.right-4.z-40 button img {
+        width: 40px;
+        height: 40px;
+        }
+    }
+    /* Media query para dispositivos móveis */
+    @media (max-width: 768px) {
+        #menuhamburguer {
+        bottom: 16px; /* Ajuste a distância conforme necessário */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 40;
+        }
+    
+        #menuhamburguer .absolute {
+        bottom: calc(100% + 8px); /* Abre para cima, ajustando a distância da margem inferior */
+        }
+    }
+    /* Media query para dispositivos móveis */
+    @media (max-width: 768px) {
+    #menuhamburguer {
+        bottom: 16px; /* Ajuste a distância conforme necessário */
+        left: 90%;
+        transform: translateX(-50%);
+        z-index: 40;
+    }
+
+    #menuhamburguer .absolute {
+        bottom: 100%; /* Abre para cima a partir da borda inferior do botão */
+        margin-bottom: 8px; /* Espaçamento entre o botão e o menu */
+        width: 80vw; /* Ajuste a largura conforme necessário */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    }
+    
+
+
+    

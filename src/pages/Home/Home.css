@@ -52,3 +52,58 @@
   margin: 20px 0;
   font-style: italic;
 }
+/* Estilo padrão para desktop */
+
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Ajustes no container principal */
+  .home-container {
+      padding: 10px;
+  }
+
+  /* Ajustes na seção do carrossel */
+  .carousel-section {
+      margin-bottom: 20px;
+  }
+
+  /* Ajustes na seção de destaques */
+  .highlights-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  .highlight {
+      text-align: center;
+  }
+
+  /* Ajustes na seção de imagem e texto */
+  .imagem-texto {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .imagem-texto img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+  }
+
+  .imagem-texto .texto {
+      padding: 0 15px;
+  }
+
+  /* Ajustes na seção de depoimentos */
+  .testimonials-section h1 {
+      font-size: 1.5rem;
+      text-align: center;
+  }
+
+  .testimonial {
+      margin-bottom: 20px;
+      padding: 0 15px;
+      text-align: center;
+  }
+}

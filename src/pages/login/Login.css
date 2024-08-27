@@ -5,3 +5,46 @@
     background-size: full;
     background-position: center;
   }
+  /* Media query para dispositivos móveis */
+@media (max-width: 480px) {
+  .fundoLogin {
+    padding: 0 1rem; /* Ajusta o padding para telas pequenas */
+  }
+
+  #card {
+    width: 90%; /* Ajusta a largura do card */
+    height: 400px; /* Permite que a altura se ajuste ao conteúdo */
+    padding: 1rem; /* Ajusta o padding interno */
+    box-shadow: none; /* Remove a sombra para telas pequenas */
+  }
+
+  #card img {
+    height: 64px; /* Reduz o tamanho do logo */
+  }
+
+  .text-sm {
+    font-size: 0.875rem; /* Ajusta o tamanho da fonte */
+  }
+
+  .font-title {
+    font-size: 1rem; /* Ajusta o tamanho da fonte */
+  }
+
+  .font-body {
+    font-size: 0.875rem; /* Ajusta o tamanho da fonte */
+  }
+
+  input {
+    font-size: 0.875rem; /* Ajusta o tamanho da fonte dos inputs */
+  }
+
+  button {
+    font-size: 0.875rem; /* Ajusta o tamanho da fonte do botão */
+    padding: 0.5rem; /* Ajusta o padding do botão */
+    width: 100%; /* Faz com que o botão ocupe toda a largura disponível */
+  }
+
+  .text-sm.font-body {
+    text-align: center; /* Centraliza o texto para dispositivos móveis */
+  }
+}

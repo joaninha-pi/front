@@ -1,0 +1,18 @@
+/* Estilo padrão para desktop */
+
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 0; /* Remove o padding lateral */
+        padding-right: 0; /* Remove o padding lateral */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .container p {
+        margin: 0 10px; /* Ajusta a margem para dar mais espaço */
+    }
+    
+    .flex {
+        justify-content: center; /* Centraliza os itens flex */
+    }
+}

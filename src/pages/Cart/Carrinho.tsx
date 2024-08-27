@@ -42,17 +42,15 @@ function Carrinho() {
                     />
                 </div>
             ) : (
-                <div className="fundoLogao">
-                    <div className='flex justify-items-start p-2 pt-24'>
-                        <h1 className='text-3xl font-bold'>Carrinho:</h1>
+                <div className="fundoLogao px-4 pb-[100px] sm:px-6 lg:px-8">
+                    <div className='flex justify-start p-2 pt-24'>
+                        <h1 className='text-2xl sm:text-3xl font-bold'>Carrinho:</h1>
                     </div>
-                    <div className='pb'></div>
-                    <div className='flex justify-end p-2'>
-                    </div>
+                    <div className='pb-4 sm:pb-6'></div>
                     <div className='flex flex-col'>
                         <div className="flex justify-center w-full my-4">
                             <div className="container flex flex-col">
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                                     {
                                         items.map(produto => (
                                             <CardProdutos key={produto.id} produto={produto} />
@@ -62,12 +60,12 @@ function Carrinho() {
                             </div>
                         </div>
                     </div>
-                    <div className='flex justify-end p-20 items-center'>
-                        <div className="text-xl font-bold mr-4">
+                    <div className='flex flex-col items-center sm:flex-row justify-between p-4 sm:p-6'>
+                        <div className="text-lg sm:text-xl font-bold mb-4 sm:mb-0">
                             Total: R${totalCarrinho.toFixed(2)}
                         </div>
                         <button
-                            className="bg-emerald-900 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
+                            className="bg-emerald-900 text-stone-100 font-body font-bold text-sm p-2 sm:p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
                             onClick={finalizarCompra}
                         >
                             Finalizar Compra
