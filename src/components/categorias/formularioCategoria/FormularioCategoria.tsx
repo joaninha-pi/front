@@ -92,41 +92,40 @@ function FormularioCategoria() {
     const carregandoCategoria = categoria.descricao === '';
 
     return (
-        <div className='fundoLogao'>
-            <div className='pt-24'></div>
-            <div className="container flex flex-col items-center justify-center mx-auto">
-                <h1 className="text-4xl text-center my-8">
+        <div className='bg-gray-100 min-h-screen py-6 flex flex-col justify-center'>
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 className="text-2xl sm:text-4xl text-center my-4 font-bold">
                     {id ? 'Editar categoria' : 'Cadastre uma nova categoria'}
                 </h1>
 
-                <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovaCategoria}>
+                <form className="w-full max-w-lg mx-auto flex flex-col gap-4" onSubmit={gerarNovaCategoria}>
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="nome">Nome da categoria</label>
+                        <label htmlFor="nome" className="text-lg font-semibold">Nome da categoria</label>
                         <input
                             type="text"
                             placeholder="Nome"
                             name='nome'
-                            className="border-2 border-slate-700 rounded p-2"
+                            className="border-2 border-slate-700 rounded p-2 text-sm"
                             value={categoria.nome}
                             onChange={atualizarEstado}
                             required
                         />
                     </div>
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="descricao">Descrição da categoria</label>
+                        <label htmlFor="descricao" className="text-lg font-semibold">Descrição da categoria</label>
                         <input
                             type="text"
                             placeholder="Descrição"
                             name='descricao'
-                            className="border-2 border-slate-700 rounded p-2"
+                            className="border-2 border-slate-700 rounded p-2 text-sm"
                             value={categoria.descricao}
                             onChange={atualizarEstado}
                         />
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                         <button
                             disabled={carregandoCategoria || loading}
-                            className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
+                            className='bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform'
                             type="submit"
                         >
                             {loading ? (
@@ -141,7 +140,7 @@ function FormularioCategoria() {
                         </button>
                         <button
                             type="button"
-                            className="bg-gray-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-gray-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
+                            className="bg-gray-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-gray-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
                             onClick={retornar}
                         >
                             Voltar

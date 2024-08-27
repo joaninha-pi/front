@@ -1,0 +1,29 @@
+/* Media query para dispositivos móveis */
+@media (max-width: 480px) {
+    .fundoLogao {
+      padding: 0 1rem; /* Ajusta o padding horizontal para telas pequenas */
+    }
+  
+    .text-3xl {
+      font-size: 1.5rem; /* Reduz o tamanho da fonte do título */
+    }
+  
+    .grid {
+      grid-template-columns: 1fr; /* Exibe uma coluna em vez de múltiplas */
+      gap: 4px; /* Reduz o espaçamento entre os itens */
+    }
+  
+    .p-20 {
+      padding: 1rem; /* Reduz o padding nas laterais e na parte inferior */
+    }
+  
+    .text-xl {
+      font-size: 1rem; /* Reduz o tamanho da fonte do total */
+    }
+  
+    .bg-emerald-900 {
+      font-size: 0.875rem; /* Reduz o tamanho da fonte do botão */
+      padding: 0.5rem 1rem; /* Ajusta o padding do botão */
+    }
+  }
+  
