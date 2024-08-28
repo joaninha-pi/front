@@ -193,8 +193,6 @@ export default function Navbar() {
                   )}
                 </div>
               </Link>
-              {navbarPerfil}
-              {navbarSair}
             </div>
           </div>
         </nav>
