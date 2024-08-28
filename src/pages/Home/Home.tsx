@@ -44,27 +44,123 @@ export default function Home() {
             </section>
 
 
-            <section className="pt-20 testimonials-section">
+            <section className="pt-20 testimonials-section px-4">
                 <h1 className="text-2xl font-title mb-8 text-center">Depoimento dos nossos clientes:</h1>
-                <div className="space-y-6 flex flex-col items-center">
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex items-center max-w-md w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto">
                         <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQxNjM0Ni5qcGVn' className="w-20 h-20 rounded-full mb-4" alt="Foto de Maria S." />
-                        <div className="ml-4">
+                        <div className="text-center">
                             <p className="text-lg italic mb-4">"Amei a qualidade dos produtos da Joana! Com certeza vou comprar mais vezes."</p>
+                            <div className="flex justify-center mb-4">
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                            </div>
                             <span className="block text-right text-sm text-gray-500">- Maria S.</span>
                         </div>
                     </div>
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex items-center max-w-md w-full">
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto">
                         <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkNTQ4OTguanBlZw==' className="w-20 h-20 rounded-full mb-4" alt="Foto de João P." />
-                        <div className="ml-4">
+                        <div className="text-center">
                             <p className="text-lg italic mb-4">"Entrega super rápida e atendimento excelente. Recomendo a todes!"</p>
+                            <div className="flex justify-center mb-4">
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                            </div>
                             <span className="block text-right text-sm text-gray-500">- João P.</span>
+                        </div>
+                    </div>
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto">
+                        <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQyNjA5OS5qcGVn' className="w-20 h-20 rounded-full mb-4" alt="Foto de Ana L." />
+                        <div className="text-center">
+                            <p className="text-lg italic mb-4">"Excelente serviço e produtos de alta qualidade. Voltarei com certeza!"</p>
+                            <div className="flex justify-center mb-4">
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                            </div>
+                            <span className="block text-right text-sm text-gray-500">- Ana V.</span>
+                        </div>
+                    </div>
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto">
+                        <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMzc4Ni5qcGVn' className="w-20 h-20 rounded-full mb-4" alt="Foto de Carlos M." />
+                        <div className="text-center">
+                            <p className="text-lg italic mb-4">"Atendimento impecável e entrega rápida. Recomendo!"</p>
+                            <div className="flex justify-center mb-4">
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                            </div>
+                            <span className="block text-right text-sm text-gray-500">- Carlos M.</span>
+                        </div>
+                    </div>
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto">
+                        <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQ0MDU2Ni5qcGVn' className="w-20 h-20 rounded-full mb-4" alt="Foto de Daniela R." />
+                        <div className="text-center">
+                            <p className="text-lg italic mb-4">"Produtos maravilhosos! Comprarei novamente."</p>
+                            <div className="flex justify-center mb-4">
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                            </div>
+                            <span className="block text-right text-sm text-gray-500">- Daniela R.</span>
+                        </div>
+                    </div>
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto">
+                        <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMjc0OTkuanBlZw==' className="w-20 h-20 rounded-full mb-4" alt="Foto de Eduardo F." />
+                        <div className="text-center">
+                            <p className="text-lg italic mb-4">"Recomendo a todos! Produtos de qualidade e excelente serviço."</p>
+                            <div className="flex justify-center mb-4">
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                            </div>
+                            <span className="block text-right text-sm text-gray-500">- Eduardo F.</span>
+                        </div>
+                    </div>
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto">
+                        <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQ0OTIwOC5qcGVn' className="w-20 h-20 rounded-full mb-4" alt="Foto de Fernanda G." />
+                        <div className="text-center">
+                            <p className="text-lg italic mb-4">"Melhor compra que já fiz! Produtos incríveis."</p>
+                            <div className="flex justify-center mb-4">
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                            </div>
+                            <span className="block text-right text-sm text-gray-500">- Fernanda G.</span>
+                        </div>
+                    </div>
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto">
+                        <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMTMwMzguanBlZw==' className="w-20 h-20 rounded-full mb-4" alt="Foto de Gabriel H." />
+                        <div className="text-center">
+                            <p className="text-lg italic mb-4">"Qualidade inigualável! Com certeza voltarei a comprar."</p>
+                            <div className="flex justify-center mb-4">
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                                <span className="text-yellow-500 text-lg">⭐</span>
+                            </div>
+                            <span className="block text-right text-sm text-gray-500">- Gabriel H.</span>
                         </div>
                     </div>
                 </div>
             </section>
-
-
 
         </div>
     );
