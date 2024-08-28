@@ -7,14 +7,13 @@ import { Navigation, Pagination } from 'swiper/modules';
 
 function Carrossel() {
     var items = [
-        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276496906960371722/juan-jose-valencia-antia-TTrJMhrkoeY-unsplash.jpg?ex=66ce5b22&is=66cd09a2&hm=070e81586d18183bddf2a46253bc6788df4bda49765b6e05fa1f155845586a6a&"},
-        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276496908130455645/arturrro-GdTLaWamFHw-unsplash.jpg?ex=66ce5b23&is=66cd09a3&hm=2711b94d4864e112f386f0fc2115100edf2a4b5099d6351efba32e5a698adfcf&"},
-        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276545587399102555/Leonardo_Phoenix_Create_a_highresolution_PNG_image_with_a_tran_0.jpg?ex=66cddfb9&is=66cc8e39&hm=4b05a4aced7410cd81c44c6772aa6d3eb0f96932bab80dbaa47e02f7219dc4c2&"},
-        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276543165695791228/Leonardo_Phoenix_Create_a_vibrant_and_eyecatching_packaging_de_1.jpg?ex=66cddd77&is=66cc8bf7&hm=58f0f903b394b14a2bbe78eca72ff17bedf1dd1555c508b10f3c4e59eb971674&"},
-        { img: "https://media.discordapp.net/attachments/1262942566370775061/1276496904317964288/odiseo-castrejon-1CsaVdwfIew-unsplash.jpg?ex=66ce5b22&is=66cd09a2&hm=7c63d102916d5869047301226b45ef528d653c03b2df8f071a6ffc5c9538d135&=&format=webp&width=625&height=416"},
-        { img: "https://media.discordapp.net/attachments/1262942566370775061/1276494450348003369/markus-spiske-O70hwncRDC8-unsplash.jpg?ex=66ce58d9&is=66cd0759&hm=fdceadddd58bef046d88c214cc8b7b344c7d32642b2d4d58ab12ff9c42dccd2e&=&format=webp&width=625&height=416"},
-        { img: "https://media.discordapp.net/attachments/1262942566370775061/1276542586764656712/Leonardo_Phoenix_Create_a_vibrant_packaging_design_featuring_a_1.jpg?ex=66cddced&is=66cc8b6d&hm=aeab2efbb144e7125f5960a115d0a72bf3fb0be3f00aea54744a902d8715cda9&=&format=webp&width=736&height=416"},
-        { img: "https://media.discordapp.net/attachments/1262942566370775061/1276494448234070057/vincent-van-zalinge-oBL5QRAxZzo-unsplash.jpg?ex=66ce58d8&is=66cd0758&hm=6e7f99d1f63965cc1719710bfe2220b7c322070aba9f8e7777c57722c50edb39&=&format=webp&width=624&height=416"},
+        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276494448234070057/vincent-van-zalinge-oBL5QRAxZzo-unsplash.jpg?ex=66d05318&is=66cf0198&hm=1c468c7a043dcb4f886564535d28f5501933c87969ef8c82ea1a85ce3c45d3a6&"},
+        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276545587399102555/Leonardo_Phoenix_Create_a_highresolution_PNG_image_with_a_tran_0.jpg?ex=66cfd9f9&is=66ce8879&hm=31ede730ae27b9e7e8f6acf71d7567aea727b8c46a6194139e4c80c83513fd89&"},
+        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276496904317964288/odiseo-castrejon-1CsaVdwfIew-unsplash.jpg?ex=66d05562&is=66cf03e2&hm=666ba2236cb4949f3895e016412ae18c222e691ba5ae72ccd490f4c45f4a8d81&"},
+        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276543165695791228/Leonardo_Phoenix_Create_a_vibrant_and_eyecatching_packaging_de_1.jpg?ex=66cfd7b7&is=66ce8637&hm=ba74f4cb9260fa4558eb6a2825aa96db15cf5dab69bc3f75b2c5202234430ea9&"},
+        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276494450348003369/markus-spiske-O70hwncRDC8-unsplash.jpg?ex=66d05319&is=66cf0199&hm=68d94b225f5574f73619d38ed2bf853143cb762c4fe596573aa1c0f05ebce87a&"},
+        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276542586764656712/Leonardo_Phoenix_Create_a_vibrant_packaging_design_featuring_a_1.jpg?ex=66cfd72d&is=66ce85ad&hm=015de7bd6d2012b4adb5e9a8c08ae8f2cbdaaa4c897af762e414a681de9a9b7f&"},
+        { img: "https://cdn.discordapp.com/attachments/1262942566370775061/1276496906960371722/juan-jose-valencia-antia-TTrJMhrkoeY-unsplash.jpg?ex=66d05562&is=66cf03e2&hm=513f5cf07c31e91f72030851733e8520b49f86a0520717aa11c7872c8f32096b&"},
     ];
 
     return (
