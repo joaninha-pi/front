@@ -42,7 +42,7 @@ function Carrinho() {
                     />
                 </div>
             ) : (
-                <div className="fundoLogao px-4 pb-[100px] sm:px-6 lg:px-8">
+                <div className="fundoLogao px-4 pb-[150px] sm:px-6 lg:px-8">
                     <div className='flex justify-start p-2 pt-24'>
                         <h1 className='text-2xl sm:text-3xl font-bold'>Carrinho:</h1>
                     </div>

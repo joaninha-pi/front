@@ -193,80 +193,80 @@ export default function Navbar() {
                   )}
                 </div>
               </Link>
+              {navbarPerfil}
+              {navbarSair}
             </div>
           </div>
         </nav>
       )}
 
-{!isVisible && (
-  <div id='menuhamburguer' className="fixed bottom-4 left-4 z-40">
-    <button
-      onClick={toggleMenu}
-      data-collapse-toggle="navbar-hamburger"
-      type="button"
-      className="inline-flex items-center justify-center"
-      aria-controls="navbar-hamburger"
-      aria-expanded={isOpen}
-    >
-      <span className="sr-only">Open main menu</span>
-      <img
-        src={menuIcon}
-        alt="Ícone Menu"
-        className="w-12 h-12 shadow-lg rounded-full border-2 border-zinc-900 hover:w-14 hover:h-14 transition-all duration-300"
-      />
-    </button>
-    <div
-      className={`${isOpen ? 'block' : 'hidden'} absolute bottom-full left-0 mb-2 w-64 bg-zinc-900 rounded-lg shadow-lg`}
-    >
-      <div className="flex flex-col font-medium rounded-lg font-body">
-        {/* Links do menu */}
-        <Link
-          to="/home"
-          className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
-        >
-          Home
-        </Link>
-        <Link
-          to="/login"
-          className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
-        >
-          Login
-        </Link>
-        <Link
-          to="/produtos"
-          className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
-        >
-          Produtos
-        </Link>
-        <Link
-          to="/carrinho"
-          className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
-        >
-          Carrinho
-        </Link>
-        <Link
-          to="/about"
-          className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
-        >
-          Sobre nós
-        </Link>
-        <Link
-          to="/contact"
-          className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
-        >
-          Contato
-        </Link>
-        {/* Outros itens de menu baseados na autenticação */}
-        {navbarCat}
-        {navbarCadCat}
-        {navbarCadProd}
-        {navbarPerfil}
-        {navbarSair}
-      </div>
-    </div>
-  </div>
-)}
-
+      {!isVisible && (
+        <div id='menuhamburguer' className="fixed bottom-4 left-4 z-40">
+          <button
+            onClick={toggleMenu}
+            data-collapse-toggle="navbar-hamburger"
+            type="button"
+            className="inline-flex items-center justify-center"
+            aria-controls="navbar-hamburger"
+            aria-expanded={isOpen}
+          >
+            <span className="sr-only">Open main menu</span>
+            <img
+              src={menuIcon}
+              alt="Ícone Menu"
+              className="w-12 h-12 shadow-lg rounded-full border-2 border-zinc-900 hover:w-14 hover:h-14 transition-all duration-300"
+            />
+          </button>
+          <div
+            className={`${isOpen ? 'block' : 'hidden'} absolute bottom-full left-0 mb-2 w-64 bg-zinc-900 rounded-lg shadow-lg`}
+          >
+            <div className="flex flex-col font-medium rounded-lg font-body">
+              {/* Links do menu */}
+              <Link
+                to="/home"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
+              >
+                Home
+              </Link>
+              <Link
+                to="/login"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
+              >
+                Login
+              </Link>
+              <Link
+                to="/produtos"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
+              >
+                Produtos
+              </Link>
+              {navbarCadCat}
+              {navbarCadProd}
+              <Link
+                to="/about"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
+              >
+                Sobre Nós
+              </Link>
+              <Link
+                to="/contact"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
+              >
+                Contato
+              </Link>
+              <Link
+                to="/carrinho"
+                className="font-title block py-2 px-4 text-red-600 hover:text-stone-100 hover:bg-zinc-700 rounded transition-colors duration-300"
+              >
+                Carrinho
+              </Link>
+              {navbarCat}
+              {navbarPerfil}
+              {navbarSair}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
