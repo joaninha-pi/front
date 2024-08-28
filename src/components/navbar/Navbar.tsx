@@ -153,7 +153,7 @@ export default function Navbar() {
               </Link>
             </div>
             <div className="flex items-center justify-center w-auto pl-20">
-              <a href="/home" className="flex items-center">
+              <a href="/" className="flex items-center">
                 <div className="logoContainer">
                   <img src={logo_b} className="logoImage" alt="Logo Blue" />
                   <img src={logo_r} className="logoImage" alt="Logo Red" />

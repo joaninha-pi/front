@@ -33,7 +33,7 @@ export default function Home() {
 
             {/* Imagem e texto central */}
             <section className="imagem-texto">
-                <img src="https://media.discordapp.net/attachments/1262942566370775061/1275829119220711547/UniversalUpscaler_fc4f7347-069b-452e-9ed7-9388e5607214-removebg.png?ex=66cde775&is=66cc95f5&hm=97aba6e960dbd4f3a20a276bc51d1fc55b3ed1e32fa42e2f1d5c3b5ed974e38e&=&format=webp&quality=lossless&width=416&height=416" />
+                <img src="https://media.discordapp.net/attachments/1262942566370775061/1275829119220711547/UniversalUpscaler_fc4f7347-069b-452e-9ed7-9388e5607214-removebg.png?ex=66cfe1b5&is=66ce9035&hm=fc3413cd8f59e2dd149535e3b532a3b3c7fec769332831a84e19cabacd22312d&=&format=webp&quality=lossless&width=416&height=416" />
                 <div className="texto">
                     <h1>Mas por quê Joana?</h1>
                     <p>Nossa relação com as joaninhas vão para além dos nossos produtos e elas tem muitas histórias para nos contar. Em muitas culturas elas carregam consigo a representação de felicidade, amor e harmonia.</p>

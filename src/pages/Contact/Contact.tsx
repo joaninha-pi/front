@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
 import logo from '../../assets/icons/Logo.png'; // Caminho atualizado para o logo
+import { toastAlerta } from '../../utils/toastAlerta';
 
 export default function Contact() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -12,6 +13,16 @@ export default function Contact() {
 
         return () => clearTimeout(timer);
     }, []);
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+
+        // Lógica para processar o envio do formulário
+        // ...
+
+        // Exibe o toast de sucesso
+        toastAlerta('Mensagem enviada com sucesso!', 'sucesso');
+    };
 
     return (
         <>
@@ -42,7 +53,7 @@ export default function Contact() {
                             backgroundPosition: 'center' // Centraliza o logo
                         }}
                     >
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="mb-4">
                                 <label htmlFor="name" className="block text-white mb-2">Nome:</label>
                                 <input 
