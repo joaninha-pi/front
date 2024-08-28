@@ -1,5 +1,6 @@
- import { At, GithubLogo } from "@phosphor-icons/react";
+import { At, GithubLogo } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
+import { FaCcVisa, FaCcMastercard, FaPaypal, FaGooglePay, FaMoneyBillWave } from "react-icons/fa";
 
 export default function Footer() {
     const [isVisible, setIsVisible] = useState(true);
@@ -24,7 +25,7 @@ export default function Footer() {
 
     return (
         <>
-            <div className={`fixed justify-center bottom-0 w-full transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} bg-gradient-to-t from-black/80 to-transparent text-neutral-100`}>
+            <div className={`fixed justify-items-center bottom-0 w-full transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} bg-gradient-to-t from-black/80 to-transparent text-neutral-100`}>
                 <div className="container flex flex-col items-center py-4 px-4 md:pl-44 text-center md:text-left">
                     <p className="text-xl font-bold text-red-400">Joana | Copyright: Generation Brasil</p>
                     <p className="text-lg text-red-400">Nos acompanhe nas redes!</p>
@@ -35,9 +36,22 @@ export default function Footer() {
                         <a target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-700 transition-colors duration-300" href="https://linktr.ee/joana_pi">
                             <At size={32} />
                         </a>
+                    
                     </div>
+                    </div>
+
+                    <div className="flex justify-end pr-16 pb-4">
+                        <div className="flex gap-3 items-center">
+                            <FaCcVisa size={32} className="text-white" />
+                            <FaCcMastercard size={32} className="text-white" />
+                            <FaPaypal size={32} className="text-white" />
+                            <FaGooglePay size={32} className="text-white" />
+                            <FaMoneyBillWave size={32} className="text-white" />
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-        </>
-    );
+
+            </>
+            );
 }
