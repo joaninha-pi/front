@@ -13,41 +13,28 @@ const TeamSection = () => {
               className="w-full md:w-1/3 mb-4 md:mb-0 md:mr-6 object-cover max-w-xs md:max-w-full hover:scale-110 transition-transform duration-300 ease-in-out"
             />
             <div>
-              <h2 className="text-2xl md:text-3xl font-body font-semibold mt-4 md:mt-8 mb-4 md:mb-6">
+              <h2 className="text-2xl md:text-2xl font-title font-semibold mt-4 md:mt-8 mb-4 md:mb-6">
                 Nossa história
               </h2>
               <p className="text-base md:text-lg text-justify font-body text-zinc-900">
-                O e-commerce Joana das iniciais joaninhas na agricultura, surgiu
-                da ideia desenvolvedores que se conheceram em um bootcamp de
-                java full stack, trazendo produtos alinhados a ODS 12 com o uso
-                eficiente de reutilização de recursos naturais e agregando valor
-                as commodites.
+              O e-commerce Joana, que tem suas inspirações iniciais no papel das joaninhas na agricultura, surgiu da ideia de desenvolvedores que se conheceram em um bootcamp de Java Full Stack. O projeto traz produtos alinhados ao ODS 12, promovendo o uso eficiente e a reutilização de recursos naturais, além de agregar valor às commodities.
               </p>
               <br />
-              <h2 className="text-2xl md:text-3xl font-body font-semibold mt-4 mb-4 md:mb-8">
+              <h2 className="text-2xl md:text-2xl font-title font-semibold mt-4 mb-4 md:mb-8">
                 Quem somos
               </h2>
               <p className="text-base md:text-lg text-justify font-body text-zinc-900">
-                Joana é um e-commerce business-to-consumer de produtos
-                oferecidos diretamente aos consumidores com foco na venda e
-                reformulação industrial do agronegócio sustentável brasileiro,
-                trabalhando commenores desperdícios na cadeia de produção e
-                fabricação de nossos produtos contam com tecnologias de e
-                agricultura regenerativa.
+              Joana é um e-commerce business-to-consumer que oferece produtos diretamente aos consumidores, com foco na venda e reformulação industrial do agronegócio sustentável brasileiro. Trabalhamos para minimizar desperdícios na cadeia de produção e fabricação dos nossos produtos, que utilizam tecnologias de agricultura regenerativa Com o intuito de aumentar a produtividade, podendo contribuir
+              para processos mais assertivos como:
               </p>
               <br />
-              <p className="text-base md:text-lg text-justify font-body text-zinc-900">
-                Com o intuito de aumentar a produtividade, podendo contribuir
-                para processos mais assertivos como:
-              </p>
-              <br />
-              <ul className="list-disc pl-5">
+              <ul className="list-disc font-body pl-5">
                 <li>
                   Monitoramento mais preciso das plantações, identificando
                   precocemente a presença de pragas;
                 </li>
                 <li>
-                  Redução de custos em diversos insumos, como fertilizantes e
+                  Redução de custos em insumos, como fertilizantes e
                   água;
                 </li>
                 <li>
@@ -69,14 +56,7 @@ const TeamSection = () => {
               </ul>
               <br />
               <p className="text-base md:text-lg font-body text-justify text-zinc-900">
-                Somos fornecedores de produtos orgânicos de soja, feijão,
-                ervilha, açúcar, sementes de girassol, café e mais diversos
-                produtos que contenham a fixação biológica de nitrogênio como
-                fonte para a nutrição das plantas, entre outros produtos
-                agrícolas com baixa emissão de carbono, o tratamento de
-                dejetos animais, como fertilizantes, adubos naturais e controle
-                de pragas utilizando de alternativas com menor impacto, como
-                joaninhas como controladora de pragas.
+              Somos fornecedores de produtos orgânicos, como soja, feijão, ervilha, açúcar, sementes de girassol, café e outros. Nossos produtos são ricos em fixação biológica de nitrogênio para a nutrição das plantas e incluem soluções agrícolas com baixa emissão de carbono, tratamento de dejetos animais como fertilizantes, adubos naturais e controle de pragas. Utilizamos alternativas com menor impacto, como joaninhas para o controle de pragas.
               </p>
             </div>
           </div>
