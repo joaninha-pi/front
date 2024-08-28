@@ -6,7 +6,7 @@ export default function Home() {
 
     return (
         <div className="home-container">
-            
+
             <section className="carousel-section">
                 <Carrossel />
             </section>
@@ -39,22 +39,33 @@ export default function Home() {
                     <p className='text-justify font-body'>Nossa relação com as joaninhas vai além dos nossos produtos, e elas têm muitas histórias para nos contar. Em muitas culturas, elas carregam consigo a representação de felicidade, amor e harmonia.</p>
                     <p className='text-justify font-body'>As joaninhas são consideradas símbolos de boa sorte, e aqui na Joana sabemos o quanto elas são valiosas para o ecossistema. Com seu apetite voraz, elas controlam pragas e pulgões e também se alimentam de néctar. Suas plantas favoritas são aquelas que retêm água, como alface e couve, além de flores como tulipas e lírios.</p>
                     <p className='text-justify font-body'>Para nós, o formato das joaninhas é fofo e encantador, mas suas cores e formato têm a função de intimidar os predadores, passando a mensagem de que seu gosto é ruim e pode ser tóxico. No entanto, o formato que conhecemos não é o primeiro. A joaninha começa como uma larva e passa por um estágio de metamorfose, semelhante ao das borboletas, para adquirir o formato de besouro. Estando alinhado as nossas diretrizes de produção consciente e sustentável.</p>
-                    
+
                 </div>
             </section>
 
-            
-            <section className="pt-40 testimonials-section">
-                <h1 className='text-2xl font-title'>Depoimento dos nossos clientes:</h1>
-                <div className="testimonial">
-                    <p>"Amei a qualidade dos produtos da Joana! Com certeza vou comprar mais vezes."</p>
-                    <span>- Maria S.</span>
-                </div>
-                <div className="testimonial">
-                    <p>"Entrega super rápida e atendimento excelente. Recomendo a tods!"</p>
-                    <span>- João P.</span>
+
+            <section className="pt-20 testimonials-section">
+                <h1 className="text-2xl font-title mb-8 text-center">Depoimento dos nossos clientes:</h1>
+                <div className="space-y-6 flex flex-col items-center">
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex items-center max-w-md w-full">
+                        <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQxNjM0Ni5qcGVn' className="w-20 h-20 rounded-full mb-4" alt="Foto de Maria S." />
+                        <div className="ml-4">
+                            <p className="text-lg italic mb-4">"Amei a qualidade dos produtos da Joana! Com certeza vou comprar mais vezes."</p>
+                            <span className="block text-right text-sm text-gray-500">- Maria S.</span>
+                        </div>
+                    </div>
+                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex items-center max-w-md w-full">
+                        <img src='https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkNTQ4OTguanBlZw==' className="w-20 h-20 rounded-full mb-4" alt="Foto de João P." />
+                        <div className="ml-4">
+                            <p className="text-lg italic mb-4">"Entrega super rápida e atendimento excelente. Recomendo a todes!"</p>
+                            <span className="block text-right text-sm text-gray-500">- João P.</span>
+                        </div>
+                    </div>
                 </div>
             </section>
+
+
+
         </div>
     );
 }
