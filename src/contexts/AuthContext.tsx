@@ -1,58 +1,63 @@
-import { createContext, ReactNode, useState } from "react"
-import { Produto } from "../models/Produto"
-import UsuarioLogin from "../models/UsuarioLogin"
-import { login } from "../services/Service"
-import { toastAlerta } from "../utils/toastAlerta"
+import { createContext, ReactNode, useState } from "react";
+import { Produto } from "../models/Produto";
+import UsuarioLogin from "../models/UsuarioLogin";
+import { login } from "../services/Service";
+import { toastAlerta } from "../utils/toastAlerta";
 
 interface AuthContextProps {
-    usuario: UsuarioLogin
-    handleLogout(): void
-    handleLogin(usuario: UsuarioLogin): Promise<void>
-    isLoading: boolean
-    adicionarProduto: (produto: Produto) => void
-    removerProduto: (produtoId: number) => void
-    limparCart: () => void
-    items: Produto[]
-    quantidadeItems: number
+    usuario: UsuarioLogin;
+    handleLogout(): void;
+    handleLogin(usuario: UsuarioLogin): Promise<void>;
+    isLoading: boolean;
+    adicionarProduto: (produto: Produto) => void;
+    removerProduto: (produtoId: number) => void;
+    limparCart: () => void;
+    items: Produto[];
+    quantidadeItems: number;
 }
 
 interface AuthProviderProps {
-    children: ReactNode
+    children: ReactNode;
 }
 
-export const AuthContext = createContext({} as AuthContextProps)
+export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: AuthProviderProps) {
+    const [items, setItems] = useState<Produto[]>([]);
 
-     
-     const [items, setItems] = useState<Produto[]>([])
+    // Calcula a quantidade total de itens no carrinho
+    const quantidadeItems = items.reduce((total, item) => total + (item.quantidade || 1), 0);
 
-     const quantidadeItems = items.length
- 
-     
-     function adicionarProduto(produto: Produto) {
-         setItems(state => [...state, produto])
-     }
- 
-     
-     function removerProduto(produtoId: number) {
- 
-        
-         const indice = items.findIndex(items => items.id === produtoId) 
-         let novoCart = [...items]   
- 
-         if(indice >= 0){
-             novoCart.splice(indice, 1)
-             setItems(novoCart) 
-         }
-     }
- 
-     function limparCart() {
-         toastAlerta("Compra efetuada com sucesso", 'sucesso')
-         setItems([])
-     }
- 
- 
+    function adicionarProduto(produto: Produto) {
+        setItems(state => {
+            const index = state.findIndex(item => item.id === produto.id);
+            if (index >= 0) {
+                // Atualiza a quantidade do produto existente
+                const updatedItems = [...state];
+                const currentQuantidade = updatedItems[index].quantidade || 1;
+                updatedItems[index] = { ...updatedItems[index], quantidade: produto.quantidade };
+                return updatedItems;
+            }
+            // Adiciona novo produto
+            return [...state, { ...produto, quantidade: produto.quantidade || 1 }];
+        });
+    }
+
+    function removerProduto(produtoId: number) {
+        setItems(state => {
+            const index = state.findIndex(item => item.id === produtoId);
+            if (index >= 0) {
+                // Remove o produto
+                return state.filter(item => item.id !== produtoId);
+            }
+            return state;
+        });
+    }
+
+    function limparCart() {
+        toastAlerta("Compra efetuada com sucesso", 'sucesso');
+        setItems([]);
+    }
 
     const [usuario, setUsuario] = useState<UsuarioLogin>({
         id: 0,
@@ -61,21 +66,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
         senha: "",
         foto: "",
         token: ""
-    })
+    });
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
     async function handleLogin(userLogin: UsuarioLogin) {
-        setIsLoading(true)
+        setIsLoading(true);
         try {
-            await login(`/usuarios/logar`, userLogin, setUsuario)
-            toastAlerta("Usuário logado com sucesso", 'sucesso')
-            setIsLoading(false)
-
+            await login(`/usuarios/logar`, userLogin, setUsuario);
+            toastAlerta("Usuário logado com sucesso", 'sucesso');
+            setIsLoading(false);
         } catch (error) {
-            console.log(error)
-            toastAlerta("Dados do usuário inconsistentes", 'erro')
-            setIsLoading(false)
+            console.log(error);
+            toastAlerta("Dados do usuário inconsistentes", 'erro');
+            setIsLoading(false);
         }
     }
 
@@ -87,12 +91,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
             senha: "",
             foto: "",
             token: ""
-        })
+        });
     }
 
     return (
         <AuthContext.Provider value={{ adicionarProduto, removerProduto, limparCart, items, quantidadeItems, usuario, handleLogin, handleLogout, isLoading }}>
             {children}
         </AuthContext.Provider>
-    )
+    );
 }
