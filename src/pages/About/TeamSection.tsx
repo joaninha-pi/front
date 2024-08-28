@@ -10,7 +10,7 @@ const TeamSection = () => {
             <img
               src={labout}
               alt="arado"
-              className="w-full md:w-1/3 mb-4 md:mb-0 md:mr-6 object-cover max-w-xs md:max-w-full"
+              className="w-full md:w-1/3 mb-4 md:mb-0 md:mr-6 object-cover max-w-xs md:max-w-full hover:scale-110 transition-transform duration-300 ease-in-out"
             />
             <div>
               <h2 className="text-2xl md:text-3xl font-body font-semibold mt-4 md:mt-8 mb-4 md:mb-6">
