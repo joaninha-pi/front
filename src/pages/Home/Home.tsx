@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { Circles } from 'react-loader-spinner';
 import "./Home.css";
 import Carrossel from '../../components/carrossel/Carrossel';
 export default function Home() {
