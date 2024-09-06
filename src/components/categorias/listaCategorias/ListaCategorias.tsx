@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Circles } from 'react-loader-spinner';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthContext';
 import Categoria from '../../../models/Categoria';
 import { buscar } from '../../../services/Service';
 import CardCategorias from '../cardCategorias/CardCategorias';
@@ -9,45 +7,27 @@ import { toastAlerta } from '../../../utils/toastAlerta';
 
 function ListaCategorias() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); 
-
-  let navigate = useNavigate();
-
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
+  const [loading, setLoading] = useState<boolean>(true);
 
   async function buscarCategorias() {
-    setLoading(true); 
+    setLoading(true);
     try {
-      await buscar('/categorias', setCategorias, {
-        headers: { Authorization: token },
-      });
+      await buscar('/categorias', setCategorias); 
     } catch (error: any) {
-      if (error.toString().includes('403')) {
-        toastAlerta('O token expirou, favor logar novamente', 'info');
-        handleLogout();
-      }
+      toastAlerta('Erro ao buscar categorias', 'error');
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   }
 
   useEffect(() => {
-    if (token === '') {
-      toastAlerta('Você precisa estar logado', 'info');
-      navigate('/login');
-    }
-  }, [token]);
-
-  useEffect(() => {
-
     const timer = setTimeout(() => {
       buscarCategorias();
     }, 100);
 
- 
     return () => clearTimeout(timer);
-  }, [token]); 
+  }, []); 
+
   return (
     <>
       <div className="fundoLogao">
