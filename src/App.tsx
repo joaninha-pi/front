@@ -21,34 +21,32 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
-    <>
-      <AuthProvider>
-        <ToastContainer />
-        <BrowserRouter>
-          <Navbar />
-          <div className="min-h-[80vh] pt-[150px] pb-[180px] bg-stone-100 text-gray-800">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/produtos" element={<ListaProdutos />} />
-              <Route path="/categorias" element={<ListaCategorias />} />
-              <Route path="/cadastroProduto" element={<FormularioProduto />} />
-              <Route path="/deletarProduto/:id" element={<DeletarProduto />} />
-              <Route path="/cadastroCategoria" element={<FormularioCategoria />} />
-              <Route path="/editarCategoria/:id" element={<FormularioCategoria />} />
-              <Route path="/editarProduto/:id" element={<FormularioProduto />} />
-              <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
-              <Route path='/carrinho' element={<Carrinho />} />
-              <Route path="/perfil" element={<Perfil />} />
-            </Routes>
-          </div>
-          <Footer />
-        </BrowserRouter>
-      </AuthProvider>
-    </>
+    <AuthProvider>
+      <ToastContainer />
+      <BrowserRouter>
+        <Navbar />
+        <main className="min-h-screen pt-20 pb-12 bg-gray-50 text-gray-800 transition-all duration-300">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/produtos" element={<ListaProdutos />} />
+            <Route path="/categorias" element={<ListaCategorias />} />
+            <Route path="/cadastroProduto" element={<FormularioProduto />} />
+            <Route path="/deletarProduto/:id" element={<DeletarProduto />} />
+            <Route path="/cadastroCategoria" element={<FormularioCategoria />} />
+            <Route path="/editarCategoria/:id" element={<FormularioCategoria />} />
+            <Route path="/editarProduto/:id" element={<FormularioProduto />} />
+            <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
+            <Route path="/carrinho" element={<Carrinho />} />
+            <Route path="/perfil" element={<Perfil />} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }

@@ -1,54 +1,21 @@
-.home-container {
+.carousel-container {
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-.carousel-section {
-  margin-bottom: 50px;
+.product-item {
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.highlights-section {
-  display: flex;
-  justify-content: space-around;
+.product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.highlight {
-  text-align: center;
-  max-width: 400px;
-  padding: 30px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.sustentabilidade-section img {
+  transition: transform 0.3s;
 }
 
-.imagem-texto {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.imagem-texto h1 {
-  margin-bottom: 10px;
-}
-
-.imagem-texto p {
-  font-style: italic;
-  padding: 10px;
-  margin: 10px;
-}
-
-.imagem-texto-img {
-  margin-right: 20px;
-  border-radius: 8px;
-  max-width: 800px;
-  height: auto;
-}
-
-.testimonials-section {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.testimonial {
-  margin: 20px 0;
-  font-style: italic;
+.sustentabilidade-section img:hover {
+  transform: scale(1.05);
 }

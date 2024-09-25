@@ -1,61 +1,71 @@
 import { useEffect, useState } from 'react';
 import { Circles } from 'react-loader-spinner';
-import "./Home.css";
 import Carrossel from '../../components/carrossel/Carrossel';
-export default function Home() {
 
+export default function Home() {
     return (
-        <div className="home-container">
+        <div className="home-container bg-gray-50 text-gray-800">
             {/* Carrossel de Imagens */}
-            <section className="carousel-section">
+            <section className="carousel-section mb-12">
                 <Carrossel />
             </section>
 
             {/* Seção de Destaques */}
-            <section className="highlights-section">
-                <div className="highlight">
-                    <h2>Novidades</h2>
-                    <br></br>
+            <section className="highlights-section grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+                <div className="highlight p-5 border-2 border-green-600 rounded-lg shadow-lg bg-white hover:scale-105 transition-transform duration-300">
+                    <h2 className="text-xl font-bold text-green-600">Novidades</h2>
                     <p>Descubra os últimos lançamentos na Joana. Produtos exclusivos e estilos únicos para você.</p>
                 </div>
-                <div className="highlight">
-                    <h2>Promoções Imperdíveis</h2>
-                    <br></br>
+                <div className="highlight p-5 border-2 border-green-600 rounded-lg shadow-lg bg-white hover:scale-105 transition-transform duration-300">
+                    <h2 className="text-xl font-bold text-green-600">Promoções Imperdíveis</h2>
                     <p>Descontos de até 50% em itens selecionados. Não perca essa oportunidade!</p>
                 </div>
-                <div className="highlight">
-                    <h2>Entrega Rápida na região da Capital</h2>
-                    <br></br>
-                    <p>Receba seu pedido em casa com toda a comodidade. </p>
-                    <p>Frete grátis nas compras acima de R$150.</p>
+                <div className="highlight p-5 border-2 border-green-600 rounded-lg shadow-lg bg-white hover:scale-105 transition-transform duration-300">
+                    <h2 className="text-xl font-bold text-green-600">Entrega Rápida</h2>
+                    <p>Receba seu pedido em casa com toda a comodidade. Frete grátis nas compras acima de R$150.</p>
                 </div>
             </section>
 
-            {/* Imagem e texto central */}
-            <section className="imagem-texto">
-                <img className="w-2/4 mr-6" src="https://cdn.discordapp.com/attachments/1262942566370775061/1275829119220711547/UniversalUpscaler_fc4f7347-069b-452e-9ed7-9388e5607214-removebg.png?ex=66c94a35&is=66c7f8b5&hm=2e72df36cbee4ed7bc1f99ec7902c50b9d2d44aea3b0e912de478a8d1f2cb4d0&" alt="Imagem da joaninha" />
-                <div className="texto">
-                    <h1 className='font-title'>Mas por quê Joana?</h1>
-                    <div className="font-body pr-6 text-justify">
-                    <p>Nossa relação com as joaninhas vão para além dos nossos produtos e elas tem muitas histórias para nos contar. Em muitas culturas elas carregam consigo a representação de felicidade, amor e harmonia.</p>
-                    <p>Joaninhas são consideradas como símbolo de boa sorte e aqui na Joana sabemos o quanto ela é valiosa para o ecossistema. Com o seu apetite voraz ela faz o controle de pragas e pulgões e também se alimentam de néctar.
-                        Suas plantas favoritas são as que retêm água como alfaces, couve e flores como tulipas e lírios.</p>
-                    <p>Para nós o formato das joaninhas são fofos e encantadores mas seu formato e cores têm a função de intimidar os predadores passando uma mensagem que seu gosto é ruim e pode ser tóxica.
-                        Contudo o formato como a conhecemos não é o primeiro, ela é uma larva que passa por um estágio de metamorfose como as borboletas para assim ter esse formato de besouro.</p>
-                    <p>Estando alinhado as nossas diretrizes de produção consciente e sustentável.</p>
+            {/* Seção de Produtos em Destaque */}
+            <section className="featured-products-section mb-12">
+                <h1 className='font-title text-2xl font-bold text-green-600 text-center mb-6'>Produtos em Destaque</h1>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div className="product-item border rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <img src="https://source.unsplash.com/300x200/?vegetable" alt="Produto 1" className="w-full h-40 object-cover rounded" />
+                        <h2 className="text-lg font-semibold text-green-600 mt-2">Produto 1</h2>
+                        <p>Descrição breve sobre o produto 1.</p>
+                    </div>
+                    <div className="product-item border rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <img src="https://source.unsplash.com/300x200/?fruit" alt="Produto 2" className="w-full h-40 object-cover rounded" />
+                        <h2 className="text-lg font-semibold text-green-600 mt-2">Produto 2</h2>
+                        <p>Descrição breve sobre o produto 2.</p>
+                    </div>
+                    <div className="product-item border rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <img src="https://source.unsplash.com/300x200/?grain" alt="Produto 3" className="w-full h-40 object-cover rounded" />
+                        <h2 className="text-lg font-semibold text-green-600 mt-2">Produto 3</h2>
+                        <p>Descrição breve sobre o produto 3.</p>
                     </div>
                 </div>
             </section>
 
+            {/* Seção de Sustentabilidade */}
+            <section className="sustentabilidade-section bg-green-100 p-8 rounded-lg mb-12 shadow-lg">
+                <h1 className='font-title text-2xl font-bold text-green-600 text-center'>Nosso Compromisso com a Sustentabilidade</h1>
+                <p className="font-body text-justify">
+                    Na Joana, acreditamos na importância de apoiar produtores de todos os tamanhos em suas jornadas rumo à produção sustentável. Trabalhamos para educar, apoiar e incentivar práticas que respeitem a natureza e preservem o nosso planeta para as futuras gerações.
+                </p>
+                <img src="https://www.pexels.com/photo/farm-vegetables-field-2154880/" alt="Sustentabilidade" className="w-full rounded-lg mt-4"/>
+            </section>
+
             {/* Seção de Depoimentos */}
-            <section className="testimonials-section">
-                <h1 className='font-title'>Depoimento dos nossos clientes:</h1>
-                <div className="testimonial font-body">
+            <section className="testimonials-section text-center mb-12">
+                <h1 className='font-title text-2xl font-bold text-green-600'>Depoimentos dos nossos clientes:</h1>
+                <div className="testimonial font-body italic my-4">
                     <p>"Amei a qualidade dos produtos da Joana! Com certeza vou comprar mais vezes."</p>
                     <span>- Maria S.</span>
                 </div>
-                <div className="testimonial font-body">
-                    <p>"Entrega super rápida e atendimento excelente. Recomendo a tods!"</p>
+                <div className="testimonial font-body italic my-4">
+                    <p>"Entrega super rápida e atendimento excelente. Recomendo a todos!"</p>
                     <span>- João P.</span>
                 </div>
             </section>

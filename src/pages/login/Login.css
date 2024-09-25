@@ -1,7 +1,7 @@
 .fundoLogin {
-    background-repeat: no-repeat;
-    min-height: auto;
-    width: auto;
-    background-size: full;
-    background-position: center;
-  }
+  background: linear-gradient(to right, #6EE7B7, #EF4444); /* Gradiente suave */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
