@@ -138,7 +138,15 @@ export default function Navbar() {
             } bg-[linear-gradient(to_bottom,_rgba(0,_0,_0,_0.8)_0%,_rgba(0,_0,_0,_0)_100%)]`}
         >
           <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-2">
-            <div className="flex flex-grow items-center justify-start space-x-4 rtl:space-x-reverse">
+            {/* Logo à esquerda */}
+            <div className="flex items-center">
+              <a href="/home" className="flex items-center">
+                <img src={logo_b} className="logoImage" alt="Logo Blue" />
+              </a>
+            </div>
+
+            {/* Centralizar links */}
+            <div className="flex-grow flex items-center justify-center space-x-4">
               <button
                 onClick={handleLoginClick}
                 className="font-title py-2 px-4 text-stone-100 hover:text-zinc-900 rounded transition-colors duration-600"
@@ -151,17 +159,6 @@ export default function Navbar() {
               >
                 Produtos
               </Link>
-            </div>
-            <div className="flex items-center justify-center w-auto pl-20">
-              <a href="/home" className="flex items-center">
-                <div className="logoContainer">
-                  <img src={logo_b} className="logoImage" alt="Logo Blue" />
-                  <img src={logo_r} className="logoImage" alt="Logo Red" />
-                  <img src={logo_s} className="logoImage" alt="Logo Silver" />
-                </div>
-              </a>
-            </div>
-            <div className="flex flex-grow items-center justify-end space-x-4 rtl:space-x-reverse">
               <Link
                 to="/about"
                 className="font-title py-2 px-4 text-stone-100 hover:text-zinc-900 rounded transition-colors duration-600"
@@ -174,6 +171,10 @@ export default function Navbar() {
               >
                 Contato
               </Link>
+            </div>
+
+            {/* Ícone do carrinho à direita */}
+            <div className="flex items-center justify-end space-x-4">
               <Link
                 to="/carrinho"
                 className="relative block text-stone-100 transition-colors duration-600"
