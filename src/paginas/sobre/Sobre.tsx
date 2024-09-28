@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
-import { motion } from 'framer-motion'; // Biblioteca para animações
-import labout from './labout.png';
+import { motion } from 'framer-motion';
 
-const AboutUs = () => {
+const Sobre = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -103,4 +102,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default Sobre;

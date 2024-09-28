@@ -3,7 +3,7 @@ import Carrossel from '../../components/carrossel/Carrossel';
 
 export default function Home() {
     return (
-        <div className="home-container bg-gray-50 text-gray-800">
+        <div className="home-container bg-[#9ED582]">
             <section className="carousel-section mb-12">
                 <Carrossel />
             </section>

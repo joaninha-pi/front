@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import logo from '../../assets/icons/Logo.png';
 
-export default function Contact() {
+export default function Contato() {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
