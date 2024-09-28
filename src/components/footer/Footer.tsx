@@ -1,5 +1,6 @@
 import { At, GithubLogo } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
+import logo from '../../assets/icons/logo_r.png';
 
 export default function Footer() {
     const [isVisible, setIsVisible] = useState(false);
@@ -8,7 +9,6 @@ export default function Footer() {
         const scrollPosition = window.scrollY + window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
 
-        // Verifica se a rolagem chegou ao fim da página
         if (scrollPosition >= documentHeight - 50) {
             setIsVisible(true);
         } else {
@@ -17,7 +17,6 @@ export default function Footer() {
     };
 
     useEffect(() => {
-        // Adiciona o listener de rolagem
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -37,7 +36,7 @@ export default function Footer() {
                         <span className="ml-1">GitHub</span>
                     </a>
                 </div>
-                <p className="mt-2 text-sm">© 2024 Joaninha. Todos os direitos reservados.</p>
+                <p className="text-sm">© 2024 Joaninha. Todos os direitos reservados.</p>
             </div>
         </footer>
     );

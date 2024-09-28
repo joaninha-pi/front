@@ -1,21 +1,20 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
-import logo from '../../assets/icons/logo.png';
-import menuIcon from '../../assets/icons/menu.png';
+import logo_r from '../../assets/icons/logo_r.png';
+import favoritos from '../../assets/icons/favoritos.png';
 import cartIcon from '../../assets/icons/cart.png';
 import { Circles } from 'react-loader-spinner';
 import { toastAlerta } from '../../utils/toastAlerta';
 
 export default function Navbar() {
     const [isVisible, setIsVisible] = useState(true);
-    const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const { usuario, handleLogout, quantidadeItems } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleScroll = () => {
-        setIsVisible(window.scrollY <= 50);
+        setIsVisible(window.scrollY <= 50 || window.scrollY + window.innerHeight >= document.body.scrollHeight);
     };
 
     useEffect(() => {
@@ -28,10 +27,6 @@ export default function Navbar() {
     const logout = () => {
         handleLogout();
         toastAlerta('Usuário deslogado com sucesso', 'sucesso');
-    };
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
     };
 
     const handleLoginClick = () => {
@@ -49,47 +44,60 @@ export default function Navbar() {
                     <Circles visible={true} height="200" width="200" ariaLabel="circles-loading" color="black" />
                 </div>
             ) : (
-                <nav className={`fixed w-full transition-opacity duration-500 bg-green-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                    <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-2 text-white">
-                        <Link to="/home" className="flex items-center">
-                            <img src={logo} alt="Logo" className="h-10" />
-                        </Link>
-                        <div className="hidden md:flex flex-grow items-center justify-center space-x-4">
-                            <button onClick={handleLoginClick} className="bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded">Login</button>
-                            <Link to="/produtos" className="hover:underline">Produtos</Link>
-                            <Link to="/about" className="hover:underline">Sobre nós</Link>
-                            <Link to="/contact" className="hover:underline">Contato</Link>
-                        </div>
-                        <Link to="/carrinho" className="relative block">
-                            <img src={cartIcon} alt="Carrinho" className="w-6 h-6" />
-                            {quantidadeItems > 0 && (
-                                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                                    {quantidadeItems}
-                                </span>
-                            )}
-                        </Link>
-
-                        {/* Menu Hamburger para dispositivos móveis */}
-                        <div className="md:hidden">
-                            <button onClick={toggleMenu} className="inline-flex items-center justify-center" aria-controls="navbar-hamburger" aria-expanded={isOpen}>
-                                <img src={menuIcon} alt="Menu" className="w-10 h-10" />
-                            </button>
+                <nav className={`fixed w-full transition-opacity duration-500 z-50 ${isVisible ? 'opacity-100' : 'opacity-0'} bg-transparent shadow-lg`}>
+                    
+                    {/* Parte superior com links adicionais */}
+                    <div className="font-title bg-gray-100 py-1 border-b border-gray-300">
+                        <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
+                            <div className="text-xs text-gray-600">
+                                Bem-vindo à nossa loja de agricultura sustentável!
+                            </div>
+                            <div className="flex space-x-4">
+                                <Link to="/sobre" className="text-xs text-gray-600 hover:text-red-600">Sobre nós</Link>
+                                <Link to="/contato" className="text-xs text-gray-600 hover:text-red-600">Contato</Link>
+                                <Link to="/vendedor" className="text-xs text-gray-600 hover:text-red-600">Central do vendedor</Link>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Menu Responsivo */}
-                    {isOpen && (
-                        <div className="absolute top-full left-0 w-full bg-green-700 text-white shadow-lg">
-                            <div className="flex flex-col font-medium">
-                                <Link to="/home" className="p-4 hover:bg-green-600">Home</Link>
-                                <Link to="/login" className="p-4 hover:bg-green-600">Login</Link>
-                                <Link to="/produtos" className="p-4 hover:bg-green-600">Produtos</Link>
-                                <Link to="/carrinho" className="p-4 hover:bg-green-600">Carrinho</Link>
-                                <Link to="/about" className="p-4 hover:bg-green-600">Sobre nós</Link>
-                                <Link to="/contact" className="p-4 hover:bg-green-600">Contato</Link>
+                    {/* Logotipo e ícones à direita */}
+                    <div className="bg-white py-12">
+                        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+
+                            {/* Logo centralizado */}
+                            <div className="absolute left-0 right-0 flex justify-center">
+                                <Link to="/home">
+                                    <img src={logo_r} alt="Logo" className="h-24" />
+                                </Link>
+                            </div>
+
+                            {/* Ícones à direita */}
+                            <div className="ml-auto flex space-x-6 items-center">
+                                <Link to="/favoritos" className="relative">
+                                    <img src={favoritos} alt="Favoritos" className="w-6 h-6 transition-transform hover:scale-110" />
+                                </Link>
+                                <Link to="/carrinho" className="relative">
+                                    <img src={cartIcon} alt="Carrinho" className="w-6 h-6 transition-transform hover:scale-110" />
+                                    {quantidadeItems > 0 && (
+                                        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                                            {quantidadeItems}
+                                        </span>
+                                    )}
+                                </Link>
+                                <button onClick={handleLoginClick} className="text-black hover:text-red-600 transition-colors">Login</button>
                             </div>
                         </div>
-                    )}
+                    </div>
+
+                    {/* Barra de navegação inferior */}
+                    <div className="bg-gray-200 py-4">
+                        <div className="font-title max-w-7xl mx-auto px-6 flex justify-center space-x-24"> {/* Aumentei o espaço entre os itens */}
+                            <Link to="/produtos" className="text-black hover:text-red-600">Produtos</Link>
+                            <Link to="/residuos" className="text-black hover:text-red-600">Coleta de Resíduos</Link>
+                            <Link to="/planos" className="text-black hover:text-red-600">Planos</Link>
+                            <Link to="/agroeducacao" className="text-black hover:text-red-600">Agroeducação</Link>
+                        </div>
+                    </div>
                 </nav>
             )}
         </>
