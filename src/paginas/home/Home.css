@@ -19,3 +19,12 @@
 .sustentabilidade-section img:hover {
   transform: scale(1.05);
 }
+
+.interactive-balls-section {
+  position: relative;
+  height: 100vh; /* Ajuste conforme necessário */
+}
+
+.ball {
+  transition: transform 0.3s ease;
+}
