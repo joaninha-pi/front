@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Produto } from '../../../models/Produto';
@@ -127,17 +127,16 @@ function FormularioProduto() {
   const carregandoCategoria = categoria.descricao === '';
 
   return (
-    <div className='fundoLogao'>
-      <div className='pt-24'></div>
-      <div className="container flex flex-col mx-auto items-center">
-        <h1 className="text-4xl text-center my-8">
+    <div className='bg-gray-100 min-h-screen py-6 flex flex-col'>
+      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+        <h1 className="text-2xl sm:text-4xl text-center my-4 font-bold">
           {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
         </h1>
 
-        <div className="flex flex-col gap-4 w-full max-w-lg">
+        <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
           <form onSubmit={gerarNovoProduto} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <label htmlFor="nome">Nome do produto</label>
+              <label htmlFor="nome" className="text-lg font-semibold">Nome do produto</label>
               <input
                 value={produto.nome}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
@@ -145,11 +144,11 @@ function FormularioProduto() {
                 placeholder="Nome"
                 name="nome"
                 required
-                className="border-2 border-slate-700 rounded p-2"
+                className="border-2 border-slate-700 rounded p-2 text-sm"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="descricao">Descrição do produto</label>
+              <label htmlFor="descricao" className="text-lg font-semibold">Descrição do produto</label>
               <input
                 value={produto.descricao}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
@@ -157,11 +156,11 @@ function FormularioProduto() {
                 placeholder="Descrição"
                 name="descricao"
                 required
-                className="border-2 border-slate-700 rounded p-2"
+                className="border-2 border-slate-700 rounded p-2 text-sm"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="preco">Preço do produto</label>
+              <label htmlFor="preco" className="text-lg font-semibold">Preço do produto</label>
               <input
                 value={produto.preco}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
@@ -169,12 +168,12 @@ function FormularioProduto() {
                 placeholder="Preço"
                 name="preco"
                 required
-                className="border-2 border-slate-700 rounded p-2"
+                className="border-2 border-slate-700 rounded p-2 text-sm"
                 step="0.01"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="image">URL da imagem do produto</label>
+              <label htmlFor="image" className="text-lg font-semibold">URL da imagem do produto</label>
               <input
                 value={produto.image}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
@@ -182,25 +181,25 @@ function FormularioProduto() {
                 placeholder="URL da imagem"
                 name="image"
                 required
-                className="border-2 border-slate-700 rounded p-2"
+                className="border-2 border-slate-700 rounded p-2 text-sm"
               />
               {produto.image && (
                 <img
                   src={produto.image}
                   alt="Imagem do Produto"
-                  className="mt-4 w-32 h-32 object-cover rounded"
+                  className="mt-4 w-full sm:w-32 h-32 object-cover rounded"
                 />
               )}
             </div>
             <div className="flex flex-col gap-2">
-              <p>Categoria do produto</p>
+              <label htmlFor="categoria" className="text-lg font-semibold">Categoria do produto</label>
               <select
                 name="categoria"
                 id="categoria"
-                className="border p-2 border-slate-800 rounded"
+                className="border p-2 border-slate-800 rounded text-sm"
                 onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
               >
-                <option value="" selected disabled>
+                <option value="" disabled>
                   Selecione uma categoria
                 </option>
                 {categorias.map((categoria) => (
@@ -210,11 +209,11 @@ function FormularioProduto() {
                 ))}
               </select>
             </div>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 disabled={carregandoCategoria || loading}
                 type="submit"
-                className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+                className='bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
               >
                 {loading ? (
                   <div className="flex items-center justify-center">
@@ -230,7 +229,8 @@ function FormularioProduto() {
               </button>
               <button
                 onClick={retornar}
-                className='bg-red-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-400 hover:text-stone-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+                type="button"
+                className='bg-red-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-400 hover:text-stone-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
               >
                 Voltar
               </button>

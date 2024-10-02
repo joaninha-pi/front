@@ -1,0 +1,12 @@
+/* Media query para dispositivos móveis */
+@media (max-width: 480px) {
+    .container {
+      padding: 0 1rem; /* Ajusta o padding da container para telas pequenas */
+    }
+  
+    .grid {
+      grid-template-columns: 1fr; /* Ajusta a grade para exibir uma coluna em vez de múltiplas */
+      gap: 4px; /* Reduz o espaçamento entre os itens */
+    }
+  }
+  

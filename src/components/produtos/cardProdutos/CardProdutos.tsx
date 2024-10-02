@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Produto } from '../../../models/Produto';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
@@ -11,9 +11,20 @@ function CardProduto({ produto }: CardProdutoProps) {
   const { adicionarProduto, removerProduto } = useContext(AuthContext);
   const { usuario } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [quantidade, setQuantidade] = useState(0); // Inicialmente 0
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const handleAdicionarAoCarrinho = () => {
+    if (quantidade > 0) {
+      adicionarProduto({ ...produto, quantidade });
+      closeModal();
+    }
+  };
+
+  const incrementarQuantidade = () => setQuantidade(prev => prev + 1);
+  const decrementarQuantidade = () => setQuantidade(prev => (prev > 0 ? prev - 1 : 0));
 
   return (
     <div className="flex flex-col rounded-2xl max-w-sm bg-red-300 bg-opacity-45 shadow-xl overflow-hidden">
@@ -35,7 +46,7 @@ function CardProduto({ produto }: CardProdutoProps) {
         <div className="flex justify-center gap-2">
           <button
             className="bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
-            onClick={() => adicionarProduto(produto)}
+            onClick={openModal}
           >
             Adicionar ao carrinho
           </button>
@@ -82,25 +93,45 @@ function CardProduto({ produto }: CardProdutoProps) {
               <p className="text-base font-subtitle font-bold text-zinc-700 text-center">{produto.categoria?.descricao}</p>
               <p className="text-lg font-body text-zinc-700 text-justify">{produto.descricao}</p>
               <p className="text-2xl font-body font-extrabold text-zinc-900">R$ {produto.preco.toFixed(2)}</p>
-              <div className="flex justify-center gap-2 w-full">
-                <button
-                  className="bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
-                  onClick={() => {
-                    adicionarProduto(produto);
-                    closeModal();
-                  }}
-                >
-                  Adicionar ao carrinho
-                </button>
-                <button
-                  className="bg-red-700 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 hover:opacity-75 active:scale-95 transition-transform transform"
-                  onClick={() => {
-                    removerProduto(produto.id);
-                    closeModal();
-                  }}
-                >
-                  Remover do carrinho
-                </button>
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <button
+                    className="bg-gray-300 text-black font-bold text-sm p-2 rounded-lg hover:bg-gray-400 hover:opacity-75 transition-transform transform"
+                    onClick={decrementarQuantidade}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    min="0"
+                    value={quantidade}
+                    onChange={(e) => setQuantidade(Number(e.target.value))}
+                    className="w-24 p-2 border border-gray-300 rounded text-center"
+                  />
+                  <button
+                    className="bg-gray-300 text-black font-bold text-sm p-2 rounded-lg hover:bg-gray-400 hover:opacity-75 transition-transform transform"
+                    onClick={incrementarQuantidade}
+                  >
+                    +
+                  </button>
+                </div>
+                <div className="flex justify-center gap-2 w-full">
+                  <button
+                    className="bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
+                    onClick={handleAdicionarAoCarrinho}
+                  >
+                    Adicionar ao carrinho
+                  </button>
+                  <button
+                    className="bg-red-700 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 hover:opacity-75 active:scale-95 transition-transform transform"
+                    onClick={() => {
+                      removerProduto(produto.id);
+                      closeModal();
+                    }}
+                  >
+                    Remover do carrinho
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -1,23 +1,40 @@
 import { useContext, useState, useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
 import { AuthContext } from '../../contexts/AuthContext';
-import CardProdutos from '../../components/produtos/cardProdutos/CardProdutos';
 import { useNavigate } from 'react-router-dom';
 
 function Carrinho() {
-    const { items, limparCart, usuario } = useContext(AuthContext);
+    const { items, limparCart, usuario, removerProduto, adicionarProduto } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState(true);
+    const [cep, setCep] = useState('');
+    const [frete, setFrete] = useState(0);
 
     const totalCarrinho = items.reduce((total, item) => total + item.preco, 0);
 
     const finalizarCompra = () => {
-        if (usuario.token !== "") {
+        if (usuario.token) {
             limparCart();
+            alert('Compra finalizada com sucesso!');
         } else {
             alert("Faça o login para finalizar a compra");
             navigate('/login');
         }
+    };
+
+    const handleQuantidadeChange = (produtoId, novaQuantidade) => {
+        if (novaQuantidade <= 0) {
+            removerProduto(produtoId); // Remove o produto se a quantidade for zero ou negativa
+        } else {
+            const produto = items.find(item => item.id === produtoId);
+            if (produto) {
+                adicionarProduto({ ...produto, quantidade: novaQuantidade });
+            }
+        }
+    };
+
+    const handleRemoverProduto = (produtoId) => {
+        removerProduto(produtoId); // Remove o produto imediatamente
     };
 
     useEffect(() => {
