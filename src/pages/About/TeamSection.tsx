@@ -1,4 +1,3 @@
-import React from "react";
 import labout from "./labout.png";
 
 const TeamSection = () => {

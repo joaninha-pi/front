@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
 import TeamSection from './TeamSection';
 
