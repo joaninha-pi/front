@@ -61,7 +61,7 @@ Antes de começar, você vai precisar:
 
 ---
 
-## 👥 **Contribuidores**
+## 👥🐞 **Joaners**
 
 Este projeto não seria possível sem a contribuição incrível de:
 
