@@ -3,12 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Produto } from '../../../models/Produto';
 import { buscar, deletar } from '../../../services/Service';
-import { RotatingLines } from 'react-loader-spinner';  // Importando o spinner
+import { RotatingLines } from 'react-loader-spinner';  
 import { toastAlerta } from '../../../utils/toastAlerta';
 
 function DeletarProduto() {
   const [produto, setProduto] = useState<Produto>({} as Produto);
-  const [loading, setLoading] = useState<boolean>(false);  // Estado de carregamento
+  const [loading, setLoading] = useState<boolean>(false); 
 
   let navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
@@ -48,7 +48,7 @@ function DeletarProduto() {
   }
 
   async function deletarProduto() {
-    setLoading(true);  // Inicia o carregamento
+    setLoading(true);
     try {
       await deletar(`/produtos/${id}`, {
         headers: {
@@ -59,7 +59,7 @@ function DeletarProduto() {
     } catch (error) {
       toastAlerta('Erro ao apagar o Produto', 'erro');
     } finally {
-      setLoading(false);  // Finaliza o carregamento
+      setLoading(false);
       retornar();
     }
   }
@@ -80,9 +80,9 @@ function DeletarProduto() {
           </header>
           <div className="p-8 bg-slate-200 flex flex-col items-center">
             <p className="text-xl mb-4">{produto.descricao}</p>
-            {produto.image && (
+            {produto.imagens && produto.imagens.length > 0 && (
               <img
-                src={produto.image}
+                src={produto.imagens[0].url} // Mostra a primeira imagem
                 alt="Imagem do Produto"
                 className="w-48 h-48 object-cover rounded"
               />
@@ -97,7 +97,7 @@ function DeletarProduto() {
             </button>
             <button
               onClick={deletarProduto}
-              disabled={loading}  // Desativa o botão durante o carregamento
+              disabled={loading}
               className="bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1"
             >
               {loading ? (

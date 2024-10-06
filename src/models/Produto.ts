@@ -1,5 +1,6 @@
 import Categoria from "./Categoria";
-import Usuario from "./Usuario.ts";
+import Usuario from "./Usuario";
+import ImagemProduto from "./ImagemProduto";
 
 export interface Produto {
     id: number;
@@ -8,6 +9,6 @@ export interface Produto {
     descricao: string;
     preco: number;
     categoria: Categoria | null;
-    image: string;
+    imagens: ImagemProduto[]; // Atualização para incluir várias imagens
     usuario: Usuario | null;
 }

@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
 import { AuthContext } from '../../contexts/AuthContext';
+import CardProdutos from '../../components/produtos/cardProdutos/CardProdutos';
 import { useNavigate } from 'react-router-dom';
 
 function Carrinho() {

@@ -17,6 +17,7 @@ import Sobre from "./paginas/sobre/Sobre";
 import Contato from "./paginas/contato/Contato";
 import Perfil from "./paginas/perfil/Perfil";
 import { ToastContainer } from "react-toastify";
+import { CssBaseline } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
