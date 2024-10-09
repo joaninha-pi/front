@@ -7,9 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        title: ['Nunito', 'sans-serif'],
-        subtitle: ['Exo', 'sans-serif'],
-        body: ['Rubik', 'sans-serif'],
+        title: ['Roboto Slab', 'serif'],
+        content: ['Poppins', 'sans-serif'],
       },
     },
   },
