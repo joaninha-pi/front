@@ -1,54 +1,44 @@
-import { At, GithubLogo } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
-import { FaCcVisa, FaCcMastercard, FaPaypal, FaGooglePay, FaMoneyBillWave } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import { GithubLogo, LinkedinLogo } from 'phosphor-react';
+import logo_r from '../../assets/icons/logo_r.png';
 
 export default function Footer() {
-    const [isVisible, setIsVisible] = useState(true);
-
-    const handleScroll = () => {
-        const scrollPosition = window.scrollY + window.innerHeight;
-        const threshold = document.body.scrollHeight - 50;
-
-        if (scrollPosition < threshold) {
-            setIsVisible(false);
-        } else {
-            setIsVisible(true);
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
     return (
-        <>
-            <div className={`fixed bottom-0 w-full transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} bg-gradient-to-t from-black/80 to-transparent text-neutral-100`}>
-                <div className="flex flex-col items-center text-center pt-10">
-                    <p className="text-xl font-bold text-red-400">Joana | Copyright: Generation Brasil</p>
-                    <p className="text-lg text-red-400">Nos acompanhe nas redes!</p>
-                    <div className="flex gap-2 mt-2 justify-center">
-                        <a target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-700 transition-colors duration-300" href="https://github.com/joaninha-pi">
-                            <GithubLogo size={32} />
-                        </a>
-                        <a target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-700 transition-colors duration-300" href="https://linktr.ee/joana_pi">
-                            <At size={32} />
-                        </a>
+        <footer className="bg-[#25433C] text-[#DEE6BE] py-10">
+            <div className="max-w-7xl mx-auto px-4 lg:px-6">
+                <div className="flex flex-wrap justify-between items-center mb-8">
+                    <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start">
+                        <Link to="/home">
+                            <img src={logo_r} alt="Logo" className="h-16 lg:h-20 transition-transform duration-300" />
+                        </Link>
+                        <p className="text-sm text-center lg:text-left mt-2">
+                            Conectando produtores e consumidores de forma sustentável.
+                        </p>
+                    </div>
+
+                    <div className="w-full lg:w-1/3 flex justify-center mt-6 lg:mt-0">
+                        <div className="flex space-x-4">
+                            <Link to="/sobre" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Sobre nós</Link>
+                            <Link to="/contato" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Contato</Link>
+                            <Link to="/centralVendedor" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Central do vendedor</Link>
+                        </div>
+                    </div>
+
+                    <div className="w-full lg:w-1/3 flex justify-center mt-6 lg:mt-0">
+                        <div className="flex space-x-4">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                                <GithubLogo size={32} className="text-[#DEE6BE] hover:text-red-700 transition-colors duration-300 transform hover:scale-110" />
+                            </a>
+                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                                <LinkedinLogo size={32} className="text-[#DEE6BE] hover:text-red-700 transition-colors duration-300 transform hover:scale-110" />
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <div className="flex justify-end pr-20 pb-4 pt-5">
-                    <div className="flex gap-3 items-center">
-                        <FaCcVisa size={32} className="text-white" />
-                        <FaCcMastercard size={32} className="text-white" />
-                        <FaPaypal size={32} className="text-white" />
-                        <FaGooglePay size={32} className="text-white" />
-                        <FaMoneyBillWave size={32} className="text-white" />
-                    </div>
+                <div className="text-center text-xs">
+                    &copy; {new Date().getFullYear()} Seu E-commerce. Todos os direitos reservados.
                 </div>
             </div>
-        </>
+        </footer>
     );
 }
