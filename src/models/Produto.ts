@@ -10,5 +10,4 @@ export interface Produto {
     preco: number;
     categoria: Categoria | null;
     imagens: ImagemProduto[]; // Atualização para incluir várias imagens
-    usuario: Usuario | null;
 }

@@ -25,7 +25,6 @@ function FormularioProduto() {
         preco: 0,
         categoria: null,
         imagens: [],
-        usuario: null,
     });
 
     const [loading, setLoading] = useState(false);
@@ -39,17 +38,21 @@ function FormularioProduto() {
     }
 
     async function buscarCategorias() {
-        try {
-            const response = await buscar('/categorias', null, {
-                headers: {
-                    Authorization: token,
-                },
-            });
+    try {
+        const response = await buscar('/categorias', null, {
+            headers: {
+                Authorization: token,
+            },
+        });
+        if (response.data) {
             setCategorias(response.data);
-        } catch (error) {
+        } else {
             toastAlerta('Erro ao buscar categorias', 'erro');
         }
+    } catch (error) {
+        toastAlerta('Erro ao buscar categorias', 'erro');
     }
+}
 
     useEffect(() => {
         if (!token) {
