@@ -29,18 +29,20 @@ export const buscarPublico = async (url: string, setDados: Function) => {
 };
 
 // Função para buscar dados (GET com autenticação)
-export const buscar = async (url: string, setDados: Function) => {
+export const buscar = async (url: string, setDados: Function, config?: AxiosRequestConfig) => {
     const token = localStorage.getItem('token');
 
     if (!token) {
         throw new Error('Usuário não autenticado.');
     }
 
-    const config: AxiosRequestConfig = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    };
+    if (!config) {
+        config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+    }
 
     try {
         const resposta = await api.get(url, config);
@@ -98,17 +100,16 @@ export const atualizar = async (url: string, dados: Object, setDados: Function) 
 };
 
 // Função para deletar dados (DELETE)
-export const deletar = async (url: string) => {
+export const deletar = async (url: string, config: AxiosRequestConfig) => {
     const token = localStorage.getItem('token');
 
     if (!token) {
         throw new Error('Usuário não autenticado.');
     }
 
-    const config: AxiosRequestConfig = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+    config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${token}`,
     };
 
     try {
