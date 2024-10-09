@@ -70,7 +70,7 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    <div className="bg-[#9ed582] py-4 lg:py-6">
+                    <div className="bg-[#9ed582] py-2 lg:py-3">
                         <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-6">
                             <button onClick={toggleMenu} className="md:hidden p-2 focus:outline-none transition-transform duration-300 hover:scale-110" aria-label="Toggle Menu">
                                 <img src={menuIcon} alt="Menu" className="w-8 h-8" />
@@ -85,11 +85,9 @@ export default function Navbar() {
                             </Link>
 
                             <div className="hidden md:flex flex-grow justify-center space-x-16">
-                                {[
-                                    { path: '/produtos', label: 'Produtos' },
-                                    { path: '/residuos', label: 'Resíduos' },
-                                    { path: '/planos', label: 'Planos' },
-                                    { path: '/agroeducacao', label: 'Agroeducação' }
+                                {[ 
+                                    { path: '/produtos', label: 'Produtos' }, 
+                                    { path: '/planos', label: 'Planos' } 
                                 ].map(({ path, label }, index) => (
                                     <Link
                                         key={index}
@@ -113,17 +111,21 @@ export default function Navbar() {
                                         <span className="absolute -top-2 -right-2 bg-red-700 text-[#DEE6BE] text-xs rounded-full w-5 h-5 flex items-center justify-center">{quantidadeItems}</span>
                                     )}
                                 </Link>
-                                {usuario ? (
+                                {usuario ? ( // Verifica se o usuário está logado
                                     <>
                                         <Link to="/perfil" className="relative" aria-label="Ir para o perfil">
-                                            <img src={login} alt="Perfil" className="w-5 h-5 lg:w-6 lg:h-6 transition-transform duration-300 hover:scale-110" />
+                                            <img
+                                                src={usuario.foto} // Assume-se que a foto do usuário esteja disponível em usuario.foto
+                                                alt="Perfil"
+                                                className="w-8 h-8 rounded-full border border-red-700 transition-transform duration-300 hover:scale-110" // A bolinha com a foto de perfil
+                                            />
                                         </Link>
                                         <button onClick={logout} className="flex items-center space-x-2 transition-transform duration-300 hover:scale-110" aria-label="Logout">
                                             <img src={logoutIcon} alt="Logout" className="w-5 h-5 lg:w-6 lg:h-6" />
                                             <span className="text-xs lg:text-base">Sair</span>
                                         </button>
                                     </>
-                                ) : (
+                                ) : ( // Caso o usuário não esteja logado
                                     <button onClick={handleLoginClick} className="bg-red-700 text-[#DEE6BE] px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-110" aria-label="Fazer login">
                                         <span className="text-sm">Login</span>
                                     </button>
@@ -150,20 +152,6 @@ export default function Navbar() {
                                     Carrinho
                                 </Link>
                                 <Link
-                                    to="/favoritos"
-                                    onClick={closeMenu}
-                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                >
-                                    Favoritos
-                                </Link>
-                                <Link
-                                    to="/login"
-                                    onClick={closeMenu}
-                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                >
-                                    Login
-                                </Link>
-                                <Link
                                     to="/sobre"
                                     onClick={closeMenu}
                                     className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
@@ -171,7 +159,7 @@ export default function Navbar() {
                                     Sobre nós
                                 </Link>
                                 <Link
-                                    to="/contato"
+                                    to="/fale-conosco"
                                     onClick={closeMenu}
                                     className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
                                 >
@@ -180,9 +168,8 @@ export default function Navbar() {
                             </div>
                         </div>
                     )}
-                </nav >
-            )
-            }
+                </nav>
+            )}
         </>
     );
 }
