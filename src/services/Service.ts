@@ -1,47 +1,120 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
+// Cria uma instância do Axios com a URL base da API
 export const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL
-})
+    baseURL: import.meta.env.VITE_API_URL,
+});
 
+// Função para buscar dados públicos (GET sem autenticação)
+export const buscarPublico = async (url: string, setDados: Function) => {
+    try {
+        const resposta = await api.get(url);
+        setDados(resposta.data);
+    } catch (error) {
+        console.error('Erro ao buscar dados públicos:', error);
+        throw error;
+    }
+};
 
-export const cadastrarUsuario = async (url: string, dados: Object, setDados: Function) => {
-    const resposta = await api.post(url, dados)
-    setDados(resposta.data)
-}
+// Função para buscar dados (GET com autenticação)
+export const buscar = async (url: string, setDados: Function) => {
+    const token = localStorage.getItem('token');
 
+    if (!token) {
+        throw new Error('Usuário não autenticado.');
+    }
+
+    const config: AxiosRequestConfig = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    try {
+        const resposta = await api.get(url, config);
+        setDados(resposta.data);
+    } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+        throw error;
+    }
+};
+
+// Função para cadastrar dados (POST)
+export const cadastrar = async (url: string, dados: Object, setDados: Function) => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        throw new Error('Usuário não autenticado.');
+    }
+
+    const config: AxiosRequestConfig = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    try {
+        const resposta = await api.post(url, dados, config);
+        setDados(resposta.data);
+    } catch (error) {
+        console.error('Erro ao cadastrar dados:', error);
+        throw error;
+    }
+};
+
+// Função para atualizar dados (PUT)
+export const atualizar = async (url: string, dados: Object, setDados: Function) => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        throw new Error('Usuário não autenticado.');
+    }
+
+    const config: AxiosRequestConfig = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    try {
+        const resposta = await api.put(url, dados, config);
+        setDados(resposta.data);
+    } catch (error) {
+        console.error('Erro ao atualizar dados:', error);
+        throw error;
+    }
+};
+
+// Função para deletar dados (DELETE)
+export const deletar = async (url: string) => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        throw new Error('Usuário não autenticado.');
+    }
+
+    const config: AxiosRequestConfig = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    try {
+        await api.delete(url, config);
+    } catch (error) {
+        console.error('Erro ao deletar dados:', error);
+        throw error;
+    }
+};
+
+// Função para login (POST)
 export const login = async (url: string, dados: Object, setDados: Function) => {
-    const resposta = await api.post(url, dados)
-    setDados(resposta.data)
-}
-
-export const buscar = async (url: string, setDados: Function, header: Object = {}) => {
-    const resposta = await api.get(url, header)
-    setDados(resposta.data)
-}
-
-
-export const buscarU = async (url: string, setDados: Function) => {
-    const resposta = await api.get(url)
-    setDados(resposta.data)
-}
-
-export const cadastrar = async (url: string, dados: Object, setDados: Function, header: Object) => {
-    const resposta = await api.post(url, dados, header)
-    setDados(resposta.data)
-}
-
-export const atualizar = async (url: string, dados: Object, setDados: Function, header: Object) => {
-    const resposta = await api.put(url, dados, header)
-    setDados(resposta.data)
-}
-
-export const deletar = async (url: string, header: Object) => {
-    await api.delete(url, header)
-}
-
-
-export const listar = async (url: string, setDados: Function) => {
-    const resposta = await api.get(url)
-    setDados(resposta.data)
-}
+    try {
+        const resposta = await api.post(url, dados);
+        localStorage.setItem('token', resposta.data.token); // Armazena o token
+        setDados(resposta.data);
+    } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        throw error;
+    }
+};

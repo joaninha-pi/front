@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Circles } from 'react-loader-spinner';
+import { RevolvingDot } from 'react-loader-spinner';
 import { Link, useNavigate } from 'react-router-dom';
 import carrinho from '../../assets/icons/carrinho.svg';
 import favoritado from '../../assets/icons/favoritado.svg';
@@ -54,7 +54,7 @@ export default function Navbar() {
         <>
             {loading ? (
                 <div className="flex justify-center items-center min-h-screen">
-                    <Circles visible={true} height="200" width="200" ariaLabel="Loading" color="black" />
+                    <RevolvingDot visible={true} height="200" width="200" ariaLabel="Loading" color="black" />
                 </div>
             ) : (
                 <nav className="fixed w-full top-0 bg-[#9ed582] shadow-lg z-50 transition-all duration-300">
@@ -72,7 +72,7 @@ export default function Navbar() {
 
                     <div className="bg-[#9ed582] py-4 lg:py-6">
                         <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-6">
-                            <button onClick={toggleMenu} className="md:hidden p-2 focus:outline-none" aria-label="Toggle Menu">
+                            <button onClick={toggleMenu} className="md:hidden p-2 focus:outline-none transition-transform duration-300 hover:scale-110" aria-label="Toggle Menu">
                                 <img src={menuIcon} alt="Menu" className="w-8 h-8" />
                             </button>
 
@@ -85,9 +85,19 @@ export default function Navbar() {
                             </Link>
 
                             <div className="hidden md:flex flex-grow justify-center space-x-16">
-                                {['/produtos', '/residuos', '/planos', '/agroeducacao'].map((path, index) => (
-                                    <Link key={index} to={path} className="relative text-[#25433C] font-title text-xs uppercase font-extrabold md:text-base group" aria-label={`Ir para ${path.split('/')[1].charAt(0).toUpperCase() + path.slice(2)}`}>
-                                        <span className="transition-transform duration-300">{path.split('/')[1].charAt(0).toUpperCase() + path.slice(2)}</span>
+                                {[
+                                    { path: '/produtos', label: 'Produtos' },
+                                    { path: '/residuos', label: 'Resíduos' },
+                                    { path: '/planos', label: 'Planos' },
+                                    { path: '/agroeducacao', label: 'Agroeducação' }
+                                ].map(({ path, label }, index) => (
+                                    <Link
+                                        key={index}
+                                        to={path}
+                                        className="relative text-[#25433C] font-title text-xs uppercase font-extrabold md:text-base group"
+                                        aria-label={`Ir para ${label}`}
+                                    >
+                                        <span className="transition-transform duration-300">{label}</span>
                                         <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
                                     </Link>
                                 ))}
@@ -124,18 +134,55 @@ export default function Navbar() {
 
                     {isMenuOpen && (
                         <div className="md:hidden">
-                            <div className="bg-[#9ed582] flex flex-col font-content text-base items-center py-4">
-                                <Link to="/produtos" onClick={closeMenu} className="py-2 text-[#25433C]">Produtos</Link>
-                                <Link to="/carrinho" onClick={closeMenu} className="py-2 text-[#25433C]">Carrinho</Link>
-                                <Link to="/favoritos" onClick={closeMenu} className="py-2 text-[#25433C]">Favoritos</Link>
-                                <Link to="/login" onClick={closeMenu} className="py-2 text-[#25433C]">Login</Link>
-                                <Link to="/sobre" onClick={closeMenu} className="py-2 text-[#25433C]">Sobre nós</Link>
-                                <Link to="/contato" onClick={closeMenu} className="py-2 text-[#25433C]">Fale Conosco</Link>
+                            <div className="bg-[#9ed582] flex flex-col font-content text-base font-medium items-center py-4">
+                                <Link
+                                    to="/produtos"
+                                    onClick={closeMenu}
+                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                >
+                                    Produtos
+                                </Link>
+                                <Link
+                                    to="/carrinho"
+                                    onClick={closeMenu}
+                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                >
+                                    Carrinho
+                                </Link>
+                                <Link
+                                    to="/favoritos"
+                                    onClick={closeMenu}
+                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                >
+                                    Favoritos
+                                </Link>
+                                <Link
+                                    to="/login"
+                                    onClick={closeMenu}
+                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    to="/sobre"
+                                    onClick={closeMenu}
+                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                >
+                                    Sobre nós
+                                </Link>
+                                <Link
+                                    to="/contato"
+                                    onClick={closeMenu}
+                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                >
+                                    Fale Conosco
+                                </Link>
                             </div>
                         </div>
                     )}
-                </nav>
-            )}
+                </nav >
+            )
+            }
         </>
     );
 }

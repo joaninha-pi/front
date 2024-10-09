@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Circles } from 'react-loader-spinner';
+import { RevolvingDot } from 'react-loader-spinner';
 import logo from '../../assets/icons/Logo.png';
 import { toastAlerta } from '../../utils/toastAlerta';
 
@@ -28,7 +28,7 @@ export default function FaleConosco() {
         <>
         {loading ? (
             <div className="flex justify-center items-center min-h-screen">
-                <Circles
+                <RevolvingDot
                     visible={true}
                     height="200"
                     width="200"

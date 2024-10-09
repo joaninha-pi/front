@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Circles } from 'react-loader-spinner';
+import { RevolvingDot } from 'react-loader-spinner';
 import Categoria from '../../../models/Categoria';
 import { buscar } from '../../../services/Service';
 import CardCategorias from '../cardCategorias/CardCategorias';
@@ -9,32 +9,28 @@ function ListaCategorias() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  async function buscarCategorias() {
+  const buscarCategorias = async () => {
     setLoading(true);
     try {
-      await buscar('/categorias', setCategorias); 
+      await buscar('/categorias', setCategorias); // Autenticação necessária
     } catch (error: any) {
+      console.error('Erro ao buscar categorias:', error);
       toastAlerta('Erro ao buscar categorias', 'error');
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      buscarCategorias();
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []); 
+    buscarCategorias();
+  }, []);
 
   return (
     <>
       <div className="fundoLogao">
-        <div className=''></div>
         {loading && (
           <div className="flex justify-center items-center min-h-screen">
-            <Circles
+            <RevolvingDot
               visible={true}
               height="200"
               width="200"

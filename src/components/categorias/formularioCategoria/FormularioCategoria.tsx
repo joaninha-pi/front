@@ -32,12 +32,9 @@ function FormularioCategoria() {
     async function buscarPorId(id: string) {
         try {
             setLoading(true);
-            await buscar(`/categorias/${id}`, setCategoria, {
-                headers: {
-                    'Authorization': token
-                }
-            });
+            await buscar(`/categorias/${id}`, setCategoria); // Não passar cabeçalhos aqui
         } catch (error: any) {
+            console.error(error);
             toastAlerta('Erro ao buscar a categoria', 'erro');
         } finally {
             setLoading(false);
@@ -58,18 +55,10 @@ function FormularioCategoria() {
         try {
             if (id) {
                 const categoriaComId = { ...categoria, id: Number(id) };
-                await atualizar(`/categorias`, categoriaComId, setCategoria, {
-                    headers: {
-                        'Authorization': token
-                    }
-                });
+                await atualizar(`/categorias`, categoriaComId, setCategoria);
                 toastAlerta('Categoria atualizada com sucesso', 'sucesso');
             } else {
-                await cadastrar(`/categorias`, categoria, setCategoria, {
-                    headers: {
-                        'Authorization': token
-                    }
-                });
+                await cadastrar(`/categorias`, categoria, setCategoria);
                 toastAlerta('Categoria cadastrada com sucesso', 'sucesso');
             }
             retornar();

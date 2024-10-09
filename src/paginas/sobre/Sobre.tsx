@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RevolvingDot } from 'react-loader-spinner';
+import { Circles } from 'react-loader-spinner';
 import { motion } from 'framer-motion';
 
 const Sobre = () => {
@@ -16,7 +16,7 @@ const Sobre = () => {
     <div className="bg-stone-50">
       {loading ? (
         <div className="flex justify-center items-center min-h-screen">
-          <RevolvingDot
+          <Circles
             visible={true}
             height="200"
             width="200"

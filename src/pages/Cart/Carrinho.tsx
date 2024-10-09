@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { Circles } from 'react-loader-spinner';
+import { RevolvingDot } from 'react-loader-spinner';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -61,7 +61,7 @@ function Carrinho() {
         <>
             {loading ? (
                 <div className="flex justify-center items-center min-h-screen">
-                    <Circles
+                    <RevolvingDot
                         visible={true}
                         height="200"
                         width="200"

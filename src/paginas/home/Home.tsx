@@ -22,8 +22,8 @@ export default function Home() {
     return (
         <div className="home-container pt-28 bg-gray-50">
             {/* Seção de Banner Principal */}
-            <section className="hero-section relative bg-[url('https://www.sargs.agr.br/assets/images/banner-soja-1-1680x840.jpg')] bg-cover bg-center min-h-[60vh] flex items-center justify-center transition-all duration-700 ease-in-out transform hover:scale-105">
-                <div className="font-title text-center text-white backdrop-blur-md bg-black/40 p-6 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-110">
+            <section className="hero-section relative bg-[url('path-to-your-image.jpg')] bg-cover bg-center min-h-[60vh] flex items-center justify-center transition-all duration-700 ease-in-out transform hover:scale-105">
+                <div className=" font-title text-center text-white backdrop-blur-md bg-black/40 p-6 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-110">
                     <h1 className="text-5xl font-bold animate-fadeIn">Sua Solução Sustentável para Agricultura</h1>
                     <p className="mt-4 font-content text-lg animate-fadeIn delay-100">Descubra os melhores produtos e práticas para uma produção agrícola eficiente e sustentável.</p>
                     <button className="mt-6 px-8 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg">
