@@ -1,23 +1,27 @@
-import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
-import Contact from "./pages/Contact/Contact";
-import About from "./pages/About/About";
-import Home from "./pages/Home/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/login/Login";
-import { AuthProvider } from './contexts/AuthContext';
-import Cadastro from './pages/Cadastro/Cadastro';
-import "./App.css";
-import ListaCategorias from "./components/categorias/listaCategorias/ListaCategorias";
-import ListaProdutos from "./components/produtos/listaProdutos/ListaProdutos";
-import FormularioCategoria from "./components/categorias/formularioCategoria/FormularioCategoria";
-import FormularioProduto from "./components/produtos/formularioProduto/FormularioProduto";
-import DeletarCategoria from "./components/categorias/deletarCategoria/DeletarCategoria";
-import DeletarProduto from "./components/produtos/deletarProduto/DeletarProduto";
-import Carrinho from "./pages/Cart/Carrinho";
-import Perfil from "./pages/perfil/perfil"; 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import DeletarCategoria from "./components/categorias/deletarCategoria/DeletarCategoria";
+import FormularioCategoria from "./components/categorias/formularioCategoria/FormularioCategoria";
+import ListaCategorias from "./components/categorias/listaCategorias/ListaCategorias";
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
+import DeletarProduto from "./components/produtos/deletarProduto/DeletarProduto";
+import FormularioProduto from "./components/produtos/formularioProduto/FormularioProduto";
+import ListaProdutos from "./components/produtos/listaProdutos/ListaProdutos";
+import { AuthProvider } from './contexts/AuthContext';
+import About from "./pages/About/About";
+import Cadastro from './pages/Cadastro/Cadastro';
+import Carrinho from "./pages/Cart/Carrinho";
+import Agroeducacao from "./pages/agroeducacao/Agroeducacao";
+import Favoritos from "./pages/favoritos/Favoritos";
+import FaleConosco from "./pages/Contact/Contact";
+import Home from "./pages/Home/Home";
+import Login from "./pages/login/Login";
+import Perfil from "./pages/perfil/perfil";
+import Planos from "./pages/planos/Planos";
+import Resíduos from "./pages/residuos/Resíduos";
 
 export default function App() {
   return (
@@ -33,7 +37,7 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/cadastro" element={<Cadastro />} />
               <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/fale-conosco" element={<FaleConosco />} />
               <Route path="/produtos" element={<ListaProdutos />} />
               <Route path="/categorias" element={<ListaCategorias />} />
               <Route path="/cadastroProduto" element={<FormularioProduto />} />
@@ -44,6 +48,10 @@ export default function App() {
               <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
               <Route path='/carrinho' element={<Carrinho />} />
               <Route path="/perfil" element={<Perfil />} />
+              <Route path="/agroeducacao" element={<Agroeducacao />} />
+              <Route path="/favoritos" element={<Favoritos />} />
+              <Route path="/planos" element={<Planos />} />
+              <Route path="/resíduos" element={<Resíduos />} />
             </Routes>
           </div>
           <Footer />

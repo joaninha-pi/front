@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
-import logo from '../../assets/icons/Logo.png'; // Caminho atualizado para o logo
+import logo from '../../assets/icons/Logo.png';
 import { toastAlerta } from '../../utils/toastAlerta';
 
-export default function Contact() {
+export default function FaleConosco() {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
