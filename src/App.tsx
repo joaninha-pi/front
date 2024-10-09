@@ -17,7 +17,6 @@ import Sobre from "./paginas/sobre/Sobre";
 import Contato from "./paginas/contato/Contato";
 import Perfil from "./paginas/perfil/Perfil";
 import { ToastContainer } from "react-toastify";
-import { CssBaseline } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
@@ -32,7 +31,7 @@ export default function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/sobre" element={<Sobre />} />
+            <Route path="/sobre-nos" element={<Sobre />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/produtos" element={<ListaProdutos />} />
             <Route path="/categorias" element={<ListaCategorias />} />
@@ -42,7 +41,7 @@ export default function App() {
             <Route path="/editarCategoria/:id" element={<FormularioCategoria />} />
             <Route path="/editarProduto/:id" element={<FormularioProduto />} />
             <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
-            <Route path="/carrinho" element={<Carrinho />} />
+            <Route path='/carrinho' element={<Carrinho />} />
             <Route path="/perfil" element={<Perfil />} />
           </Routes>
         </main>

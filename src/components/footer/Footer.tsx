@@ -1,42 +1,43 @@
-import { At, GithubLogo } from '@phosphor-icons/react';
-import { useEffect, useState } from 'react';
-import logo from '../../assets/icons/logo_r.png';
+import { Link } from 'react-router-dom';
+import { GithubLogo, LinkedinLogo } from 'phosphor-react';
+import logo_r from '../../assets/icons/logo_r.png';
 
 export default function Footer() {
-    const [isVisible, setIsVisible] = useState(false);
-
-    const handleScroll = () => {
-        const scrollPosition = window.scrollY + window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-
-        if (scrollPosition >= documentHeight - 50) {
-            setIsVisible(true);
-        } else {
-            setIsVisible(false);
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
     return (
-        <footer className={`bg-green-700 text-white text-center py-4 transition-opacity duration-700 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-center items-center space-x-0 md:space-x-6 mb-4">
-                    <a href="mailto:contato@joaninha.com" className="flex items-center hover:underline mb-2 md:mb-0">
-                        <At size={20} />
-                        <span className="ml-1">contato@joaninha.com</span>
-                    </a>
-                    <a href="https://github.com/joaninha" target="_blank" rel="noopener noreferrer" className="flex items-center hover:underline">
-                        <GithubLogo size={20} />
-                        <span className="ml-1">GitHub</span>
-                    </a>
+        <footer className="bg-[#25433C] text-[#DEE6BE] py-10">
+            <div className="max-w-7xl mx-auto px-4 lg:px-6">
+                <div className="flex flex-wrap justify-between items-center mb-8">
+                    <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start">
+                        <Link to="/home">
+                            <img src={logo_r} alt="Logo" className="h-16 lg:h-20 transition-transform duration-300" />
+                        </Link>
+                        <p className="text-sm text-center lg:text-left mt-2">
+                            Conectando produtores e consumidores de forma sustentável.
+                        </p>
+                    </div>
+
+                    <div className="w-full lg:w-1/3 flex justify-center mt-6 lg:mt-0">
+                        <div className="flex space-x-4">
+                            <Link to="/sobre" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Sobre nós</Link>
+                            <Link to="/contato" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Contato</Link>
+                            <Link to="/centralVendedor" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Central do vendedor</Link>
+                        </div>
+                    </div>
+
+                    <div className="w-full lg:w-1/3 flex justify-center mt-6 lg:mt-0">
+                        <div className="flex space-x-4">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                                <GithubLogo size={32} className="text-[#DEE6BE] hover:text-red-700 transition-colors duration-300 transform hover:scale-110" />
+                            </a>
+                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                                <LinkedinLogo size={32} className="text-[#DEE6BE] hover:text-red-700 transition-colors duration-300 transform hover:scale-110" />
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <p className="text-sm">© 2024 Joaninha. Todos os direitos reservados.</p>
+                <div className="text-center text-xs">
+                    &copy; {new Date().getFullYear()} Seu E-commerce. Todos os direitos reservados.
+                </div>
             </div>
         </footer>
     );
