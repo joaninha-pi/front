@@ -53,12 +53,18 @@ function FormularioCategoria() {
         setLoading(true);
 
         try {
+            const config = { // Create an empty config object or define headers as needed
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+
             if (id) {
                 const categoriaComId = { ...categoria, id: Number(id) };
-                await atualizar(`/categorias`, categoriaComId, setCategoria);
+                await atualizar(`/categorias`, categoriaComId, setCategoria, config); // Ensure to pass config
                 toastAlerta('Categoria atualizada com sucesso', 'sucesso');
             } else {
-                await cadastrar(`/categorias`, categoria, setCategoria);
+                await cadastrar(`/categorias`, categoria, setCategoria, config); // Now passing the config
                 toastAlerta('Categoria cadastrada com sucesso', 'sucesso');
             }
             retornar();
@@ -73,6 +79,7 @@ function FormularioCategoria() {
             setLoading(false);
         }
     }
+
 
     function retornar() {
         navigate("/categorias");

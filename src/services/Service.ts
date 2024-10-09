@@ -54,17 +54,16 @@ export const buscar = async (url: string, setDados: Function, config?: AxiosRequ
 };
 
 // Função para cadastrar dados (POST)
-export const cadastrar = async (url: string, dados: Object, setDados: Function) => {
+export const cadastrar = async (url: string, dados: Object, setDados: Function, config: AxiosRequestConfig) => {
     const token = localStorage.getItem('token');
 
     if (!token) {
         throw new Error('Usuário não autenticado.');
     }
 
-    const config: AxiosRequestConfig = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+    config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${token}`,
     };
 
     try {
@@ -77,18 +76,20 @@ export const cadastrar = async (url: string, dados: Object, setDados: Function) 
 };
 
 // Função para atualizar dados (PUT)
-export const atualizar = async (url: string, dados: Object, setDados: Function) => {
+export const atualizar = async (url: string, dados: Object, setDados: Function, config?: AxiosRequestConfig) => {
     const token = localStorage.getItem('token');
 
     if (!token) {
         throw new Error('Usuário não autenticado.');
     }
 
-    const config: AxiosRequestConfig = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    };
+    if (!config) {
+        config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+    }
 
     try {
         const resposta = await api.put(url, dados, config);
@@ -98,6 +99,7 @@ export const atualizar = async (url: string, dados: Object, setDados: Function) 
         throw error;
     }
 };
+
 
 // Função para deletar dados (DELETE)
 export const deletar = async (url: string, config: AxiosRequestConfig) => {
