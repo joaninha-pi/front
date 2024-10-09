@@ -1,165 +1,94 @@
-import "./Home.css";
-import Carrossel from '../../components/carrossel/Carrossel';
+import { useEffect } from 'react';
+import './Home.css';
+
 export default function Home() {
+    useEffect(() => {
+        const sections = document.querySelectorAll('.animate-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fadeIn');
+                } else {
+                    entry.target.classList.remove('fadeIn');
+                }
+            });
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    }, []);
 
     return (
-        <div className="home-container">
-
-            <section className="carousel-section">
-                <Carrossel />
-            </section>
-
-            
-            <section className="highlights-section">
-                <div className="highlight">
-                    <h2 className='font-title'>Novidades</h2>
-                    <br></br>
-                    <p>Descubra os últimos lançamentos na Joana. Produtos exclusivos e estilos únicos para você.</p>
-                </div>
-                <div className="highlight">
-                    <h2 className='font-title'>Promoções Imperdíveis</h2>
-                    <br></br>
-                    <p>Descontos de até 50% em itens selecionados. Não perca essa oportunidade!</p>
-                </div>
-                <div className="highlight">
-                    <h2 className='font-title'>Entrega Rápida na região da Capital</h2>
-                    <br></br>
-                    <p>Receba seu pedido em casa com toda a comodidade. </p>
-                    <p>Frete grátis nas compras acima de R$150.</p>
+        <div className="home-container pt-28 bg-gray-50">
+            {/* Seção de Banner Principal */}
+            <section className="hero-section relative bg-[url('path-to-your-image.jpg')] bg-cover bg-center min-h-[60vh] flex items-center justify-center transition-all duration-700 ease-in-out transform hover:scale-105">
+                <div className=" font-title text-center text-white backdrop-blur-md bg-black/40 p-6 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-110">
+                    <h1 className="text-5xl font-bold animate-fadeIn">Sua Solução Sustentável para Agricultura</h1>
+                    <p className="mt-4 font-content text-lg animate-fadeIn delay-100">Descubra os melhores produtos e práticas para uma produção agrícola eficiente e sustentável.</p>
+                    <button className="mt-6 px-8 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg">
+                        Explore Agora
+                    </button>
                 </div>
             </section>
 
-            
-            <section className="pt-20 imagem-texto">
-                <img className="size-5/6 hover:scale-110" src={"https://media.discordapp.net/attachments/1262942566370775061/1275829119220711547/UniversalUpscaler_fc4f7347-069b-452e-9ed7-9388e5607214-removebg.png?ex=66cfe1b5&is=66ce9035&hm=fc3413cd8f59e2dd149535e3b532a3b3c7fec769332831a84e19cabacd22312d&=&format=webp&quality=lossless&width=416&height=416"} />
-                <div className="texto">
-                    <h1 className='text-2xl font-title'>Mas por quê Joana?</h1>
-                    <p className='text-justify font-body'>Nossa relação com as joaninhas vai além dos nossos produtos, e elas têm muitas histórias para nos contar. Em muitas culturas, elas carregam consigo a representação de felicidade, amor e harmonia.</p>
-                    <p className='text-justify font-body'>As joaninhas são consideradas símbolos de boa sorte, e aqui na Joana sabemos o quanto elas são valiosas para o ecossistema. Com seu apetite voraz, elas controlam pragas e pulgões e também se alimentam de néctar. Suas plantas favoritas são aquelas que retêm água, como alface e couve, além de flores como tulipas e lírios.</p>
-                    <p className='text-justify font-body'>Para nós, o formato das joaninhas é fofo e encantador, mas suas cores e formato têm a função de intimidar os predadores, passando a mensagem de que seu gosto é ruim e pode ser tóxico. No entanto, o formato que conhecemos não é o primeiro. A joaninha começa como uma larva e passa por um estágio de metamorfose, semelhante ao das borboletas, para adquirir o formato de besouro. Estando alinhado as nossas diretrizes de produção consciente e sustentável.</p>
-
+            {/* Seção de Destaques com Layout Flexível */}
+            <section className="highlights-section grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12 p-6">
+                <div className="highlight-item animate-section bg-green-100 hover:bg-green-200 p-6 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105 hover:shadow-xl">
+                    <h2 className="text-xl font-content font-bold text-red-800">Destaque 1</h2>
+                    <p className="font-content text-gray-700">Descrição do primeiro destaque.</p>
+                </div>
+                <div className="highlight-item animate-section bg-green-100 hover:bg-green-200 p-6 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105 hover:shadow-xl delay-100">
+                    <h2 className="font-content text-xl font-bold text-red-800">Destaque 2</h2>
+                    <p className="font-content text-gray-700">Descrição do segundo destaque.</p>
+                </div>
+                <div className="highlight-item animate-section bg-green-100 hover:bg-green-200 p-6 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105 hover:shadow-xl delay-200">
+                    <h2 className="font-content text-xl font-bold text-red-800">Destaque 3</h2>
+                    <p className="font-content text-gray-700">Descrição do terceiro destaque.</p>
                 </div>
             </section>
 
-
-            <section className="pt-20 testimonials-section px-4">
-                <h1 className="text-2xl font-title mb-8 text-center">Depoimento dos nossos clientes:</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto hover:scale-105">
-                        <img src={'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQxNjM0Ni5qcGVn'} className="w-20 h-20 rounded-full mb-4" alt="Foto de Maria S." />
-                        <div className="text-center">
-                            <p className="text-lg italic mb-4">"Amei a qualidade dos produtos da Joana! Com certeza vou comprar mais vezes."</p>
-                            <div className="flex justify-center mb-4">
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                            </div>
-                            <span className="block text-right text-sm text-gray-500">- Maria S.</span>
-                        </div>
+            {/* Seção de Produtos em Destaque */}
+            <section className="featured-products-section mb-12 p-6">
+                <h2 className="text-2xl font-bold text-center text-green-700 mb-6 animate-section">Produtos em Destaque</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div className="product-item animate-section bg-white border hover:border-green-500 p-4 rounded-lg shadow-lg transition-all duration-500 hover:shadow-xl hover:transform hover:-translate-y-2">
+                        <h3 className="text-lg font-bold text-red-800">Produto 1</h3>
+                        <p className="text-gray-700">Descrição do produto em destaque 1.</p>
                     </div>
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto hover:scale-105">
-                        <img src={'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkNTQ4OTguanBlZw=='} className="w-20 h-20 rounded-full mb-4" alt="Foto de João P." />
-                        <div className="text-center">
-                            <p className="text-lg italic mb-4">"Entrega super rápida e atendimento excelente. Recomendo a todes!"</p>
-                            <div className="flex justify-center mb-4">
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                            </div>
-                            <span className="block text-right text-sm text-gray-500">- João P.</span>
-                        </div>
+                    <div className="product-item animate-section bg-white border hover:border-green-500 p-4 rounded-lg shadow-lg transition-all duration-500 hover:shadow-xl hover:transform hover:-translate-y-2 delay-100">
+                        <h3 className="text-lg font-bold text-red-800">Produto 2</h3>
+                        <p className="text-gray-700">Descrição do produto em destaque 2.</p>
                     </div>
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto hover:scale-105">
-                        <img src={'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQyNjA5OS5qcGVn'} className="w-20 h-20 rounded-full mb-4" alt="Foto de Ana L." />
-                        <div className="text-center">
-                            <p className="text-lg italic mb-4">"Excelente serviço e produtos de alta qualidade. Voltarei com certeza!"</p>
-                            <div className="flex justify-center mb-4">
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                            </div>
-                            <span className="block text-right text-sm text-gray-500">- Ana V.</span>
-                        </div>
-                    </div>
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto hover:scale-105">
-                        <img src={'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMzc4Ni5qcGVn'} className="w-20 h-20 rounded-full mb-4" alt="Foto de Carlos M." />
-                        <div className="text-center">
-                            <p className="text-lg italic mb-4">"Atendimento impecável e entrega rápida. Recomendo!"</p>
-                            <div className="flex justify-center mb-4">
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                            </div>
-                            <span className="block text-right text-sm text-gray-500">- Carlos M.</span>
-                        </div>
-                    </div>
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto hover:scale-105">
-                        <img src={'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQ0MDU2Ni5qcGVn'} className="w-20 h-20 rounded-full mb-4" alt="Foto de Daniela R." />
-                        <div className="text-center">
-                            <p className="text-lg italic mb-4">"Produtos maravilhosos! Comprarei novamente."</p>
-                            <div className="flex justify-center mb-4">
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                            </div>
-                            <span className="block text-right text-sm text-gray-500">- Daniela R.</span>
-                        </div>
-                    </div>
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto hover:scale-105">
-                        <img src={'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMjc0OTkuanBlZw=='} className="w-20 h-20 rounded-full mb-4" alt="Foto de Eduardo F." />
-                        <div className="text-center">
-                            <p className="text-lg italic mb-4">"Recomendo a todos! Produtos de qualidade e excelente serviço."</p>
-                            <div className="flex justify-center mb-4">
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                            </div>
-                            <span className="block text-right text-sm text-gray-500">- Eduardo F.</span>
-                        </div>
-                    </div>
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto hover:scale-105">
-                        <img src={'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQ0OTIwOC5qcGVn'} className="w-20 h-20 rounded-full mb-4" alt="Foto de Fernanda G." />
-                        <div className="text-center">
-                            <p className="text-lg italic mb-4">"Melhor compra que já fiz! Produtos incríveis."</p>
-                            <div className="flex justify-center mb-4">
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                            </div>
-                            <span className="block text-right text-sm text-gray-500">- Fernanda G.</span>
-                        </div>
-                    </div>
-                    <div className="testimonial bg-white shadow-md rounded-lg p-6 flex flex-col items-center max-w-md w-full mx-auto hover:scale-105">
-                        <img src={'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMTMwMzguanBlZw=='} className="w-20 h-20 rounded-full mb-4" alt="Foto de Gabriel H." />
-                        <div className="text-center">
-                            <p className="text-lg italic mb-4">"Qualidade inigualável! Com certeza voltarei a comprar."</p>
-                            <div className="flex justify-center mb-4">
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                                <span className="text-yellow-500 text-lg">⭐</span>
-                            </div>
-                            <span className="block text-right text-sm text-gray-500">- Gabriel H.</span>
-                        </div>
+                    <div className="product-item animate-section bg-white border hover:border-green-500 p-4 rounded-lg shadow-lg transition-all duration-500 hover:shadow-xl hover:transform hover:-translate-y-2 delay-200">
+                        <h3 className="text-lg font-bold text-red-800">Produto 3</h3>
+                        <p className="text-gray-700">Descrição do produto em destaque 3.</p>
                     </div>
                 </div>
             </section>
 
+            {/* Chamada para Ação */}
+            <section className="cta-section bg-green-700 text-white py-12 text-center animate-section">
+                <h2 className="text-3xl font-bold">Entre em contato conosco!</h2>
+                <p className="text-lg mt-4">Descubra nossos planos e produtos sustentáveis para sua produção agrícola.</p>
+                <button className="mt-6 px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg">
+                    Saiba mais
+                </button>
+            </section>
+
+            {/* Seção de Newsletter */}
+            <section className="newsletter-section bg-gray-100 py-12 text-center animate-section">
+                <h2 className="text-2xl font-bold text-green-700 mb-6">Assine nossa Newsletter</h2>
+                <p className="text-gray-700 mb-4">Receba atualizações e novidades sobre agricultura sustentável diretamente no seu e-mail.</p>
+                <input
+                    type="email"
+                    className="px-4 py-2 border border-green-500 rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-600"
+                    placeholder="Seu e-mail"
+                />
+                <button className="ml-4 px-6 py-2 bg-green-700 text-white rounded-md hover:bg-green-800 transition-all duration-300">
+                    Assinar
+                </button>
+            </section>
         </div>
     );
 }
