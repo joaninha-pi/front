@@ -5,13 +5,25 @@ export const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
 });
 
+export const cadastrarUsuario = async (url: string, dados: Object, setDados: Function) => {
+    const resposta = await api.post(url, dados)
+    setDados(resposta.data)
+}
+
 // Função para buscar dados públicos (GET sem autenticação)
 export const buscarPublico = async (url: string, setDados: Function) => {
     try {
         const resposta = await api.get(url);
         setDados(resposta.data);
-    } catch (error) {
-        console.error('Erro ao buscar dados públicos:', error);
+    } catch (error: any) {
+        // Log detalhado do erro para diagnóstico
+        if (error.response) {
+            console.error('Erro ao buscar dados públicos (response):', error.response.data);
+        } else if (error.request) {
+            console.error('Erro ao buscar dados públicos (request):', error.request);
+        } else {
+            console.error('Erro ao buscar dados públicos (outro):', error.message);
+        }
         throw error;
     }
 };
