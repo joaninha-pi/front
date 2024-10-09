@@ -20,7 +20,6 @@ export default function Footer() {
                         <div className="flex space-x-4">
                             <Link to="/sobre" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Sobre nós</Link>
                             <Link to="/contato" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Contato</Link>
-                            <Link to="/centralVendedor" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Central do vendedor</Link>
                         </div>
                     </div>
 

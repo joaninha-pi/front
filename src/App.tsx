@@ -23,6 +23,9 @@ import Perfil from "./pages/perfil/perfil";
 import Planos from "./pages/planos/Planos";
 import Resíduos from "./pages/residuos/Resíduos";
 
+// Importando o VLibras como default export
+import VLibras from '@djpfs/react-vlibras';
+
 export default function App() {
   return (
     <>
@@ -30,6 +33,10 @@ export default function App() {
         <ToastContainer />
         <BrowserRouter>
           <Navbar />
+          
+          {/* Adicionando o VLibras */}
+          <VLibras />
+
           <div className="min-h-[80vh] pt-[150px] pb-[180px] bg-stone-100 text-gray-800">
             <Routes>
               <Route path="/" element={<Home />} />
