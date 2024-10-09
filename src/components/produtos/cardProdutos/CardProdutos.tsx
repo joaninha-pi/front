@@ -2,141 +2,88 @@ import { useState, useContext } from 'react';
 import { Produto } from '../../../models/Produto';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import { FaEdit, FaTrashAlt, FaShoppingCart } from 'react-icons/fa'; // Ícones de lápis, lixeira e carrinho
 
 interface CardProdutoProps {
   produto: Produto;
 }
 
 function CardProduto({ produto }: CardProdutoProps) {
-  const { adicionarProduto, removerProduto } = useContext(AuthContext);
+  const { adicionarProduto } = useContext(AuthContext);
   const { usuario } = useContext(AuthContext);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [quantidade, setQuantidade] = useState(0); // Inicialmente 0
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
+  // Função para adicionar o produto ao carrinho
   const handleAdicionarAoCarrinho = () => {
     if (quantidade > 0) {
-      adicionarProduto({ ...produto, quantidade });
-      closeModal();
+      adicionarProduto({ ...produto, quantidade }); // Apenas adiciona o produto ao carrinho
+      setQuantidade(0); // Reseta a quantidade após adicionar
     }
   };
 
+  // Função para incrementar a quantidade
   const incrementarQuantidade = () => setQuantidade(prev => prev + 1);
+
+  // Função para decrementar a quantidade
   const decrementarQuantidade = () => setQuantidade(prev => (prev > 0 ? prev - 1 : 0));
 
   return (
-    <div className="flex flex-col rounded-2xl max-w-sm bg-red-300 bg-opacity-45 shadow-xl overflow-hidden">
-      <figure
-        className="flex justify-center items-center rounded-2xl cursor-pointer overflow-hidden"
-        onClick={openModal}
-      >
-        <img
-          src={produto.image}
-          alt="Preview Produto"
-          className="relative rounded-t-2xl w-full h-48 object-cover transition-transform transform hover:scale-110"
-        />
-      </figure>
-      <div className="flex flex-col p-4 flex-grow">
-        <h3 className="text-xl font-title font-bold text-center text-zinc-900 truncate">{produto.nome}</h3>
-        <p className="text-lg font-body text-right text-zinc-900 mt-5">R$ {produto.preco.toFixed(2)}</p>
-      </div>
-      <div className="flex flex-col gap-2 p-4">
-        <div className="flex justify-center gap-2">
-          <button
-            className="bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
-            onClick={openModal}
-          >
-            Adicionar ao carrinho
-          </button>
-          <button
-            className="bg-red-700 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 hover:opacity-75 active:scale-95 transition-transform transform"
-            onClick={() => removerProduto(produto.id)}
-          >
-            Remover do carrinho
-          </button>
-        </div>
-        {usuario.token !== "" && usuario.usuario === "root@root.com" && (
-          <div className="flex justify-center gap-2">
-            <Link
-              to={`/editarProduto/${produto.id}`}
-              className="bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
-            >
-              Editar produto
-            </Link>
-            <Link
-              to={`/deletarProduto/${produto.id}`}
-              className="bg-red-700 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 hover:opacity-75 active:scale-95 transition-transform transform"
-            >
-              Deletar produto
-            </Link>
-          </div>
-        )}
-      </div>
-
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-2xl p-6 max-w-lg w-full max-h-screen overflow-y-auto">
-            <div className="flex justify-end">
-              <button className="text-red-500 font-body font-bold underline" onClick={closeModal}>
-                Fechar
-              </button>
-            </div>
-            <div className="flex flex-col items-center space-y-4">
-              <img
-                src={produto.image}
-                alt="Produto"
-                className="relative rounded-2xl max-w-full h-64 object-cover mb-4 transition-transform transform hover:scale-110 z-0"
-              />
-              <h2 className="text-2xl font-title font-bold text-zinc-900 text-center">{produto.nome}</h2>
-              <p className="text-base font-subtitle font-bold text-zinc-700 text-center">{produto.categoria?.descricao}</p>
-              <p className="text-lg font-body text-zinc-700 text-justify">{produto.descricao}</p>
-              <p className="text-2xl font-body font-extrabold text-zinc-900">R$ {produto.preco.toFixed(2)}</p>
-              <div className="flex flex-col items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <button
-                    className="bg-gray-300 text-black font-bold text-sm p-2 rounded-lg hover:bg-gray-400 hover:opacity-75 transition-transform transform"
-                    onClick={decrementarQuantidade}
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    min="0"
-                    value={quantidade}
-                    onChange={(e) => setQuantidade(Number(e.target.value))}
-                    className="w-24 p-2 border border-gray-300 rounded text-center"
-                  />
-                  <button
-                    className="bg-gray-300 text-black font-bold text-sm p-2 rounded-lg hover:bg-gray-400 hover:opacity-75 transition-transform transform"
-                    onClick={incrementarQuantidade}
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="flex justify-center gap-2 w-full">
-                  <button
-                    className="bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform"
-                    onClick={handleAdicionarAoCarrinho}
-                  >
-                    Adicionar ao carrinho
-                  </button>
-                  <button
-                    className="bg-red-700 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-700 hover:text-lime-400 hover:opacity-75 active:scale-95 transition-transform transform"
-                    onClick={() => {
-                      removerProduto(produto.id);
-                      closeModal();
-                    }}
-                  >
-                    Remover do carrinho
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="border rounded-lg shadow-lg p-6 max-w-xs bg-white relative hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+      {/* Ícones de edição e exclusão no canto superior direito */}
+      {usuario.token !== "" && usuario.usuario === "root@root.com" && (
+        <div className="absolute top-2 right-2 flex space-x-2">
+          <Link to={`/editarProduto/${produto.id}`} className="text-gray-400 hover:text-yellow-500 transition-colors duration-200">
+            <FaEdit size={20} />
+          </Link>
+          <Link to={`/deletarProduto/${produto.id}`} className="text-gray-400 hover:text-red-600 transition-colors duration-200">
+            <FaTrashAlt size={20} />
+          </Link>
         </div>
       )}
+
+      {/* Imagem do produto */}
+      <div className="flex justify-center">
+        <img
+          src={produto.image}
+          alt={produto.nome}
+          className="rounded-lg w-48 h-48 object-cover transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+
+      {/* Nome do produto */}
+      <h3 className="text-lg font-semibold text-gray-800 text-center mt-4">{produto.nome}</h3>
+
+      {/* Preço do produto */}
+      <p className="text-xl font-bold text-gray-900 text-center mt-2">R$ {produto.preco.toFixed(2)}</p>
+
+      {/* Quantidade, botões de adicionar/remover e botão de adicionar ao carrinho */}
+      <div className="flex items-center justify-center mt-4 space-x-2">
+        <button
+          onClick={decrementarQuantidade}
+          className="p-1 bg-gray-300 rounded text-lg hover:bg-gray-400 transition-colors duration-200"
+        >
+          -
+        </button>
+        <input
+          type="number"
+          className="w-12 text-center border mx-2 p-1 rounded bg-gray-100"
+          value={quantidade}
+          readOnly
+        />
+        <button
+          onClick={incrementarQuantidade}
+          className="p-1 bg-gray-300 rounded text-lg hover:bg-gray-400 transition-colors duration-200"
+        >
+          +
+        </button>
+        <button
+          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-500 transition-transform duration-300 transform hover:scale-105 flex items-center"
+          onClick={handleAdicionarAoCarrinho}
+        >
+          <FaShoppingCart className="mr-2" /> {/* Ícone do carrinho */}
+          Adicionar
+        </button>
+      </div>
     </div>
   );
 }
