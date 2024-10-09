@@ -26,17 +26,17 @@ export default function Footer() {
 
                     <div className="w-full lg:w-1/3 flex justify-center mt-6 lg:mt-0">
                         <div className="flex space-x-4">
-                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                            <a href="https://github.com/joaninha-pi" target="_blank" rel="noopener noreferrer">
                                 <GithubLogo size={32} className="text-[#DEE6BE] hover:text-red-700 transition-colors duration-300 transform hover:scale-110" />
                             </a>
-                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                            <a href="https://linktr.ee/joana_pi" target="_blank" rel="noopener noreferrer">
                                 <LinkedinLogo size={32} className="text-[#DEE6BE] hover:text-red-700 transition-colors duration-300 transform hover:scale-110" />
                             </a>
                         </div>
                     </div>
                 </div>
                 <div className="text-center text-xs">
-                    &copy; {new Date().getFullYear()} Seu E-commerce. Todos os direitos reservados.
+                    &copy; {new Date().getFullYear()} Joana. Todos os direitos reservados.
                 </div>
             </div>
         </footer>
