@@ -68,7 +68,7 @@ function Login() {
                         )}
                     </button>
                 </form>
-                <div className="mt-4 text-center">
+                <div className="mt-4 font-content font-semibold text-center">
                     <p className="text-[#25433C]">
                         Ainda não tem uma conta? 
                         <Link to="/cadastro" className="text-red-700 font-semibold hover:underline"> Cadastre-se</Link>

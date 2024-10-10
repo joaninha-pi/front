@@ -128,15 +128,15 @@ function FormularioProduto() {
 
   return (
     <div className='fundoLogao'>
-      <div className='pt-24'></div>
-      <div className="container flex flex-col mx-auto items-center">
-        <h1 className="text-4xl text-center my-8">
+      <div className='pt-44'></div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        <h1 className="text-4xl font-bold font-title text-red-700text-center my-8">
           {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
         </h1>
 
-        <div className="flex flex-col gap-4 w-full max-w-lg">
+        <div className="flex flex-col gap-4 w-full max-w-md sm:max-w-lg">
           <form onSubmit={gerarNovoProduto} className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
+            <div className="flex font-content flex-col gap-2">
               <label htmlFor="nome">Nome do produto</label>
               <input
                 value={produto.nome}
@@ -148,7 +148,7 @@ function FormularioProduto() {
                 className="border-2 border-slate-700 rounded p-2"
               />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex font-content flex-col gap-2">
               <label htmlFor="descricao">Descrição do produto</label>
               <input
                 value={produto.descricao}
@@ -160,7 +160,7 @@ function FormularioProduto() {
                 className="border-2 border-slate-700 rounded p-2"
               />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex font-content flex-col gap-2">
               <label htmlFor="preco">Preço do produto</label>
               <input
                 value={produto.preco}
@@ -173,7 +173,7 @@ function FormularioProduto() {
                 step="0.01"
               />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex font-content flex-col gap-2">
               <label htmlFor="image">URL da imagem do produto</label>
               <input
                 value={produto.image}
@@ -192,7 +192,7 @@ function FormularioProduto() {
                 />
               )}
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex font-content flex-col gap-2">
               <p>Categoria do produto</p>
               <select
                 name="categoria"
@@ -214,10 +214,10 @@ function FormularioProduto() {
               <button
                 disabled={carregandoCategoria || loading}
                 type="submit"
-                className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+                className='bg-lime-500 font-content text-stone-100 font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
               >
                 {loading ? (
-                  <div className="flex items-center justify-center">
+                  <div className="flex font-content items-center justify-center">
                     <RotatingLines
                       strokeColor="#18181b"
                       strokeWidth="5"
@@ -230,7 +230,7 @@ function FormularioProduto() {
               </button>
               <button
                 onClick={retornar}
-                className='bg-red-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-400 hover:text-stone-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+                className='bg-red-500 font-content text-stone-100 font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-400 hover:text-stone-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
               >
                 Voltar
               </button>
