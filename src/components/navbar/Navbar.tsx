@@ -99,6 +99,7 @@ export default function Navbar() {
                                         <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
                                     </Link>
                                 ))}
+
                             </div>
 
                             <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
@@ -111,11 +112,16 @@ export default function Navbar() {
                                         <span className="absolute -top-2 -right-2 bg-red-700 text-[#DEE6BE] text-xs rounded-full w-5 h-5 flex items-center justify-center">{quantidadeItems}</span>
                                     )}
                                 </Link>
-                                {usuario ? ( // Verifica se o usuário está logado
+                                {!usuario || !usuario.token ? ( // Verifica se o usuário não está logado
+                                    <button onClick={handleLoginClick} className="flex items-center space-x-2 transition-transform duration-300 hover:scale-110" aria-label="Fazer login">
+                                        <img src={login} alt="Login" className="w-5 h-5 lg:w-6 lg:h-6" />
+                                        <span className="text-xs lg:text-base">Login</span>
+                                    </button>
+                                ) : ( // Se o usuário estiver logado
                                     <>
                                         <Link to="/perfil" className="relative" aria-label="Ir para o perfil">
                                             <img
-                                                src={usuario.foto} // Assume-se que a foto do usuário esteja disponível em usuario.foto
+                                                src={usuario.foto} // A foto do usuário
                                                 alt="Perfil"
                                                 className="w-8 h-8 rounded-full border border-red-700 transition-transform duration-300 hover:scale-110" // A bolinha com a foto de perfil
                                             />
@@ -125,10 +131,6 @@ export default function Navbar() {
                                             <span className="text-xs lg:text-base">Sair</span>
                                         </button>
                                     </>
-                                ) : ( // Caso o usuário não esteja logado
-                                    <button onClick={handleLoginClick} className="bg-red-700 text-[#DEE6BE] px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-110" aria-label="Fazer login">
-                                        <span className="text-sm">Login</span>
-                                    </button>
                                 )}
                             </div>
                         </div>
