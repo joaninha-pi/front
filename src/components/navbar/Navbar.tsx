@@ -50,6 +50,11 @@ export default function Navbar() {
         setIsMenuOpen(false);
     };
 
+    // Função para verificar se o e-mail do usuário contém o domínio @root.com
+    const isUserRoot = () => {
+        return usuario && usuario.usuario && usuario.usuario.endsWith('@root.com');
+    };
+
     return (
         <>
             {loading ? (
@@ -85,9 +90,9 @@ export default function Navbar() {
                             </Link>
 
                             <div className="hidden md:flex flex-grow justify-center space-x-16">
-                                {[ 
-                                    { path: '/produtos', label: 'Produtos' }, 
-                                    { path: '/planos', label: 'Planos' } 
+                                {[
+                                    { path: '/produtos', label: 'Produtos' },
+                                    { path: '/planos', label: 'Planos' }
                                 ].map(({ path, label }, index) => (
                                     <Link
                                         key={index}
@@ -112,12 +117,12 @@ export default function Navbar() {
                                         <span className="absolute -top-2 -right-2 bg-red-700 text-[#DEE6BE] text-xs rounded-full w-5 h-5 flex items-center justify-center">{quantidadeItems}</span>
                                     )}
                                 </Link>
-                                {!usuario || !usuario.token ? ( // Verifica se o usuário não está logado
+                                {!usuario || !usuario.token ? (
                                     <button onClick={handleLoginClick} className="flex items-center space-x-2 transition-transform duration-300 hover:scale-110" aria-label="Fazer login">
                                         <img src={login} alt="Login" className="w-5 h-5 lg:w-6 lg:h-6" />
                                         <span className="text-xs lg:text-base">Login</span>
                                     </button>
-                                ) : ( // Se o usuário estiver logado
+                                ) : (
                                     <>
                                         <Link to="/perfil" className="relative" aria-label="Ir para o perfil">
                                             <img
@@ -167,6 +172,26 @@ export default function Navbar() {
                                 >
                                     Fale Conosco
                                 </Link>
+
+                                {/* Links de administrador (visíveis apenas para usuários com o domínio @root.com) */}
+                                {isUserRoot() && (
+                                    <>
+                                        <Link
+                                            to="/cadastroCategoria"
+                                            onClick={closeMenu}
+                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                        >
+                                            Cadastrar Categoria
+                                        </Link>
+                                        <Link
+                                            to="/cadastroProduto"
+                                            onClick={closeMenu}
+                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                        >
+                                            Cadastrar Produto
+                                        </Link>
+                                    </>
+                                )}
                             </div>
                         </div>
                     )}

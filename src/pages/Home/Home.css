@@ -1,7 +1,7 @@
 .animate-section {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .animate-section.fadeIn {
@@ -14,7 +14,7 @@
     margin-bottom: 1.5rem; /* Ajuste conforme necessário */
 }
 
-/* Adicionando espaçamento e aumentando a largura do input e botão da newsletter */
+/* Aumentando a largura do input e botão da newsletter */
 .newsletter-section input {
     width: 80%; /* Aumenta a largura do input */
     max-width: 400px; /* Define uma largura máxima */
@@ -72,4 +72,18 @@
     .highlight-item, .product-item {
         padding: 1rem; /* Reduz o padding em dispositivos menores */
     }
+}
+
+/* Adicionando transições mais suaves para hover */
+.vantagem-item:hover {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.vantagem-item {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.vantagem-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
 }
