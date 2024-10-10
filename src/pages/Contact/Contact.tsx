@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { RevolvingDot } from 'react-loader-spinner';
-import logo from '../../assets/icons/Logo.png';
+import { RotatingLines, RevolvingDot } from 'react-loader-spinner';
 import { toastAlerta } from '../../utils/toastAlerta';
 
 export default function FaleConosco() {
     const [loading, setLoading] = useState<boolean>(true);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false); // Estado para controle do botão de envio
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -14,14 +14,17 @@ export default function FaleConosco() {
         return () => clearTimeout(timer);
     }, []);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setIsSubmitting(true); // Inicia o loading do botão
 
         // Lógica para processar o envio do formulário
-        // ...
+        // Simulação de envio de formulário com um timeout
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Simula um atraso
 
         // Exibe o toast de sucesso
         toastAlerta('Mensagem enviada com sucesso!', 'sucesso');
+        setIsSubmitting(false); // Finaliza o loading do botão
     };
 
     return (
@@ -32,61 +35,54 @@ export default function FaleConosco() {
                     visible={true}
                     height="200"
                     width="200"
-                    ariaLabel="circles-loading"
+                    ariaLabel="revolving-dot-loading"
                     color='black'
                 />
             </div>
         ) : (
-            <div className="w-full flex flex-col items-center bg-stone-100 px-4 py-6">
-                <div className="mb-6 text-center">
-                    <h1 className="text-xl md:text-2xl font-bold font-body">Entre em contato!</h1>
-                </div>
-                
-                <div className="relative p-4 md:p-6 bg-[#b91c1c] rounded-lg shadow-2xl shadow-red-800 w-full max-w-md">
-                    <div 
-                        id='principal' 
-                        className="p-4 md:p-6 rounded-lg bg-cover bg-no-repeat bg-center"
-                        style={{ 
-                            backgroundImage: `url(${logo})`, // Define o logo como background
-                            backgroundColor: '#b91c1c',
-                            backgroundSize: 'contain', // Ajusta o tamanho do logo
-                            backgroundPosition: 'center' // Centraliza o logo
-                        }}
-                    >
-                        <form onSubmit={handleSubmit}>
-                            <div className="mb-4">
-                                <label htmlFor="name" className="block text-white mb-2">Nome:</label>
-                                <input 
-                                    type="text" 
-                                    className="w-full bg-[#fca5a5] bg-opacity-30 p-2 rounded-tl rounded-tr text-white placeholder-white border-b-2 border-black"
-                                    placeholder="Digite seu nome"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="email" className="block text-white mb-2">Email:</label>
-                                <input 
-                                    type="email" 
-                                    className="w-full bg-[#fca5a5] bg-opacity-30 p-2 rounded-tl rounded-tr text-white placeholder-white border-b-2 border-black"
-                                    placeholder="Digite seu email"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="text" className="block text-white mb-2">Mensagem:</label>
-                                <textarea 
-                                    className="w-full p-2 rounded-tl rounded-tr bg-[#fca5a5] bg-opacity-30 h-36 text-white placeholder-white border-b-2 border-black" 
-                                    placeholder="Digite sua mensagem"
-                                />
-                            </div>
-                            <div className="text-center">
-                                <button
-                                    type="submit"
-                                    className="bg-[#18181b] text-stone-100 font-bold py-2 px-4 rounded-full hover:bg-[#fca5a5cc] transition duration-300"
-                                >
-                                    Enviar
-                                </button>
-                            </div>
-                        </form>
+            <div className="min-h-screen pt-36 md:pt-44 pb-24 md:pb-32 flex items-center justify-center bg-gradient-to-b from-[#9ed582] to-[#25433C]">
+                <div className="w-full max-w-md bg-[#DEE6BE] rounded-lg shadow-lg p-8 flex flex-col">
+                    <div className="flex flex-col items-center mb-6">
+                        <h2 className="text-2xl font-title font-extrabold text-red-700">Entre em contato!</h2>
                     </div>
+                    <form className="flex font-content font-semibold flex-col gap-4" onSubmit={handleSubmit}>
+                        <div className="flex flex-col">
+                            <label htmlFor="name" className="text-[#25433C]">Nome:</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                className="p-2 border-b-2 bg-[#DEE6BE] border-red-700 focus:outline-none focus:border-[#9ed582] transition duration-300"
+                                placeholder="Digite seu nome"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label htmlFor="email" className="text-[#25433C]">Email:</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                className="p-2 border-b-2 bg-[#DEE6BE] border-red-700 focus:outline-none focus:border-[#9ed582] transition duration-300"
+                                placeholder="Digite seu email"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label htmlFor="message" className="text-[#25433C]">Mensagem:</label>
+                            <textarea 
+                                id="message" 
+                                className="p-2 border-b-2 bg-[#DEE6BE] border-red-700 focus:outline-none focus:border-[#9ed582] transition duration-300 h-36"
+                                placeholder="Digite sua mensagem"
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            className="mt-4 bg-[#25433C] text-[#DEE6BE] py-2 rounded hover:bg-[#9ed582] hover:text-[#25433C] transition duration-300 flex justify-center items-center"
+                        >
+                            {isSubmitting ? (
+                                <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="24" visible={true} />
+                            ) : (
+                                <span>Enviar</span>
+                            )}
+                        </button>
+                    </form>
                 </div>
             </div>
         )}

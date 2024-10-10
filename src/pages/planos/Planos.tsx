@@ -43,7 +43,7 @@ export default function Planos() {
 
     return (
         <div className="planos-container pt-32 md:pt-40 bg-[#DEE6BE] p-4">
-            <h1 className="text-4xl text-center font-title font-bold text-red-600 mb-8">Nossos Planos de Assinatura</h1>
+            <h1 className="text-4xl text-center font-title font-bold text-red-700 mb-8">Nossos Planos de Assinatura</h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
@@ -89,13 +89,13 @@ export default function Planos() {
                 ].map((plano, index) => (
                     <div key={index} className="plano-card bg-[#9ed582] rounded-lg shadow-lg p-6 flex flex-col justify-between">
                         <div>
-                            <h2 className="text-2xl font-title font-bold text-[#25433C] mb-4 text-center">{plano.title}</h2>
-                            <p className="text-xl font-content font-semibold text-gray-800 mb-2 text-center">{plano.price}</p>
-                            <p className="text-md font-content font-medium text-gray-700 mb-4 text-center">{plano.description}</p>
-                            <ul className="text-sm font-content font-light text-gray-600 mb-4">
+                            <h2 className="text-2xl font-title font-extrabold text-red-700 mb-4 text-center">{plano.title}</h2>
+                            <p className="text-xl font-content font-semibold text-[#25433C] mb-2 text-center">{plano.price}</p>
+                            <p className="text-md font-content font-medium text-[#25433C] mb-4 text-center">{plano.description}</p>
+                            <ul className="text-sm font-content font-light text-[#25433C] mb-4">
                                 {plano.features.map((feature, featureIndex) => (
                                     <li key={featureIndex} className="flex items-center mb-1">
-                                        <FaCheck className="text-green-700 mr-2" />
+                                        <FaCheck className="text-red-700 mr-2" />
                                         {feature}
                                     </li>
                                 ))}
@@ -103,7 +103,7 @@ export default function Planos() {
                             <p className="font-bold font-content text-center text-lg text-[#25433C]">{plano.callToAction}</p>
                         </div>
                         <button
-                            className="mt-4 w-full font-content px-4 py-2 bg-green-700 text-[#DEE6BE] rounded-lg hover:bg-green-800 transition-all duration-300 shadow-md"
+                            className="mt-4 w-full font-content font-extrabold px-4 py-2 bg-red-700 text-[#DEE6BE] rounded-lg hover:bg-[#25433C] transition-all duration-300 shadow-md"
                             onClick={() => handleButtonClick(index)} // Passa o índice do plano clicado
                         >
                             {buttonLoadingIndex === index ? (

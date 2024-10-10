@@ -15,11 +15,13 @@ export default function Navbar() {
     const { usuario, handleLogout, quantidadeItems } = useContext(AuthContext);
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isVisible, setIsVisible] = useState(true); // Estado para controlar a visibilidade da navbar
+    const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     const handleResize = () => {
         if (window.innerWidth > 768) {
             setIsMenuOpen(false);
+            setIsAdminDropdownOpen(false);
         }
     };
 
@@ -31,7 +33,6 @@ export default function Navbar() {
     }, []);
 
     const handleScroll = () => {
-        // Se o scroll for maior que 50px, esconda a navbar
         const currentScroll = window.scrollY;
         setIsVisible(currentScroll < 50);
     };
@@ -44,7 +45,7 @@ export default function Navbar() {
     }, []);
 
     const logout = () => {
-        handleLogout(); // Chama a função de logout do AuthContext
+        handleLogout();
         toastAlerta('Usuário deslogado com sucesso', 'sucesso');
     };
 
@@ -62,6 +63,11 @@ export default function Navbar() {
 
     const closeMenu = () => {
         setIsMenuOpen(false);
+        setIsAdminDropdownOpen(false);
+    };
+
+    const toggleAdminDropdown = () => {
+        setIsAdminDropdownOpen(prev => !prev);
     };
 
     // Função para verificar se o e-mail do usuário contém o domínio @root.com
@@ -115,6 +121,39 @@ export default function Navbar() {
                                         <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
                                     </Link>
                                 ))}
+                                {/* Botão para exibir o menu de administração */}
+                                {isUserRoot() && (
+                                    <div className="relative">
+                                        <button onClick={toggleAdminDropdown} className="relative text-[#25433C] font-title text-xs uppercase font-extrabold md:text-base group">
+                                            Administração
+                                        </button>
+                                        {isAdminDropdownOpen && (
+                                            <div className="absolute font-content text-xs text-[#25433C] right-0 z-10 mt-2 w-48 bg-[#DEE6BE] rounded-lg shadow-lg">
+                                                <Link
+                                                    to="/cadastroCategoria"
+                                                    className="block px-4 py-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300"
+                                                    onClick={closeMenu}
+                                                >
+                                                    Cadastro Categoria
+                                                </Link>
+                                                <Link
+                                                    to="/cadastroProduto"
+                                                    className="block px-4 py-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300"
+                                                    onClick={closeMenu}
+                                                >
+                                                    Cadastro Produto
+                                                </Link>
+                                                <Link
+                                                    to="/categorias"
+                                                    className="block px-4 py-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300"
+                                                    onClick={closeMenu}
+                                                >
+                                                    Categorias
+                                                </Link>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
 
                             <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
@@ -136,9 +175,9 @@ export default function Navbar() {
                                     <>
                                         <Link to="/perfil" className="relative" aria-label="Ir para o perfil">
                                             <img
-                                                src={usuario.foto} // A foto do usuário
+                                                src={usuario.foto}
                                                 alt="Perfil"
-                                                className="w-8 h-8 rounded-full border border-red-700 transition-transform duration-300 hover:scale-110" // A bolinha com a foto de perfil
+                                                className="w-8 h-8 rounded-full border border-red-700 transition-transform duration-300 hover:scale-110"
                                             />
                                         </Link>
                                         <button onClick={logout} className="flex items-center space-x-2 transition-transform duration-300 hover:scale-110" aria-label="Logout">
@@ -153,60 +192,40 @@ export default function Navbar() {
 
                     {isMenuOpen && (
                         <div className="md:hidden">
-                            <div className="bg-[#9ed582] flex flex-col font-content text-base font-medium items-center py-4">
-                                <Link
-                                    to="/produtos"
-                                    onClick={closeMenu}
-                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                >
+                            <div className="flex flex-col bg-white shadow-lg p-4">
+                                <Link to="/produtos" className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300" onClick={closeMenu}>
                                     Produtos
                                 </Link>
-                                <Link
-                                    to="/carrinho"
-                                    onClick={closeMenu}
-                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                >
+                                <Link to="/planos" className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300" onClick={closeMenu}>
+                                    Planos
+                                </Link>
+                                {isUserRoot() && (
+                                    <>
+                                        <Link to="/cadastroCategoria" className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300" onClick={closeMenu}>
+                                            Cadastro Categoria
+                                        </Link>
+                                        <Link to="/cadastroProduto" className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300" onClick={closeMenu}>
+                                            Cadastro Produto
+                                        </Link>
+                                        <Link to="/categorias" className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300" onClick={closeMenu}>
+                                            Categorias
+                                        </Link>
+                                    </>
+                                )}
+                                <Link to="/favoritos" className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300" onClick={closeMenu}>
+                                    Favoritos
+                                </Link>
+                                <Link to="/carrinho" className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300" onClick={closeMenu}>
                                     Carrinho
                                 </Link>
-                                <Link
-                                    to="/about"
-                                    onClick={closeMenu}
-                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                >
-                                    Sobre nós
-                                </Link>
-                                <Link
-                                    to="/fale-conosco"
-                                    onClick={closeMenu}
-                                    className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                >
-                                    Fale Conosco
-                                </Link>
-                                {/* Condicional para exibir links de login ou perfil/logout */}
                                 {!usuario || !usuario.token ? (
-                                    <Link
-                                        to="/login"
-                                        onClick={closeMenu}
-                                        className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                    >
+                                    <button onClick={handleLoginClick} className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300 w-full">
                                         Login
-                                    </Link>
+                                    </button>
                                 ) : (
-                                    <>
-                                        <Link
-                                            to="/perfil"
-                                            onClick={closeMenu}
-                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                        >
-                                            Perfil
-                                        </Link>
-                                        <button
-                                            onClick={() => { logout(); closeMenu(); }}
-                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                        >
-                                            Sair
-                                        </button>
-                                    </>
+                                    <button onClick={logout} className="p-2 text-[#25433C] hover:bg-[#9ad5a0] transition-all duration-300 w-full">
+                                        Sair
+                                    </button>
                                 )}
                             </div>
                         </div>

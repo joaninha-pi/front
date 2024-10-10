@@ -30,10 +30,10 @@ function Login() {
     }
 
     return (
-        <div className="min-h-screen pt-36 md:pt-44 pb-24 md:pb-32 flex items-center justify-center bg-gradient-to-br from-[#9ed582] to-[#25433C]">
+        <div className="min-h-screen pt-36 md:pt-44 pb-24 md:pb-32 flex items-center justify-center bg-gradient-to-b from-[#9ed582] to-[#25433C]">
             <div className="w-full max-w-md bg-[#DEE6BE] rounded-lg shadow-lg p-8 flex flex-col">
                 <div className="flex flex-col items-center mb-6">
-                    <h2 className="text-2xl font-title font-extrabold text-red-600">Faça seu login</h2>
+                    <h2 className="text-2xl font-title font-extrabold text-red-700">Faça seu login</h2>
                 </div>
                 <form className="flex font-content font-semibold flex-col gap-4" onSubmit={login}>
                     <div className="flex flex-col">
@@ -43,7 +43,7 @@ function Login() {
                             id="usuario"
                             name="usuario"
                             placeholder="Usuário"
-                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-600 focus:outline-none focus:border-[#9ed582] transition duration-300"
+                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-700 focus:outline-none focus:border-[#9ed582] transition duration-300"
                             value={usuarioLogin.nome}
                             onChange={atualizarEstado}
                         />
@@ -55,7 +55,7 @@ function Login() {
                             id="senha"
                             name="senha"
                             placeholder="Senha"
-                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-600 focus:outline-none focus:border-[#9ed582] transition duration-300"
+                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-700 focus:outline-none focus:border-[#9ed582] transition duration-300"
                             value={usuarioLogin.senha}
                             onChange={atualizarEstado}
                         />
@@ -67,10 +67,6 @@ function Login() {
                             <span>Enviar</span>
                         )}
                     </button>
-                    <p className="text-sm text-center text-[#25433C] mt-4">
-                        Ainda não tem uma conta?{' '}
-                        <Link to="/cadastro" className="text-red-600 hover:underline">Cadastre-se</Link>
-                    </p>
                 </form>
             </div>
         </div>
