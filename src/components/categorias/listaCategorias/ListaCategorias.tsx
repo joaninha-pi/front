@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { RevolvingDot } from 'react-loader-spinner';
 import Categoria from '../../../models/Categoria';
-import { buscar } from '../../../services/Service';
+import { buscarU } from '../../../services/Service';
 import CardCategorias from '../cardCategorias/CardCategorias';
 import { toastAlerta } from '../../../utils/toastAlerta';
 
@@ -12,7 +12,7 @@ function ListaCategorias() {
   const buscarCategorias = async () => {
     setLoading(true);
     try {
-      await buscar('/categorias', setCategorias); // Autenticação necessária
+      await buscarU('/categorias', setCategorias); // Autenticação necessária
     } catch (error: any) {
       console.error('Erro ao buscar categorias:', error);
       toastAlerta('Erro ao buscar categorias', 'error');

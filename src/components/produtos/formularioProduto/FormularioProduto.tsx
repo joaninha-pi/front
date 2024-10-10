@@ -26,6 +26,7 @@ function FormularioProduto() {
     quantidade: 0,
     descricao: '',
     preco: 0,
+    peso: 0,
     categoria: null,
     image: '',
     usuario: null,
@@ -84,6 +85,18 @@ function FormularioProduto() {
       [e.target.name]: e.target.value,
       categoria: categoria,
       usuario: usuario,
+    });
+  }
+
+  // Lógica para validar e converter o peso em gramas para quilos
+  function atualizarPeso(e: ChangeEvent<HTMLInputElement>) {
+    let pesoInserido = parseFloat(e.target.value);
+    if (e.target.value.toLowerCase().includes('g')) {
+      pesoInserido = pesoInserido / 1000; // Converter gramas para quilos
+    }
+    setProduto({
+      ...produto,
+      peso: pesoInserido,
     });
   }
 
@@ -172,6 +185,19 @@ function FormularioProduto() {
                 step="0.01"
               />
             </div>
+            {/* Campo de peso */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="peso" className="text-lg font-semibold">Peso do produto (em kg ou g)</label>
+              <input
+                value={produto.peso || ''}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarPeso(e)}
+                type="text"
+                placeholder="Peso (ex: 1.5kg ou 1500g)"
+                name="peso"
+                required
+                className="border-2 border-slate-700 rounded p-2 text-sm"
+              />
+            </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="image" className="text-lg font-semibold">URL da imagem do produto</label>
               <input
@@ -230,9 +256,9 @@ function FormularioProduto() {
               <button
                 onClick={retornar}
                 type="button"
-                className='bg-red-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-400 hover:text-stone-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+                className='bg-red-700 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-500 hover:text-slate-300 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
               >
-                Voltar
+                Cancelar
               </button>
             </div>
           </form>

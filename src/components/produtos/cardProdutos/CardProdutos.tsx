@@ -13,6 +13,14 @@ function CardProduto({ produto }: CardProdutoProps) {
   const { usuario } = useContext(AuthContext);
   const [quantidade, setQuantidade] = useState(0); // Inicialmente 0
 
+  // Função para exibir o peso com a unidade correta
+  const exibirPeso = (peso: number) => {
+    if (peso >= 1000) {
+      return `${(peso / 1000).toFixed(2)} kg`; // Converte para kg se o peso for >= 1000 gramas
+    }
+    return `${peso} g`; // Exibe em gramas se for menor que 1000
+  };
+
   // Função para adicionar o produto ao carrinho
   const handleAdicionarAoCarrinho = () => {
     if (quantidade > 0) {
@@ -55,6 +63,9 @@ function CardProduto({ produto }: CardProdutoProps) {
 
       {/* Preço do produto */}
       <p className="text-xl font-bold text-gray-900 text-center mt-2">R$ {produto.preco.toFixed(2)}</p>
+
+      {/* Peso do produto */}
+      <p className="text-gray-700 font-semibold text-center mt-1">Peso: {exibirPeso(produto.peso)}</p>
 
       {/* Quantidade, botões de adicionar/remover e botão de adicionar ao carrinho */}
       <div className="flex items-center justify-center mt-4 space-x-2">
