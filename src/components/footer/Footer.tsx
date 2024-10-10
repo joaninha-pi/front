@@ -18,8 +18,8 @@ export default function Footer() {
 
                     <div className="w-full lg:w-1/3 flex justify-center mt-6 lg:mt-0">
                         <div className="flex space-x-4">
-                            <Link to="/sobre" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Sobre nós</Link>
-                            <Link to="/contato" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Contato</Link>
+                            <Link to="/about" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Sobre nós</Link>
+                            <Link to="/fale-conosco" className="hover:text-red-700 transition-colors duration-300 transform hover:scale-105">Contato</Link>
                         </div>
                     </div>
 

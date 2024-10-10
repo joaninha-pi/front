@@ -64,7 +64,7 @@ export default function Navbar() {
                                 Trazendo sorte pra você e para o mundo!
                             </p>
                             <div className="hidden md:flex space-x-4">
-                                <Link to="/sobre" className="hover:text-[#25433C] transition-all duration-300 font-content text-xs">Sobre nós</Link>
+                                <Link to="/about" className="hover:text-[#25433C] transition-all duration-300 font-content text-xs">Sobre nós</Link>
                                 <Link to="/fale-conosco" className="hover:text-[#25433C] transition-all duration-300 font-content text-xs">Fale Conosco</Link>
                             </div>
                         </div>
@@ -154,7 +154,7 @@ export default function Navbar() {
                                     Carrinho
                                 </Link>
                                 <Link
-                                    to="/sobre"
+                                    to="/about"
                                     onClick={closeMenu}
                                     className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
                                 >

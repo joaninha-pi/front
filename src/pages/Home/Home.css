@@ -1,0 +1,75 @@
+.animate-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.animate-section.fadeIn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Adicionando uma classe para o espaçamento dos textos */
+.text-spacing {
+    margin-bottom: 1.5rem; /* Ajuste conforme necessário */
+}
+
+/* Adicionando espaçamento e aumentando a largura do input e botão da newsletter */
+.newsletter-section input {
+    width: 80%; /* Aumenta a largura do input */
+    max-width: 400px; /* Define uma largura máxima */
+}
+
+/* Melhorando o espaçamento dos destaques e produtos */
+.highlight-item {
+    padding: 2rem; /* Aumenta o espaçamento interno */
+}
+
+.product-item {
+    padding: 1.5rem; /* Aumenta o espaçamento interno */
+}
+
+/* Ajustando o hero section para melhor responsividade */
+.hero-section {
+    min-height: 60vh; /* Ajuste conforme necessário */
+    padding: 2rem; /* Adiciona espaçamento */
+}
+
+.hero-section h1 {
+    margin-bottom: 1rem; /* Aumenta o espaçamento entre o título e o parágrafo */
+}
+
+/* Ajustes para textos menores em dispositivos móveis */
+@media (max-width: 640px) {
+    .hero-section h1 {
+        font-size: 2.5rem; /* Ajuste o tamanho da fonte */
+    }
+
+    .hero-section p {
+        font-size: 1rem; /* Ajuste o tamanho da fonte */
+    }
+}
+
+/* Estilos adicionais para suavizar transições */
+.transition-transform {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.transition-all {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Melhora a responsividade geral */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 1rem;
+    }
+
+    .newsletter-section {
+        padding: 1rem;
+    }
+
+    .highlight-item, .product-item {
+        padding: 1rem; /* Reduz o padding em dispositivos menores */
+    }
+}
