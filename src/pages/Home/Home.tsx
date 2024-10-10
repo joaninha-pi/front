@@ -1,20 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom'; // Importando useNavigate
-import { RotatingLines, RevolvingDot } from 'react-loader-spinner';
-import { FaCheck } from 'react-icons/fa'; // Importando ícone de check
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FaCheck } from 'react-icons/fa';
 import './Home.css';
 
 export default function Home() {
-    const [loading, setLoading] = useState(true);
     const [buttonLoading, setButtonLoading] = useState(false);
-    const [newsletterSubmitted, setNewsletterSubmitted] = useState(false); // Estado para controlar a inscrição na newsletter
+    const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
     const location = useLocation();
-    const navigate = useNavigate(); // Inicializando useNavigate
+    const navigate = useNavigate();
 
     useEffect(() => {
-        setLoading(false); // Define o carregamento como false imediatamente
-
-        // Configura o IntersectionObserver
+        // Verifique se o Intersection Observer está funcionando corretamente
         const sections = document.querySelectorAll('.animate-section');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -31,37 +27,22 @@ export default function Home() {
         return () => {
             observer.disconnect();
         };
-    }, [location]);
+    }, []); // Removido `location` das dependências
 
     const handleButtonClick = (path) => {
         setButtonLoading(true);
         setTimeout(() => {
             setButtonLoading(false);
-            // Redirecionar para a página especificada
             navigate(path);
-        }, 2000); // Simula uma operação antes do redirecionamento
-    };
-
-    const handleNewsletterSignup = () => {
-        setNewsletterSubmitted(true); // Atualiza o estado para indicar que a inscrição foi realizada
-        setTimeout(() => {
-            setNewsletterSubmitted(false); // Reseta após 2 segundos
         }, 2000);
     };
 
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <RevolvingDot
-                    height="100"
-                    width="100"
-                    color="[#25433C]"
-                    ariaLabel="revolving-dot-loading"
-                    visible={true}
-                />
-            </div>
-        );
-    }
+    const handleNewsletterSignup = () => {
+        setNewsletterSubmitted(true);
+        setTimeout(() => {
+            setNewsletterSubmitted(false);
+        }, 2000);
+    };
 
     return (
         <div className="home-container pt-24 md:pt-32 bg-[#DEE6BE]">
@@ -71,16 +52,10 @@ export default function Home() {
                     <p className="mt-4 font-content text-lg sm:text-base mb-6 text-spacing">Descubra os melhores produtos e práticas para uma produção agrícola eficiente e sustentável.</p>
                     <button
                         className="mt-6 px-8 py-3 sm:px-6 sm:py-2 bg-green-700 text-[#DEE6BE] rounded-lg hover:bg-green-800 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
-                        onClick={() => handleButtonClick("/produtos")} // Redireciona para /produtos
+                        onClick={() => handleButtonClick("/produtos")}
                     >
                         {buttonLoading ? (
-                            <RotatingLines
-                                strokeColor="white"
-                                strokeWidth="5"
-                                animationDuration="0.75"
-                                width="24"
-                                visible={true}
-                            />
+                            "Carregando..."
                         ) : (
                             "Explore Agora"
                         )}
@@ -110,16 +85,10 @@ export default function Home() {
                 <p className="text-lg mt-4 mb-6 font-content text-spacing">Incentivamos pequenos produtores a contribuir para uma agricultura sustentável conosco. Verifique nossos planos!</p>
                 <button
                     className="mt-6 px-8 py-3 bg-red-600 text-[#DEE6BE] rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
-                    onClick={() => handleButtonClick("/planos")} // Redireciona para /planos
+                    onClick={() => handleButtonClick("/planos")}
                 >
                     {buttonLoading ? (
-                        <RotatingLines
-                            strokeColor="white"
-                            strokeWidth="5"
-                            animationDuration="0.75"
-                            width="24"
-                            visible={true}
-                        />
+                        "Carregando..."
                     ) : (
                         "Saiba mais"
                     )}
@@ -140,7 +109,7 @@ export default function Home() {
                 >
                     {newsletterSubmitted ? (
                         <div className="flex items-center">
-                            <FaCheck className="text-[#DEE6BE] mr-2" /> {/* Ícone de check */}
+                            <FaCheck className="text-[#DEE6BE] mr-2" />
                             Inscrito!
                         </div>
                     ) : (
