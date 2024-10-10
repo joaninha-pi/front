@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RevolvingDot } from 'react-loader-spinner';
 import { motion } from 'framer-motion';
+import labout from "./labout.png";
 
 const Sobre = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -13,7 +14,7 @@ const Sobre = () => {
   }, []);
 
   return (
-    <div className="bg-stone-50">
+    <div className="bg-stone-50 pt-44">
       {loading ? (
         <div className="flex justify-center items-center min-h-screen">
           <RevolvingDot
@@ -35,7 +36,12 @@ const Sobre = () => {
             >
               <h2 className="text-4xl font-bold text-center text-black mb-4">Nossa História</h2>
               <div className="flex flex-col md:flex-row items-center">
-                <img src="https://cdn.discordapp.com/attachments/1262942566370775061/1276569973749186707/10.png?ex=66ca01ef&is=66c8b06f&hm=d2791b587a524cc3e7ce5b8d5bb62d926567312eb45fe19bb6192a06dae97195&" alt="arado" className="w-full md:w-1/2 rounded-md mb-4 md:mb-0 md:mr-6" />
+              <img
+              src={labout}
+              alt="arado"
+              className="w-full md:w-1/3 mb-4 md:mb-0 md:mr-6 object-cover max-w-xs md:max-w-full"
+            />
+
                 <p className="text-lg text-zinc-900 text-justify">
                   O e-commerce "Joana" surgiu da ideia de desenvolvedores que se conheceram em um bootcamp de Java Full Stack. 
                   Trazendo produtos alinhados com o ODS 12, buscamos o uso eficiente de recursos naturais e agregar valor às commodities.
