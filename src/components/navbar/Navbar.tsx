@@ -182,6 +182,32 @@ export default function Navbar() {
                                 >
                                     Fale Conosco
                                 </Link>
+                                {/* Condicional para exibir links de login ou perfil/logout */}
+                                {!usuario || !usuario.token ? (
+                                    <Link
+                                        to="/login"
+                                        onClick={closeMenu}
+                                        className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                    >
+                                        Login
+                                    </Link>
+                                ) : (
+                                    <>
+                                        <Link
+                                            to="/perfil"
+                                            onClick={closeMenu}
+                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                        >
+                                            Perfil
+                                        </Link>
+                                        <button
+                                            onClick={() => { logout(); closeMenu(); }}
+                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                        >
+                                            Sair
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     )}
