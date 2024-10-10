@@ -15,6 +15,7 @@ export default function Navbar() {
     const { usuario, handleLogout, quantidadeItems } = useContext(AuthContext);
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true); // Estado para controlar a visibilidade da navbar
 
     const handleResize = () => {
         if (window.innerWidth > 768) {
@@ -26,6 +27,19 @@ export default function Navbar() {
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const handleScroll = () => {
+        // Se o scroll for maior que 50px, esconda a navbar
+        const currentScroll = window.scrollY;
+        setIsVisible(currentScroll < 50);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
@@ -62,11 +76,11 @@ export default function Navbar() {
                     <RevolvingDot visible={true} height="200" width="200" ariaLabel="Loading" color="black" />
                 </div>
             ) : (
-                <nav className="fixed w-full top-0 bg-[#9ed582] shadow-lg z-50 transition-all duration-300">
+                <nav className={`fixed w-full top-0 bg-[#9ed582] shadow-lg z-50 transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
                     <div className="bg-red-700 py-1 text-[#DEE6BE]">
                         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 lg:px-6">
                             <p className="flex-1 text-center md:text-left font-content text-xs">
-                                Trazendo sorte pra você e para o mundo!
+                                Trazendo sorte para o seu negócio e para o mundo!
                             </p>
                             <div className="hidden md:flex space-x-4">
                                 <Link to="/about" className="hover:text-[#25433C] transition-all duration-300 font-content text-xs">Sobre nós</Link>
@@ -90,10 +104,7 @@ export default function Navbar() {
                             </Link>
 
                             <div className="hidden md:flex flex-grow justify-center space-x-16">
-                                {[
-                                    { path: '/produtos', label: 'Produtos' },
-                                    { path: '/planos', label: 'Planos' }
-                                ].map(({ path, label }, index) => (
+                                {[{ path: '/produtos', label: 'Produtos' }, { path: '/planos', label: 'Planos' }].map(({ path, label }, index) => (
                                     <Link
                                         key={index}
                                         to={path}
@@ -104,7 +115,6 @@ export default function Navbar() {
                                         <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-red-700 transition-all duration-300 group-hover:w-full"></span>
                                     </Link>
                                 ))}
-
                             </div>
 
                             <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
@@ -120,7 +130,7 @@ export default function Navbar() {
                                 {!usuario || !usuario.token ? (
                                     <button onClick={handleLoginClick} className="flex items-center space-x-2 transition-transform duration-300 hover:scale-110" aria-label="Fazer login">
                                         <img src={login} alt="Login" className="w-5 h-5 lg:w-6 lg:h-6" />
-                                        <span className="text-xs lg:text-base">Login</span>
+                                        <span className="text-xs font-content font-medium lg:text-base">Login</span>
                                     </button>
                                 ) : (
                                     <>
@@ -172,33 +182,6 @@ export default function Navbar() {
                                 >
                                     Fale Conosco
                                 </Link>
-
-                                {/* Links de administrador (visíveis apenas para usuários com o domínio @root.com) */}
-                                {isUserRoot() && (
-                                    <>
-                                        <Link
-                                            to="/categorias"
-                                            onClick={closeMenu}
-                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                        >
-                                            Categorias
-                                        </Link>
-                                        <Link
-                                            to="/cadastroCategoria"
-                                            onClick={closeMenu}
-                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                        >
-                                            Cadastrar Categoria
-                                        </Link>
-                                        <Link
-                                            to="/cadastroProduto"
-                                            onClick={closeMenu}
-                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
-                                        >
-                                            Cadastrar Produto
-                                        </Link>
-                                    </>
-                                )}
                             </div>
                         </div>
                     )}

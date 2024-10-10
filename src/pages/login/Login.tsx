@@ -30,45 +30,44 @@ function Login() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 to-red-400">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 flex flex-col">
+        <div className="min-h-screen pt-36 md:pt-44 pb-24 md:pb-32 flex items-center justify-center bg-gradient-to-br from-[#9ed582] to-[#25433C]">
+            <div className="w-full max-w-md bg-[#DEE6BE] rounded-lg shadow-lg p-8 flex flex-col">
                 <div className="flex flex-col items-center mb-6">
-                    <img src={logo} alt="Logo" className="h-32 mb-2" />
-                    <h2 className="text-xl font-bold text-gray-800">Faça seu login</h2>
+                    <h2 className="text-2xl font-title font-extrabold text-red-600">Faça seu login</h2>
                 </div>
-                <form className="flex flex-col gap-4" onSubmit={login}>
+                <form className="flex font-content font-semibold flex-col gap-4" onSubmit={login}>
                     <div className="flex flex-col">
-                        <label htmlFor="usuario" className="text-gray-700">Usuário</label>
+                        <label htmlFor="usuario" className="text-[#25433C]">Usuário</label>
                         <input
                             type="text"
                             id="usuario"
                             name="usuario"
                             placeholder="Usuário"
-                            className="p-2 border-b-2 border-green-600 focus:outline-none focus:border-red-600 transition duration-300"
+                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-600 focus:outline-none focus:border-[#9ed582] transition duration-300"
                             value={usuarioLogin.nome}
                             onChange={atualizarEstado}
                         />
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="senha" className="text-gray-700">Senha</label>
+                        <label htmlFor="senha" className="text-[#25433C]">Senha</label>
                         <input
                             type="password"
                             id="senha"
                             name="senha"
                             placeholder="Senha"
-                            className="p-2 border-b-2 border-green-600 focus:outline-none focus:border-red-600 transition duration-300"
+                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-600 focus:outline-none focus:border-[#9ed582] transition duration-300"
                             value={usuarioLogin.senha}
                             onChange={atualizarEstado}
                         />
                     </div>
-                    <button type='submit' className="mt-4 bg-black text-white py-2 rounded hover:bg-lime-600 transition duration-300 flex justify-center items-center">
+                    <button type='submit' className="mt-4 bg-[#25433C] text-[#DEE6BE] py-2 rounded hover:bg-[#9ed582] hover:text-[#25433C] transition duration-300 flex justify-center items-center">
                         {isLoading ? (
                             <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="24" visible={true} />
                         ) : (
                             <span>Enviar</span>
                         )}
                     </button>
-                    <p className="text-sm text-center text-gray-600 mt-4">
+                    <p className="text-sm text-center text-[#25433C] mt-4">
                         Ainda não tem uma conta?{' '}
                         <Link to="/cadastro" className="text-red-600 hover:underline">Cadastre-se</Link>
                     </p>

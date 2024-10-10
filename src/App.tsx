@@ -35,7 +35,7 @@ export default function App() {
                     {/* Adicionando o VLibras */}
                     <VLibras />
 
-                    <div className="min-h-[80vh] bg-stone-100 text-gray-800">
+                    <div className="min-h-[80vh] bg-[#DEE6BE] text-[#25433C]">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/home" element={<Home />} />

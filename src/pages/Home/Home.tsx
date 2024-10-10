@@ -55,7 +55,7 @@ export default function Home() {
                 <RevolvingDot
                     height="100"
                     width="100"
-                    color="black"
+                    color="[#25433C]"
                     ariaLabel="revolving-dot-loading"
                     visible={true}
                 />
@@ -64,13 +64,13 @@ export default function Home() {
     }
 
     return (
-        <div className="home-container pt-24 md:pt-32 bg-gray-50">
+        <div className="home-container pt-24 md:pt-32 bg-[#DEE6BE]">
             <section className="hero-section animate-section relative bg-[url('https://www.sargs.agr.br/assets/images/banner-soja-1-1680x840.jpg')] bg-cover bg-center flex items-center justify-center p-6">
-                <div className="font-title text-center text-white backdrop-blur-md bg-black/40 p-6 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105">
+                <div className="font-title text-center text-[#DEE6BE] backdrop-blur-md bg-black/40 p-6 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105">
                     <h1 className="text-5xl sm:text-4xl font-bold mb-4 text-spacing">Sua Solução Sustentável para Agricultura</h1>
                     <p className="mt-4 font-content text-lg sm:text-base mb-6 text-spacing">Descubra os melhores produtos e práticas para uma produção agrícola eficiente e sustentável.</p>
                     <button
-                        className="mt-6 px-8 py-3 sm:px-6 sm:py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+                        className="mt-6 px-8 py-3 sm:px-6 sm:py-2 bg-green-700 text-[#DEE6BE] rounded-lg hover:bg-green-800 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
                         onClick={handleButtonClick}
                     >
                         {buttonLoading ? (
@@ -105,11 +105,11 @@ export default function Home() {
                 ))}
             </section>
 
-            <section className="cta-section bg-green-700 text-white py-12 text-center animate-section">
+            <section className="cta-section bg-[#25433C] text-[#DEE6BE] py-12 text-center animate-section">
                 <h2 className="text-3xl font-title font-bold mb-4">Descubra nossos planos</h2>
                 <p className="text-lg mt-4 mb-6 font-content text-spacing">Incentivamos pequenos produtores a contribuir para uma agricultura sustentável conosco. Verifique nossos planos!</p>
                 <button
-                    className="mt-6 px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+                    className="mt-6 px-8 py-3 bg-red-600 text-[#DEE6BE] rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
                     onClick={handleButtonClick} // Redireciona para /planos
                 >
                     {buttonLoading ? (
@@ -131,16 +131,16 @@ export default function Home() {
                 <p className="text-gray-700 mb-4 font-content">Receba promoções exclusivas e conteúdo personalizado de agroeducação em seu e-mail.</p>
                 <input
                     type="email"
-                    className="px-4 py-2 border border-green-500 rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-600 mb-4"
+                    className="px-4 py-2 border bg-[#DEE6BE] border-green-500 rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-600 mb-4"
                     placeholder="Seu e-mail"
                 />
                 <button
-                    className="ml-2 px-4 py-2 bg-green-700 text-white rounded-md hover:bg-green-800 transition-all duration-300"
+                    className="ml-2 px-4 py-2 bg-green-700 text-[#DEE6BE] rounded-md hover:bg-green-800 transition-all duration-300"
                     onClick={handleNewsletterSignup}
                 >
                     {newsletterSubmitted ? (
                         <div className="flex items-center">
-                            <FaCheck className="text-white mr-2" /> {/* Ícone de check */}
+                            <FaCheck className="text-[#DEE6BE] mr-2" /> {/* Ícone de check */}
                             Inscrito!
                         </div>
                     ) : (
