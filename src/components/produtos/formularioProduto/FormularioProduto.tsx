@@ -88,7 +88,6 @@ function FormularioProduto() {
     });
   }
 
-  // Lógica para validar e converter o peso em gramas para quilos
   function atualizarPeso(e: ChangeEvent<HTMLInputElement>) {
     let pesoInserido = parseFloat(e.target.value);
     if (e.target.value.toLowerCase().includes('g')) {
@@ -140,14 +139,14 @@ function FormularioProduto() {
   const carregandoCategoria = categoria.descricao === '';
 
   return (
-    <div className='bg-gray-100 min-h-screen py-6 flex flex-col'>
+    <div className='bg-gray-100 min-h-screen py-36 flex flex-col'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <h1 className="text-2xl sm:text-4xl text-center my-4 font-bold">
           {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
         </h1>
 
-        <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
-          <form onSubmit={gerarNovoProduto} className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+          <form onSubmit={gerarNovoProduto} className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="nome" className="text-lg font-semibold">Nome do produto</label>
               <input
@@ -157,7 +156,7 @@ function FormularioProduto() {
                 placeholder="Nome"
                 name="nome"
                 required
-                className="border-2 border-slate-700 rounded p-2 text-sm"
+                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -169,7 +168,7 @@ function FormularioProduto() {
                 placeholder="Descrição"
                 name="descricao"
                 required
-                className="border-2 border-slate-700 rounded p-2 text-sm"
+                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -181,11 +180,10 @@ function FormularioProduto() {
                 placeholder="Preço"
                 name="preco"
                 required
-                className="border-2 border-slate-700 rounded p-2 text-sm"
+                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
                 step="0.01"
               />
             </div>
-            {/* Campo de peso */}
             <div className="flex flex-col gap-2">
               <label htmlFor="peso" className="text-lg font-semibold">Peso do produto (em kg ou g)</label>
               <input
@@ -195,7 +193,7 @@ function FormularioProduto() {
                 placeholder="Peso (ex: 1.5kg ou 1500g)"
                 name="peso"
                 required
-                className="border-2 border-slate-700 rounded p-2 text-sm"
+                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -207,13 +205,13 @@ function FormularioProduto() {
                 placeholder="URL da imagem"
                 name="image"
                 required
-                className="border-2 border-slate-700 rounded p-2 text-sm"
+                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
               />
               {produto.image && (
                 <img
                   src={produto.image}
                   alt="Imagem do Produto"
-                  className="mt-4 w-full sm:w-32 h-32 object-cover rounded"
+                  className="mt-4 w-full sm:w-32 h-32 object-cover rounded-lg shadow-sm"
                 />
               )}
             </div>
@@ -222,7 +220,7 @@ function FormularioProduto() {
               <select
                 name="categoria"
                 id="categoria"
-                className="border p-2 border-slate-800 rounded text-sm"
+                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
                 onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
               >
                 <option value="" disabled>
@@ -239,24 +237,20 @@ function FormularioProduto() {
               <button
                 disabled={carregandoCategoria || loading}
                 type="submit"
-                className='bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+                className='bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition duration-300'
               >
                 {loading ? (
-                  <div className="flex items-center justify-center">
-                    <RotatingLines
-                      strokeColor="#18181b"
-                      strokeWidth="5"
-                      animationDuration="0.75"
-                      width="24"
-                      visible={true}
-                    />
+                  <div className='flex items-center justify-center'>
+                    <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="20" visible={true} />
                   </div>
-                ) : id !== undefined ? 'Editar' : 'Cadastrar'}
+                ) : (
+                  (id !== undefined ? 'Salvar' : 'Cadastrar')
+                )}
               </button>
               <button
-                onClick={retornar}
                 type="button"
-                className='bg-red-700 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-red-500 hover:text-slate-300 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
+                onClick={retornar}
+                className='bg-red-500 text-white font-body font-bold text-sm p-3 rounded-lg hover:bg-red-400 hover:opacity-75 active:scale-95 transition duration-300'
               >
                 Cancelar
               </button>

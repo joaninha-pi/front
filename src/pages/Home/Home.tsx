@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // Importando useNavigate
 import { RotatingLines, RevolvingDot } from 'react-loader-spinner';
+import { FaCheck } from 'react-icons/fa'; // Importando ícone de check
 import './Home.css';
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
     const [buttonLoading, setButtonLoading] = useState(false);
+    const [newsletterSubmitted, setNewsletterSubmitted] = useState(false); // Estado para controlar a inscrição na newsletter
     const location = useLocation();
     const navigate = useNavigate(); // Inicializando useNavigate
 
@@ -41,7 +43,10 @@ export default function Home() {
     };
 
     const handleNewsletterSignup = () => {
-        alert("Obrigado por se inscrever na nossa newsletter!");
+        setNewsletterSubmitted(true); // Atualiza o estado para indicar que a inscrição foi realizada
+        setTimeout(() => {
+            setNewsletterSubmitted(false); // Reseta após 2 segundos
+        }, 2000);
     };
 
     if (loading) {
@@ -133,7 +138,14 @@ export default function Home() {
                     className="ml-2 px-4 py-2 bg-green-700 text-white rounded-md hover:bg-green-800 transition-all duration-300"
                     onClick={handleNewsletterSignup}
                 >
-                    Inscrever-se
+                    {newsletterSubmitted ? (
+                        <div className="flex items-center">
+                            <FaCheck className="text-white mr-2" /> {/* Ícone de check */}
+                            Inscrito!
+                        </div>
+                    ) : (
+                        "Inscrever-se"
+                    )}
                 </button>
             </section>
         </div>
