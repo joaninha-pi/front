@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Produto } from '../../../models/Produto';
 import Categoria from '../../../models/Categoria';
-import { buscar, atualizar, cadastrar } from '../../../services/Service';
+import { buscarU, atualizar, cadastrar } from '../../../services/Service';
 import { RotatingLines } from 'react-loader-spinner';
 import { toastAlerta } from '../../../utils/toastAlerta';
 
@@ -34,27 +34,15 @@ function FormularioProduto() {
   const [loading, setLoading] = useState(false);
 
   async function buscarProdutoPorId(id: string) {
-    await buscar(`/produtos/${id}`, setProduto, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    await buscarU(`/produtos/${id}`, setProduto);
   }
 
   async function buscarCategoriaPorId(id: string) {
-    await buscar(`/categorias/${id}`, setCategoria, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    await buscarU(`/categorias/${id}`, setCategoria);
   }
 
   async function buscarCategorias() {
-    await buscar('/categorias', setCategorias, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    await buscarU('/categorias', setCategorias);
   }
 
   useEffect(() => {
