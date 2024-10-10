@@ -14,12 +14,6 @@ function FormularioProduto() {
   const token = usuario.token;
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [categoria, setCategoria] = useState<Categoria>({
-    id: 0,
-    nome: '',
-    descricao: '',
-  });
-
   const [produto, setProduto] = useState<Produto>({
     id: 0,
     nome: '',
@@ -36,14 +30,6 @@ function FormularioProduto() {
 
   async function buscarProdutoPorId(id: string) {
     await buscar(`/produtos/${id}`, setProduto, {
-      headers: {
-        Authorization: token,
-      },
-    });
-  }
-
-  async function buscarCategoriaPorId(id: string) {
-    await buscar(`/categorias/${id}`, setCategoria, {
       headers: {
         Authorization: token,
       },
@@ -72,32 +58,30 @@ function FormularioProduto() {
     }
   }, [id]);
 
-  useEffect(() => {
-    setProduto({
-      ...produto,
-      categoria: categoria,
-    });
-  }, [categoria]);
-
   function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setProduto({
       ...produto,
       [e.target.name]: e.target.value,
-      categoria: categoria,
       usuario: usuario,
     });
   }
 
   function atualizarPeso(e: ChangeEvent<HTMLInputElement>) {
     let pesoInserido = parseFloat(e.target.value);
+    if (isNaN(pesoInserido)) {
+      // Opcional: Tratar caso o usuário insira um valor inválido
+      return;
+    }
     if (e.target.value.toLowerCase().includes('g')) {
       pesoInserido = pesoInserido / 1000; // Converter gramas para quilos
     }
+    // Agora, o peso é convertido para número novamente, antes de atribuí-lo ao estado
     setProduto({
       ...produto,
-      peso: pesoInserido,
+      peso: Number(pesoInserido.toFixed(2)), // Converter para número
     });
-  }
+}
+
 
   function retornar() {
     navigate('/produtos');
@@ -136,8 +120,6 @@ function FormularioProduto() {
     }
   }
 
-  const carregandoCategoria = categoria.descricao === '';
-
   return (
     <div className='bg-gray-100 min-h-screen py-36 flex flex-col'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
@@ -151,7 +133,7 @@ function FormularioProduto() {
               <label htmlFor="nome" className="text-lg font-semibold">Nome do produto</label>
               <input
                 value={produto.nome}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                onChange={atualizarEstado}
                 type="text"
                 placeholder="Nome"
                 name="nome"
@@ -163,7 +145,7 @@ function FormularioProduto() {
               <label htmlFor="descricao" className="text-lg font-semibold">Descrição do produto</label>
               <input
                 value={produto.descricao}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                onChange={atualizarEstado}
                 type="text"
                 placeholder="Descrição"
                 name="descricao"
@@ -175,7 +157,7 @@ function FormularioProduto() {
               <label htmlFor="preco" className="text-lg font-semibold">Preço do produto</label>
               <input
                 value={produto.preco}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                onChange={atualizarEstado}
                 type="number"
                 placeholder="Preço"
                 name="preco"
@@ -188,7 +170,7 @@ function FormularioProduto() {
               <label htmlFor="peso" className="text-lg font-semibold">Peso do produto (em kg ou g)</label>
               <input
                 value={produto.peso || ''}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarPeso(e)}
+                onChange={atualizarPeso}
                 type="text"
                 placeholder="Peso (ex: 1.5kg ou 1500g)"
                 name="peso"
@@ -200,7 +182,7 @@ function FormularioProduto() {
               <label htmlFor="image" className="text-lg font-semibold">URL da imagem do produto</label>
               <input
                 value={produto.image}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                onChange={atualizarEstado}
                 type="text"
                 placeholder="URL da imagem"
                 name="image"
@@ -221,7 +203,13 @@ function FormularioProduto() {
                 name="categoria"
                 id="categoria"
                 className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
-                onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
+                onChange={(e) => {
+                  const categoriaSelecionada = categorias.find(cat => cat.id === parseInt(e.target.value));
+                  setProduto({
+                    ...produto,
+                    categoria: categoriaSelecionada || null,
+                  });
+                }}
               >
                 <option value="" disabled>
                   Selecione uma categoria
@@ -235,7 +223,7 @@ function FormularioProduto() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                disabled={carregandoCategoria || loading}
+                disabled={loading}
                 type="submit"
                 className='bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition duration-300'
               >

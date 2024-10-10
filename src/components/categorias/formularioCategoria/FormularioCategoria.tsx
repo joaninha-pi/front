@@ -32,9 +32,12 @@ function FormularioCategoria() {
     async function buscarPorId(id: string) {
         try {
             setLoading(true);
-            await buscar(`/categorias/${id}`, setCategoria); // Não passar cabeçalhos aqui
+            await buscar(`/categorias/${id}`, setCategoria, {
+                headers: {
+                    'Authorization': token
+                }
+            });
         } catch (error: any) {
-            console.error(error);
             toastAlerta('Erro ao buscar a categoria', 'erro');
         } finally {
             setLoading(false);
@@ -53,18 +56,20 @@ function FormularioCategoria() {
         setLoading(true);
 
         try {
-            const config = { // Create an empty config object or define headers as needed
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-
             if (id) {
                 const categoriaComId = { ...categoria, id: Number(id) };
-                await atualizar(`/categorias`, categoriaComId, setCategoria, config); // Ensure to pass config
+                await atualizar(`/categorias`, categoriaComId, setCategoria, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
                 toastAlerta('Categoria atualizada com sucesso', 'sucesso');
             } else {
-                await cadastrar(`/categorias`, categoria, setCategoria, config); // Now passing the config
+                await cadastrar(`/categorias`, categoria, setCategoria, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
                 toastAlerta('Categoria cadastrada com sucesso', 'sucesso');
             }
             retornar();
@@ -79,7 +84,6 @@ function FormularioCategoria() {
             setLoading(false);
         }
     }
-
 
     function retornar() {
         navigate("/categorias");
