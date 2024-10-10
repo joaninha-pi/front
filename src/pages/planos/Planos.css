@@ -1,0 +1,12 @@
+.planos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.plano-card {
+    transition: transform 0.2s;
+}
+
+.plano-card:hover {
+    transform: scale(1.05);
+}
