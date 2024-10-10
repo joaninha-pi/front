@@ -75,13 +75,15 @@ function CardProduto({ produto }: CardProdutoProps) {
         {isAdmin && (
           <div className="flex justify-between mt-2">
             <Link 
-              to={`/produtos/editar/${produto.id}`} 
+              to={`/editarProduto/${produto.id}`} 
               className="text-blue-500 hover:underline flex items-center">
               <FaEdit className="mr-1" /> Editar
             </Link>
-            <button className="text-red-500 hover:underline flex items-center">
-              <FaTrashAlt className="mr-1" /> Remover
-            </button>
+            <Link 
+              to={`/deletarProduto/${produto.id}`} 
+              className="text-red-600 hover:underline flex items-center">
+              <FaTrashAlt className="mr-1" /> Deletar
+            </Link>
           </div>
         )}
       </div>
