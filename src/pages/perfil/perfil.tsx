@@ -1,39 +1,109 @@
-import React, { useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../contexts/AuthContext'
-import { toastAlerta } from '../../utils/toastAlerta'
-// import Logo from '../../assets/images/logo.svg'
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import { toastAlerta } from '../../utils/toastAlerta';
+import { RotatingLines } from 'react-loader-spinner';
+import { atualizar } from '../../services/Service'; // Certifique-se de importar a função corretamente
 
 function Perfil() {
-  let navigate = useNavigate()
+    let navigate = useNavigate();
+    const { usuario } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        nome: usuario.nome,
+        email: usuario.usuario,
+        foto: usuario.foto || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+    });
 
-
-    const { usuario } = useContext(AuthContext)
+    // Adicione um estado para armazenar os dados atualizados
+    const [dadosUsuario, setDadosUsuario] = useState(usuario); 
 
     useEffect(() => {
         if (usuario.token === "") {
-            toastAlerta('Você precisa estar logado', 'info')
-            navigate("/login")
+            toastAlerta('Você precisa estar logado', 'info');
+            navigate("/login");
         }
-    }, [usuario.token])
+    }, [usuario.token]);
 
-    if(usuario.foto == ""){
-        usuario.foto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
-  return (
-    <div className="fundoLogao">
-      <div className=''></div>
-    <div className='container mx-auto mt-4 rounded-2xl overflow-hidden'>
-      <img className='w-full h-72 object-cover border-b-8 border-white' src='https://joaobidu.com.br/wp-content/uploads/2023/02/joaninhas.jpg' alt="Capa do Perfil" />
-      <img src={usuario.foto} alt={`"Foto de perfil de ${usuario.nome}`} className='rounded-full w-56 mx-auto mt-[-8rem] border-8 border-white relative z-10' />
-      <div className="relative mt-[-6rem] h-72 flex flex-col bg-lime-500 text-white text-2xl items-center justify-center">
-        <p>Nome: {usuario.nome} </p>
-        <p>Email: {usuario.usuario}</p>
-      </div>
-    </div>
-    </div>
-  )
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        // Simulação de atualização de perfil
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Simula um atraso
+
+        const url = `/usuarios/atualizar`; // Altere para a URL correta da API
+
+        // Chame a função atualizar, passando um objeto vazio como header
+        await atualizar(url, formData, setDadosUsuario, {}); // Agora você passa setDadosUsuario
+        toastAlerta('Perfil atualizado com sucesso!', 'sucesso');
+        setLoading(false);
+    };
+
+    return (
+        <div className="min-h-screen pt-36 md:pt-44 pb-24 md:pb-32 flex items-center justify-center bg-gradient-to-b from-[#9ed582] to-[#25433C]">
+            <div className="w-full max-w-lg bg-[#DEE6BE] rounded-lg shadow-lg p-8 flex flex-col">
+                <div className="flex flex-col items-center mb-6">
+                    <h2 className="text-2xl font-title font-extrabold text-red-700">Perfil de {usuario.nome}</h2>
+                </div>
+                <form className="flex font-content font-semibold flex-col gap-4" onSubmit={handleSubmit}>
+                    <div className="flex flex-col items-center mb-4">
+                        <img src={formData.foto} alt={`Foto de perfil de ${formData.nome}`} className='rounded-full w-32 h-32 border-4 border-red-700 mb-4' />
+                        <label htmlFor="foto" className="text-red-700">URL da Foto:</label>
+                        <input
+                            type="text"
+                            id="foto"
+                            name="foto"
+                            value={formData.foto}
+                            onChange={handleChange}
+                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-700 focus:outline-none focus:border-[#9ed582] transition duration-300 w-full"
+                            placeholder="Digite a URL da sua foto"
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <label htmlFor="nome" className="text-[#25433C]">Nome:</label>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            value={formData.nome}
+                            onChange={handleChange}
+                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-700 focus:outline-none focus:border-[#9ed582] transition duration-300"
+                            placeholder="Digite seu nome"
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <label htmlFor="email" className="text-[#25433C]">Email:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="p-2 border-b-2 bg-[#DEE6BE] border-red-700 focus:outline-none focus:border-[#9ed582] transition duration-300"
+                            placeholder="Digite seu email"
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="mt-4 bg-[#25433C] text-[#DEE6BE] py-2 rounded hover:bg-[#9ed582] hover:text-[#25433C] transition duration-300 flex justify-center items-center"
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="24" visible={true} />
+                        ) : (
+                            <span>Atualizar Perfil</span>
+                        )}
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
 }
 
-export default Perfil
+export default Perfil;

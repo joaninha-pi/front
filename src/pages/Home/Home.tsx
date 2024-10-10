@@ -33,12 +33,12 @@ export default function Home() {
         };
     }, [location]);
 
-    const handleButtonClick = () => {
+    const handleButtonClick = (path) => {
         setButtonLoading(true);
         setTimeout(() => {
             setButtonLoading(false);
-            // Redirecionar para a página de planos
-            navigate("/planos");
+            // Redirecionar para a página especificada
+            navigate(path);
         }, 2000); // Simula uma operação antes do redirecionamento
     };
 
@@ -71,7 +71,7 @@ export default function Home() {
                     <p className="mt-4 font-content text-lg sm:text-base mb-6 text-spacing">Descubra os melhores produtos e práticas para uma produção agrícola eficiente e sustentável.</p>
                     <button
                         className="mt-6 px-8 py-3 sm:px-6 sm:py-2 bg-green-700 text-[#DEE6BE] rounded-lg hover:bg-green-800 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
-                        onClick={handleButtonClick}
+                        onClick={() => handleButtonClick("/produtos")} // Redireciona para /produtos
                     >
                         {buttonLoading ? (
                             <RotatingLines
@@ -110,7 +110,7 @@ export default function Home() {
                 <p className="text-lg mt-4 mb-6 font-content text-spacing">Incentivamos pequenos produtores a contribuir para uma agricultura sustentável conosco. Verifique nossos planos!</p>
                 <button
                     className="mt-6 px-8 py-3 bg-red-600 text-[#DEE6BE] rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
-                    onClick={handleButtonClick} // Redireciona para /planos
+                    onClick={() => handleButtonClick("/planos")} // Redireciona para /planos
                 >
                     {buttonLoading ? (
                         <RotatingLines

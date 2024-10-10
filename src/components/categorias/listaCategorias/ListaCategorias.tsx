@@ -26,30 +26,31 @@ function ListaCategorias() {
   }, []);
 
   return (
-    <>
-      <div className="fundoLogao">
-        {loading && (
-          <div className="flex justify-center items-center min-h-screen">
-            <RevolvingDot
-              visible={true}
-              height="200"
-              width="200"
-              ariaLabel="circles-loading"
-              color='black'
-            />
-          </div>
-        )}
-        <div className="flex justify-center w-full py-4">
-          <div className="container flex flex-col">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categorias.map((categoria) => (
-                <CardCategorias key={categoria.id} categoria={categoria} />
-              ))}
+    <div className="bg-[#DEE6BE] min-h-screen py-44">
+      {loading && (
+        <div className="flex justify-center items-center min-h-screen">
+          <RevolvingDot
+            visible={true}
+            height="200"
+            width="200"
+            ariaLabel="circles-loading"
+            color='black'
+          />
+        </div>
+      )}
+      <div className="container mx-auto flex flex-col items-center">
+        <h2 className="text-3xl font-title font-extrabold text-center mb-8 text-red-700 animate-fadeIn">
+          Nossas Categorias
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categorias.map((categoria) => (
+            <div key={categoria.id} className="animate-fadeIn">
+              <CardCategorias categoria={categoria} />
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
