@@ -68,6 +68,12 @@ function Login() {
                         )}
                     </button>
                 </form>
+                <div className="mt-4 text-center">
+                    <p className="text-[#25433C]">
+                        Ainda não tem uma conta? 
+                        <Link to="/cadastro" className="text-red-700 font-semibold hover:underline"> Cadastre-se</Link>
+                    </p>
+                </div>
             </div>
         </div>
     );
