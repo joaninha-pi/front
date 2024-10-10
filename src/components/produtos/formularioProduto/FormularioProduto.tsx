@@ -68,14 +68,20 @@ function FormularioProduto() {
 
   function atualizarPeso(e: ChangeEvent<HTMLInputElement>) {
     let pesoInserido = parseFloat(e.target.value);
+    if (isNaN(pesoInserido)) {
+      // Opcional: Tratar caso o usuário insira um valor inválido
+      return;
+    }
     if (e.target.value.toLowerCase().includes('g')) {
       pesoInserido = pesoInserido / 1000; // Converter gramas para quilos
     }
+    // Agora, o peso é convertido para número novamente, antes de atribuí-lo ao estado
     setProduto({
       ...produto,
-      peso: pesoInserido,
+      peso: Number(pesoInserido.toFixed(2)), // Converter para número
     });
-  }
+}
+
 
   function retornar() {
     navigate('/produtos');
