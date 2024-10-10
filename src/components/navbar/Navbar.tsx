@@ -177,6 +177,13 @@ export default function Navbar() {
                                 {isUserRoot() && (
                                     <>
                                         <Link
+                                            to="/categorias"
+                                            onClick={closeMenu}
+                                            className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
+                                        >
+                                            Categorias
+                                        </Link>
+                                        <Link
                                             to="/cadastroCategoria"
                                             onClick={closeMenu}
                                             className="py-2 text-[#25433C] transition-all duration-300 hover:bg-red-700 hover:text-[#DEE6BE] rounded-lg w-full text-center transform hover:scale-105"
