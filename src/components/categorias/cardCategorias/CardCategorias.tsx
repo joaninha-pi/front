@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 import Categoria from '../../../models/Categoria';
-import { useContext } from 'react';
-import { AuthContext } from '../../../contexts/AuthContext';
 
 interface CardCategoriaProps {
     categoria: Categoria;
@@ -9,18 +7,23 @@ interface CardCategoriaProps {
 
 function CardCategorias({ categoria }: CardCategoriaProps) {
     return (
-        <div className="flex flex-col rounded-xl w-full max-w-sm bg-[#FFE5B4] shadow-lg transition-transform duration-300 transform hover:scale-105">
-            <div className="flex flex-col p-4 sm:p-6">
-                <h3 className="text-2xl sm:text-3xl font-title font-bold text-center text-[#25433C] pb-4 sm:pb-6">Categoria</h3>
-                <h4 className="text-lg sm:text-2xl font-subtitle font-bold text-center text-[#25433C] pb-4 sm:pb-6">{categoria.nome}</h4>
-                <div className="text-base sm:text-lg font-body text-center text-[#25433C] mb-4">{categoria.descricao}</div>
-                
+        <div className="flex flex-col rounded-xl w-full max-w-sm h-[250px] bg-[#9ed582] shadow-lg transition-transform duration-300 transform hover:scale-105">
+            <div className="flex flex-col p-4 sm:p-6 h-full">
+                <h4 className="text-lg sm:text-2xl font-title font-bold text-center text-red-700 pb-2 sm:pb-4">{categoria.nome}</h4>
+                <div className="text-base sm:text-lg font-content text-center text-[#25433C] mb-4 flex-grow">{categoria.descricao}</div>
+
                 {/* Botões de editar e deletar */}
-                <div className="flex justify-around pt-4 gap-2">
-                    <Link to={`/editarCategoria/${categoria.id}`} className='bg-lime-500 text-white font-body font-bold text-xs p-2 rounded-lg hover:bg-lime-400 transition-colors duration-300'>
+                <div className="flex justify-center pt-2 gap-2">
+                    <Link
+                        to={`/editarCategoria/${categoria.id}`}
+                        className='bg-[#25433C] text-[#DEE6BE] font-content font-bold text-sm p-3 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl'
+                    >
                         Editar
                     </Link>
-                    <Link to={`/deletarCategoria/${categoria.id}`} className='bg-red-700 text-white font-body font-bold text-xs p-2 rounded-lg hover:bg-red-600 transition-colors duration-300'>
+                    <Link
+                        to={`/deletarCategoria/${categoria.id}`}
+                        className='bg-red-700 text-[#DEE6BE] font-content font-bold text-sm p-3 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl'
+                    >
                         Deletar
                     </Link>
                 </div>

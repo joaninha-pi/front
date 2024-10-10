@@ -12,7 +12,7 @@ function ListaCategorias() {
   const buscarCategorias = async () => {
     setLoading(true);
     try {
-      await buscarU('/categorias', setCategorias); // Autenticação não necessária o U quer dizer usuário para indicar que qualquer usuário pode buscar necessária
+      await buscarU('/categorias', setCategorias);
     } catch (error: any) {
       console.error('Erro ao buscar categorias:', error);
       toastAlerta('Erro ao buscar categorias', 'error');

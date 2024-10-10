@@ -36,7 +36,7 @@ function CardProduto({ produto }: CardProdutoProps) {
   const decrementarQuantidade = () => setQuantidade(prev => (prev > 0 ? prev - 1 : 0));
 
   return (
-    <div className="border rounded-lg shadow-lg p-6 max-w-xs bg-white relative hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+    <div className="flex flex-col rounded-xl w-full max-w-sm h-[350px] bg-white shadow-lg transition-transform duration-300 transform hover:scale-105">
       {/* Ícones de edição e exclusão no canto superior direito */}
       {usuario.token !== "" && usuario.usuario === "root@root.com" && (
         <div className="absolute top-2 right-2 flex space-x-2">
@@ -50,7 +50,7 @@ function CardProduto({ produto }: CardProdutoProps) {
       )}
 
       {/* Imagem do produto */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-4">
         <img
           src={produto.image}
           alt={produto.nome}
@@ -71,7 +71,7 @@ function CardProduto({ produto }: CardProdutoProps) {
       <div className="flex items-center justify-center mt-4 space-x-2">
         <button
           onClick={decrementarQuantidade}
-          className="p-1 bg-gray-300 rounded text-lg hover:bg-gray-400 transition-colors duration-200"
+          className="p-2 bg-gray-300 rounded text-lg hover:bg-gray-400 transition-colors duration-200"
         >
           -
         </button>
@@ -83,7 +83,7 @@ function CardProduto({ produto }: CardProdutoProps) {
         />
         <button
           onClick={incrementarQuantidade}
-          className="p-1 bg-gray-300 rounded text-lg hover:bg-gray-400 transition-colors duration-200"
+          className="p-2 bg-gray-300 rounded text-lg hover:bg-gray-400 transition-colors duration-200"
         >
           +
         </button>
