@@ -11,7 +11,7 @@ interface AuthContextProps {
     isLoading: boolean;
     adicionarProduto: (produto: Produto) => void;
     removerProduto: (produtoId: number) => void;
-    limparCart: () => void;
+    // limparCart: () => void;
     items: Produto[];
     quantidadeItems: number;
 }
@@ -54,10 +54,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         });
     }
 
-    function limparCart() {
-        toastAlerta("Compra efetuada com sucesso", 'sucesso');
-        setItems([]);
-    }
+    // function limparCart() {
+    //     toastAlerta("Compra efetuada com sucesso", 'sucesso');
+    //     setItems([]);
+    // }
 
     const [usuario, setUsuario] = useState<UsuarioLogin>({
         id: 0,
@@ -96,7 +96,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ adicionarProduto, removerProduto, limparCart, items, quantidadeItems, usuario, handleLogin, handleLogout, isLoading }}>
+        <AuthContext.Provider value={{ adicionarProduto, removerProduto,items, quantidadeItems, usuario, handleLogin, handleLogout, isLoading }}>
             {children}
         </AuthContext.Provider>
     );
