@@ -84,7 +84,7 @@ function Carrinho() {
                     />
                 </div>
             ) : (
-                <div className="container mx-auto p-4">
+                <div className="container mx-auto p-4 pt-44">
                     <div className="bg-white p-8 rounded-lg shadow-md">
                         <h1 className="text-2xl font-bold mb-6">Carrinho de Compras</h1>
 
