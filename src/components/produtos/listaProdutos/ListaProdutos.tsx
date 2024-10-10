@@ -65,7 +65,7 @@ function ListaProdutos() {
   }, [searchTerm, selectedCategories, minPrice, maxPrice, produtos]);
 
   return (
-    <div className='min-h-screen bg-[#F8F9FA] py-20'>
+    <div className='min-h-screen bg-[#F8F9FA] py-44'>
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row">
           {/* Sidebar de filtros */}
