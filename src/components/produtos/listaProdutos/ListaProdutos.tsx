@@ -30,7 +30,7 @@ function ListaProdutos() {
 
   return (
     <>
-      <div className='fundoLogao'>
+      <div className='fundoLogao pt-44'>
         {loading && (
           <div className="flex justify-center items-center min-h-screen">
             <RevolvingDot
