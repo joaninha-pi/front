@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Produto } from '../../../models/Produto';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
-import { FaEdit, FaTrashAlt, FaShoppingCart } from 'react-icons/fa'; // Ícones de lápis, lixeira e carrinho
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'; 
 
 interface CardProdutoProps {
   produto: Produto;
@@ -11,89 +11,59 @@ interface CardProdutoProps {
 function CardProduto({ produto }: CardProdutoProps) {
   const { adicionarProduto } = useContext(AuthContext);
   const { usuario } = useContext(AuthContext);
-  const [quantidade, setQuantidade] = useState(0); // Inicialmente 0
+  const [quantidade, setQuantidade] = useState(0);
 
-  // Função para exibir o peso com a unidade correta
   const exibirPeso = (peso: number) => {
     if (peso >= 1000) {
-      return `${(peso / 1000).toFixed(2)} kg`; // Converte para kg se o peso for >= 1000 gramas
+      return `${(peso / 1000).toFixed(2)} kg`;
     }
-    return `${peso} g`; // Exibe em gramas se for menor que 1000
+    return `${peso} g`;
   };
 
-  // Função para adicionar o produto ao carrinho
   const handleAdicionarAoCarrinho = () => {
     if (quantidade > 0) {
-      adicionarProduto({ ...produto, quantidade }); // Apenas adiciona o produto ao carrinho
-      setQuantidade(0); // Reseta a quantidade após adicionar
+      adicionarProduto({ ...produto, quantidade });
+      setQuantidade(0);
     }
   };
 
-  // Função para incrementar a quantidade
-  const incrementarQuantidade = () => setQuantidade(prev => prev + 1);
+  const incrementarQuantidade = () => setQuantidade(quantidade + 1);
+  const decrementarQuantidade = () => setQuantidade(Math.max(0, quantidade - 1));
 
-  // Função para decrementar a quantidade
-  const decrementarQuantidade = () => setQuantidade(prev => (prev > 0 ? prev - 1 : 0));
+  // Verificação de domínio do usuário
+  const isAdmin = usuario && usuario.usuario.endsWith('@root.com');
 
   return (
-    <div className="flex flex-col rounded-xl w-full max-w-sm h-[350px] bg-white shadow-lg transition-transform duration-300 transform hover:scale-105">
-      {/* Ícones de edição e exclusão no canto superior direito */}
-      {usuario.token !== "" && usuario.usuario === "root@root.com" && (
-        <div className="absolute top-2 right-2 flex space-x-2">
-          <Link to={`/editarProduto/${produto.id}`} className="text-gray-400 hover:text-yellow-500 transition-colors duration-200">
-            <FaEdit size={20} />
-          </Link>
-          <Link to={`/deletarProduto/${produto.id}`} className="text-gray-400 hover:text-red-600 transition-colors duration-200">
-            <FaTrashAlt size={20} />
-          </Link>
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105">
+      <Link to={`/produtos/${produto.id}`}>
+        <img src={produto.image} alt={produto.nome} className="w-full h-40 object-cover" />
+      </Link>
+      <div className="p-4">
+        <h3 className="text-xl font-semibold">{produto.nome}</h3>
+        <p className="text-gray-500">Categoria: {produto.categoria.nome}</p>
+        <p className="text-lg font-bold mt-2">R$ {produto.preco.toFixed(2)}</p>
+        <p className="text-gray-600 mt-1">{exibirPeso(produto.peso)}</p>
+
+        {/* Controle de quantidade */}
+        <div className="flex items-center mt-4">
+          <button onClick={decrementarQuantidade} className="px-2 py-1 border rounded-l-lg bg-gray-200 hover:bg-gray-300 transition">-</button>
+          <input type="number" value={quantidade} readOnly className="w-12 text-center border-t border-b border-gray-300" />
+          <button onClick={incrementarQuantidade} className="px-2 py-1 border rounded-r-lg bg-gray-200 hover:bg-gray-300 transition">+</button>
         </div>
-      )}
 
-      {/* Imagem do produto */}
-      <div className="flex justify-center mt-4">
-        <img
-          src={produto.image}
-          alt={produto.nome}
-          className="rounded-lg w-48 h-48 object-cover transition-transform duration-300 hover:scale-105"
-        />
-      </div>
+        <button onClick={handleAdicionarAoCarrinho} className="w-full mt-4 bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600 transition">Adicionar ao Carrinho</button>
 
-      {/* Nome do produto */}
-      <h3 className="text-lg font-semibold text-gray-800 text-center mt-4">{produto.nome}</h3>
-
-      {/* Preço do produto */}
-      <p className="text-xl font-bold text-gray-900 text-center mt-2">R$ {produto.preco.toFixed(2)}</p>
-
-      {/* Peso do produto */}
-      <p className="text-gray-700 font-semibold text-center mt-1">Peso: {exibirPeso(produto.peso)}</p>
-
-      {/* Quantidade, botões de adicionar/remover e botão de adicionar ao carrinho */}
-      <div className="flex items-center justify-center mt-4 space-x-2">
-        <button
-          onClick={decrementarQuantidade}
-          className="p-2 bg-gray-300 rounded text-lg hover:bg-gray-400 transition-colors duration-200"
-        >
-          -
-        </button>
-        <input
-          type="number"
-          className="w-12 text-center border mx-2 p-1 rounded bg-gray-100"
-          value={quantidade}
-          readOnly
-        />
-        <button
-          onClick={incrementarQuantidade}
-          className="p-2 bg-gray-300 rounded text-lg hover:bg-gray-400 transition-colors duration-200"
-        >
-          +
-        </button>
-        <button
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-500 transition-transform duration-300 transform hover:scale-105 flex items-center"
-          onClick={handleAdicionarAoCarrinho}
-        >
-          <FaShoppingCart className="mr-2" /> {/* Ícone do carrinho */}
-          Adicionar
-        </button>
+        {/* Ações administrativas */}
+        {isAdmin && (
+          <div className="flex justify-between mt-2">
+            <Link to={`/produtos/editar/${produto.id}`} className="text-blue-500 hover:underline">
+              <FaEdit /> Editar
+            </Link>
+            <button className="text-red-500 hover:underline">
+              <FaTrashAlt /> Remover
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
