@@ -34,7 +34,7 @@ function CardProduto({ produto }: CardProdutoProps) {
 
   return (
     <div className="bg-[#9ED582] rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
-      <Link to={`/produtos/${produto.id}`}>
+      <Link to={`/produtos`}>
         <img
           src={produto.image}
           alt={produto.nome}
