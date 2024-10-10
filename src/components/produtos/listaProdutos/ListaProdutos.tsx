@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { listar } from '../../../services/Service'; // Utilizar a função listar
+import { listar } from '../../../services/Service';
 import { RevolvingDot } from 'react-loader-spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Produto } from '../../../models/Produto';
 import CardProduto from '../cardProdutos/CardProdutos';
 import { toastAlerta } from '../../../utils/toastAlerta';
+import Slider from '@mui/material/Slider';
 
 function ListaProdutos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -13,11 +14,12 @@ function ListaProdutos() {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredProducts, setFilteredProducts] = useState<Produto[]>([]);
-  const [minPrice, setMinPrice] = useState<number | ''>('');
-  const [maxPrice, setMaxPrice] = useState<number | ''>('');
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // Múltiplas categorias
+  const [priceRange, setPriceRange] = useState<number[]>([0, 1000]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [sortOrder, setSortOrder] = useState<string>('asc');
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [productsPerPage] = useState<number>(8); // Definido 8 produtos por página
 
-  // Buscar produtos e categorias
   async function buscarDados() {
     setLoading(true);
     try {
@@ -46,31 +48,49 @@ function ListaProdutos() {
     }
 
     if (selectedCategories.length > 0) {
-      produtosFiltrados = produtosFiltrados.filter(produto => 
+      produtosFiltrados = produtosFiltrados.filter(produto =>
         selectedCategories.includes(produto.categoria.nome)
       );
     }
 
-    if (minPrice !== '' || maxPrice !== '') {
-      produtosFiltrados = produtosFiltrados.filter(produto => {
-        const preco = produto.preco;
-        return (
-          (minPrice === '' || preco >= minPrice) &&
-          (maxPrice === '' || preco <= maxPrice)
-        );
-      });
+    produtosFiltrados = produtosFiltrados.filter(produto => {
+      const preco = produto.preco;
+      return preco >= priceRange[0] && preco <= priceRange[1];
+    });
+
+    if (sortOrder === 'asc') {
+      produtosFiltrados = produtosFiltrados.sort((a, b) => a.preco - b.preco);
+    } else if (sortOrder === 'desc') {
+      produtosFiltrados = produtosFiltrados.sort((a, b) => b.preco - a.preco);
     }
 
     setFilteredProducts(produtosFiltrados);
-  }, [searchTerm, selectedCategories, minPrice, maxPrice, produtos]);
+  }, [searchTerm, selectedCategories, priceRange, sortOrder, produtos]);
+
+  // Calcular o número de páginas
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  // Selecionar produtos da página atual
+  const currentProducts = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
+  // Mudar para a página específica
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  // Função para remover uma categoria individualmente
+  const handleRemoveCategory = (categoria: string) => {
+    setSelectedCategories(selectedCategories.filter(cat => cat !== categoria));
+  };
 
   return (
-    <div className='min-h-screen bg-[#F8F9FA] py-44'>
+    <div className="min-h-screen bg-[#DEE6BE] py-44 font-content">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row">
           {/* Sidebar de filtros */}
-          <aside className="w-full md:w-1/4 bg-white p-4 rounded-lg shadow-sm mb-4 md:mb-0">
-            <h2 className="text-lg font-bold mb-4">Filtros</h2>
+          <aside className="w-full md:w-1/4 bg-[#DEE6BE] p-4 rounded-lg shadow-sm mb-4 md:mb-0">
+            <h2 className="text-lg font-bold mb-4 font-title">Filtros</h2>
 
             {/* Filtro por categoria */}
             <div className="mb-6">
@@ -102,33 +122,41 @@ function ListaProdutos() {
             {/* Filtro por faixa de preço */}
             <div className="mb-6">
               <h3 className="font-semibold mb-2">Faixa de preço</h3>
-              <div className="flex space-x-2">
-                <input
-                  type="number"
-                  placeholder="Mínimo"
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(Number(e.target.value))}
-                  className="w-full p-2 border rounded-lg focus:outline-none"
-                />
-                <input
-                  type="number"
-                  placeholder="Máximo"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(Number(e.target.value))}
-                  className="w-full p-2 border rounded-lg focus:outline-none"
-                />
+              <Slider
+                value={priceRange}
+                onChange={(event, newValue) => setPriceRange(newValue as number[])}
+                valueLabelDisplay="auto"
+                min={0}
+                max={5000}
+                style={{ color: '#9ed582' }} // Cor do slider ajustada
+              />
+              <div className="flex justify-between text-sm">
+                <span>R$ {priceRange[0]}</span>
+                <span>R$ {priceRange[1]}</span>
               </div>
+            </div>
+
+            {/* Ordenação por preço */}
+            <div className="mb-6">
+              <h3 className="font-semibold mb-2">Ordenar por</h3>
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                className="w-full p-2 border rounded-lg focus:outline-none"
+              >
+                <option value="asc">Preço: Menor para Maior</option>
+                <option value="desc">Preço: Maior para Menor</option>
+              </select>
             </div>
 
             {/* Botão de limpar filtros */}
             <button
               onClick={() => {
                 setSelectedCategories([]);
-                setMinPrice('');
-                setMaxPrice('');
+                setPriceRange([0, 1000]);
                 setSearchTerm('');
               }}
-              className="w-full bg-gray-300 text-gray-700 p-2 rounded-lg mt-4 hover:bg-gray-400 transition"
+              className="w-full bg-[#DEE6BE] text-[#25433C] font-content font-bold p-2 rounded-lg mt-4 hover:bg-[#9ed582] transition"
             >
               Limpar Filtros
             </button>
@@ -144,34 +172,56 @@ function ListaProdutos() {
                   placeholder="Pesquisar produtos..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full p-2 pl-10 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                  className="w-full p-2 pl-10 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-[#9ed582] font-content"
                 />
-                <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
+                <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-2.5 w-5 h-5 text-[#25433C]" />
               </div>
-              <button className="ml-2 p-2 bg-blue-500 text-white font-bold rounded-lg shadow-sm hover:bg-blue-600 transition-colors duration-200">
-                Filtrar
-                <FontAwesomeIcon icon={faFilter} className="inline ml-1 w-4 h-4" />
-              </button>
+            </div>
+
+            {/* Filtros ativos */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {selectedCategories.map((cat) => (
+                <span key={cat} className="bg-gray-200 px-3 py-1 rounded-lg">
+                  {cat}
+                  <button onClick={() => handleRemoveCategory(cat)} className="ml-2 text-red-700">x</button>
+                </span>
+              ))}
+              {(priceRange[0] !== 0 || priceRange[1] !== 1000) && (
+                <span className="bg-[#DEE6BE] px-3 py-1 rounded-lg">
+                  Preço: R$ {priceRange[0]} - R$ {priceRange[1]}
+                </span>
+              )}
             </div>
 
             {/* Listagem de produtos */}
             {loading ? (
               <div className="flex justify-center items-center min-h-screen">
-                <RevolvingDot visible={true} height="100" width="100" ariaLabel="circles-loading" color='black' />
+                <RevolvingDot visible={true} height="100" width="100" ariaLabel="circles-loading" color="black" />
+              </div>
+            ) : currentProducts.length === 0 ? (
+              <div className="text-center text-lg text-[#25433C] font-content">
+                Nenhum produto disponível no momento.
               </div>
             ) : (
-              filteredProducts.length === 0 ? (
-                <div className="text-center text-lg text-gray-700">
-                  Nenhum produto disponível no momento.
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {filteredProducts.map((produto) => (
-                    <CardProduto key={produto.id} produto={produto} />
-                  ))}
-                </div>
-              )
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {currentProducts.map((produto) => (
+                  <CardProduto key={produto.id} produto={produto} />
+                ))}
+              </div>
             )}
+
+            {/* Paginação */}
+            <div className="flex justify-center items-center mt-8">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => paginate(page)}
+                  className={`mx-1 px-3 py-1 rounded-lg ${page === currentPage ? 'bg-[#9ed582] text-[#25433C]' : 'bg-[#DEE6BE] text-[#25433C] border'} hover:bg-[#66C86B] transition`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

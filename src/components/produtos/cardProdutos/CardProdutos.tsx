@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Produto } from '../../../models/Produto';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'; 
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 interface CardProdutoProps {
   produto: Produto;
@@ -30,36 +30,57 @@ function CardProduto({ produto }: CardProdutoProps) {
   const incrementarQuantidade = () => setQuantidade(quantidade + 1);
   const decrementarQuantidade = () => setQuantidade(Math.max(0, quantidade - 1));
 
-  // Verificação de domínio do usuário
   const isAdmin = usuario && usuario.usuario.endsWith('@root.com');
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105">
+    <div className="bg-[#9ED582] rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
       <Link to={`/produtos/${produto.id}`}>
-        <img src={produto.image} alt={produto.nome} className="w-full h-40 object-cover" />
+        <img
+          src={produto.image}
+          alt={produto.nome}
+          className="w-full h-40 object-cover transition duration-300 ease-in-out transform hover:scale-110"
+        />
       </Link>
       <div className="p-4">
         <h3 className="text-xl font-semibold">{produto.nome}</h3>
-        <p className="text-gray-500">Categoria: {produto.categoria.nome}</p>
-        <p className="text-lg font-bold mt-2">R$ {produto.preco.toFixed(2)}</p>
+        <p className="text-lg font-bold mt-2 text-[#AB100B]">R$ {produto.preco.toFixed(2)}</p>
 
         {/* Controle de quantidade */}
         <div className="flex items-center mt-4">
-          <button onClick={decrementarQuantidade} className="px-2 py-1 border rounded-l-lg bg-gray-200 hover:bg-gray-300 transition">-</button>
-          <input type="number" value={quantidade} readOnly className="w-12 text-center border-t border-b border-gray-300" />
-          <button onClick={incrementarQuantidade} className="px-2 py-1 border rounded-r-lg bg-gray-200 hover:bg-gray-300 transition">+</button>
+          <button 
+            onClick={decrementarQuantidade} 
+            className="px-2 py-1 w-10 h-10 border rounded-l-lg bg-[#DEE6BE] hover:bg-red-700 hover:text-[#DEE6BE] transition">
+            -
+          </button>
+          <input 
+            type="number" 
+            value={quantidade} 
+            readOnly 
+            className="w-10 h-10 text-center border-t border-b border-[#DEE6BE] focus:outline-none" 
+          />
+          <button 
+            onClick={incrementarQuantidade} 
+            className="px-2 py-1 w-10 h-10 border rounded-r-lg bg-[#DEE6BE] hover:bg-[#25433C] hover:text-[#DEE6BE] transition">
+            +
+          </button>
         </div>
 
-        <button onClick={handleAdicionarAoCarrinho} className="w-full mt-4 bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600 transition">Adicionar ao Carrinho</button>
+        <button 
+          onClick={handleAdicionarAoCarrinho} 
+          className="w-full mt-4 bg-[#25433C] text-[#DEE6BE] font-bold py-2 rounded-lg hover:bg-[#9ed582] transition transform hover:scale-105 hover:text-[#25433C]">
+          Adicionar ao Carrinho
+        </button>
 
         {/* Ações administrativas */}
         {isAdmin && (
           <div className="flex justify-between mt-2">
-            <Link to={`/produtos/editar/${produto.id}`} className="text-blue-500 hover:underline">
-              <FaEdit /> Editar
+            <Link 
+              to={`/produtos/editar/${produto.id}`} 
+              className="text-blue-500 hover:underline flex items-center">
+              <FaEdit className="mr-1" /> Editar
             </Link>
-            <button className="text-red-500 hover:underline">
-              <FaTrashAlt /> Remover
+            <button className="text-red-500 hover:underline flex items-center">
+              <FaTrashAlt className="mr-1" /> Remover
             </button>
           </div>
         )}
