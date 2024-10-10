@@ -42,7 +42,6 @@ function CardProduto({ produto }: CardProdutoProps) {
         <h3 className="text-xl font-semibold">{produto.nome}</h3>
         <p className="text-gray-500">Categoria: {produto.categoria.nome}</p>
         <p className="text-lg font-bold mt-2">R$ {produto.preco.toFixed(2)}</p>
-        <p className="text-gray-600 mt-1">{exibirPeso(produto.peso)}</p>
 
         {/* Controle de quantidade */}
         <div className="flex items-center mt-4">

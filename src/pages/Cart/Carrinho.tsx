@@ -2,9 +2,10 @@ import { useContext, useState, useEffect } from 'react';
 import { RevolvingDot } from 'react-loader-spinner';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { toastAlerta } from '../../utils/toastAlerta';
 
 function Carrinho() {
-    const { items, limparCart, usuario, removerProduto, adicionarProduto } = useContext(AuthContext);
+    const { items, usuario, removerProduto, adicionarProduto } = useContext(AuthContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [cep, setCep] = useState('');
@@ -24,15 +25,28 @@ function Carrinho() {
         }
     };
 
+    const limparCarrinho = () => {
+        items.forEach(item => {
+            removerProduto(item.id); // Remove cada produto do carrinho
+        });
+    };
+
     const finalizarCompra = () => {
+        if (!frete) {
+            toastAlerta("Por favor, calcule o frete antes de finalizar a compra.", 'info');
+            return; // Impede a finalização da compra
+        }
+        
         if (usuario.token) {
-            limparCart();
-            alert('Compra finalizada com sucesso!');
+            toastAlerta('Compra finalizada com sucesso!', 'sucesso'); // Usando toastAlerta aqui
+            limparCarrinho(); // Limpa o carrinho
+            setFrete(0); // Reseta o frete
         } else {
-            alert("Faça o login para finalizar a compra");
+            toastAlerta("Faça o login para finalizar a compra", 'info'); // Usando toastAlerta aqui
             navigate('/login');
         }
     };
+    
 
     const handleQuantidadeChange = (produtoId, novaQuantidade) => {
         if (novaQuantidade <= 0) {
@@ -70,7 +84,7 @@ function Carrinho() {
                     />
                 </div>
             ) : (
-                <div className="container mx-auto p-4">
+                <div className="container mx-auto p-4 pt-44">
                     <div className="bg-white p-8 rounded-lg shadow-md">
                         <h1 className="text-2xl font-bold mb-6">Carrinho de Compras</h1>
 

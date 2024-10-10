@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { Produto } from '../../../models/Produto';
@@ -14,13 +14,18 @@ function FormularioProduto() {
   const token = usuario.token;
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [categoria, setCategoria] = useState<Categoria>({
+    id: 0,
+    nome: '',
+    descricao: '',
+  });
+
   const [produto, setProduto] = useState<Produto>({
     id: 0,
     nome: '',
     quantidade: 0,
     descricao: '',
     preco: 0,
-    peso: 0,
     categoria: null,
     image: '',
     usuario: null,
@@ -30,6 +35,14 @@ function FormularioProduto() {
 
   async function buscarProdutoPorId(id: string) {
     await buscar(`/produtos/${id}`, setProduto, {
+      headers: {
+        Authorization: token,
+      },
+    });
+  }
+
+  async function buscarCategoriaPorId(id: string) {
+    await buscar(`/categorias/${id}`, setCategoria, {
       headers: {
         Authorization: token,
       },
@@ -58,30 +71,21 @@ function FormularioProduto() {
     }
   }, [id]);
 
+  useEffect(() => {
+    setProduto({
+      ...produto,
+      categoria: categoria,
+    });
+  }, [categoria]);
+
   function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setProduto({
       ...produto,
       [e.target.name]: e.target.value,
+      categoria: categoria,
       usuario: usuario,
     });
   }
-
-  function atualizarPeso(e: ChangeEvent<HTMLInputElement>) {
-    let pesoInserido = parseFloat(e.target.value);
-    if (isNaN(pesoInserido)) {
-      // Opcional: Tratar caso o usuário insira um valor inválido
-      return;
-    }
-    if (e.target.value.toLowerCase().includes('g')) {
-      pesoInserido = pesoInserido / 1000; // Converter gramas para quilos
-    }
-    // Agora, o peso é convertido para número novamente, antes de atribuí-lo ao estado
-    setProduto({
-      ...produto,
-      peso: Number(pesoInserido.toFixed(2)), // Converter para número
-    });
-}
-
 
   function retornar() {
     navigate('/produtos');
@@ -120,98 +124,83 @@ function FormularioProduto() {
     }
   }
 
+  const carregandoCategoria = categoria.descricao === '';
+
   return (
-    <div className='bg-gray-100 min-h-screen py-36 flex flex-col'>
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        <h1 className="text-2xl sm:text-4xl text-center my-4 font-bold">
+    <div className='fundoLogao'>
+      <div className='pt-24'></div>
+      <div className="container flex flex-col mx-auto items-center">
+        <h1 className="text-4xl text-center my-8">
           {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
         </h1>
 
-        <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-          <form onSubmit={gerarNovoProduto} className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4 w-full max-w-lg">
+          <form onSubmit={gerarNovoProduto} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <label htmlFor="nome" className="text-lg font-semibold">Nome do produto</label>
+              <label htmlFor="nome">Nome do produto</label>
               <input
                 value={produto.nome}
-                onChange={atualizarEstado}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                 type="text"
                 placeholder="Nome"
                 name="nome"
                 required
-                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
+                className="border-2 border-slate-700 rounded p-2"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="descricao" className="text-lg font-semibold">Descrição do produto</label>
+              <label htmlFor="descricao">Descrição do produto</label>
               <input
                 value={produto.descricao}
-                onChange={atualizarEstado}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                 type="text"
                 placeholder="Descrição"
                 name="descricao"
                 required
-                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
+                className="border-2 border-slate-700 rounded p-2"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="preco" className="text-lg font-semibold">Preço do produto</label>
+              <label htmlFor="preco">Preço do produto</label>
               <input
                 value={produto.preco}
-                onChange={atualizarEstado}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                 type="number"
                 placeholder="Preço"
                 name="preco"
                 required
-                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
+                className="border-2 border-slate-700 rounded p-2"
                 step="0.01"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="peso" className="text-lg font-semibold">Peso do produto (em kg ou g)</label>
-              <input
-                value={produto.peso || ''}
-                onChange={atualizarPeso}
-                type="text"
-                placeholder="Peso (ex: 1.5kg ou 1500g)"
-                name="peso"
-                required
-                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="image" className="text-lg font-semibold">URL da imagem do produto</label>
+              <label htmlFor="image">URL da imagem do produto</label>
               <input
                 value={produto.image}
-                onChange={atualizarEstado}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                 type="text"
                 placeholder="URL da imagem"
                 name="image"
                 required
-                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
+                className="border-2 border-slate-700 rounded p-2"
               />
               {produto.image && (
                 <img
                   src={produto.image}
                   alt="Imagem do Produto"
-                  className="mt-4 w-full sm:w-32 h-32 object-cover rounded-lg shadow-sm"
+                  className="mt-4 w-32 h-32 object-cover rounded"
                 />
               )}
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="categoria" className="text-lg font-semibold">Categoria do produto</label>
+              <p>Categoria do produto</p>
               <select
                 name="categoria"
                 id="categoria"
-                className="border border-slate-300 rounded-lg p-3 text-sm transition duration-300 focus:border-lime-500 focus:outline-none"
-                onChange={(e) => {
-                  const categoriaSelecionada = categorias.find(cat => cat.id === parseInt(e.target.value));
-                  setProduto({
-                    ...produto,
-                    categoria: categoriaSelecionada || null,
-                  });
-                }}
+                className="border p-2 border-slate-800 rounded"
+                onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
               >
-                <option value="" disabled>
+                <option value="" selected disabled>
                   Selecione uma categoria
                 </option>
                 {categorias.map((categoria) => (
@@ -221,26 +210,29 @@ function FormularioProduto() {
                 ))}
               </select>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex gap-4">
               <button
-                disabled={loading}
+                disabled={carregandoCategoria || loading}
                 type="submit"
-                className='bg-lime-500 text-stone-100 font-body font-bold text-sm p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition duration-300'
+                className='bg-lime-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-lime-400 hover:text-red-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
               >
                 {loading ? (
-                  <div className='flex items-center justify-center'>
-                    <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="20" visible={true} />
+                  <div className="flex items-center justify-center">
+                    <RotatingLines
+                      strokeColor="#18181b"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      width="24"
+                      visible={true}
+                    />
                   </div>
-                ) : (
-                  (id !== undefined ? 'Salvar' : 'Cadastrar')
-                )}
+                ) : id !== undefined ? 'Editar' : 'Cadastrar'}
               </button>
               <button
-                type="button"
                 onClick={retornar}
-                className='bg-red-500 text-white font-body font-bold text-sm p-3 rounded-lg hover:bg-red-400 hover:opacity-75 active:scale-95 transition duration-300'
+                className='bg-red-500 text-stone-100 font-body font-bold text-sm m-2 p-3 rounded-lg hover:bg-red-400 hover:text-stone-700 hover:opacity-75 active:scale-95 transition-transform transform flex-1'
               >
-                Cancelar
+                Voltar
               </button>
             </div>
           </form>
